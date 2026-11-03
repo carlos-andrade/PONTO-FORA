@@ -1,7 +1,7 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 2.9  
+**Versão:** 3.0  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
@@ -149,3 +149,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 2.7 | Correção da assinatura das dependências FastAPI e atualização do hash/commit da rota de consulta no inventário. |
 | 03/11/2026 | 2.8 | Aplicação dos hashes SHA-256 em falta na rota de consulta e no documento da Fase B, com atualização dos commits de publicação. |
 | 03/11/2026 | 2.9 | Confirmação da integração da Fase B na main e inventário inicial dos artefactos da Fase C na branch de implementação. |
+| 03/11/2026 | 3.0 | Atualização do commit efetivo de publicação do serviço factual e revisão do inventário da Fase C. |
