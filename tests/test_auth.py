@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Testes unitários de configuração, validação JWT e falhas do provedor.
-# SHA-256 (conteúdo normalizado): 57ef3cd77c10bc77c6d38a70e9f2589dd728db57ece57685c0e8457f241794f6
+# SHA-256 (conteúdo normalizado): 910d74f038f8aa516ef5dcc5b87a1d4c3957b1b3b9f0b9827e5070ed35c2d3ad
 # Commit de referência (base documental): 88db30df8317ad26a44fa4be7b2c794984cc9f1c
 
 from unittest.mock import Mock
@@ -137,3 +137,19 @@ def test_malformed_token_header_is_rejected(monkeypatch, settings, credentials) 
     with pytest.raises(HTTPException) as error:
         auth.get_current_principal(credentials=credentials, settings=settings)
     assert error.value.status_code == 401
+
+
+def test_settings_load_from_environment(monkeypatch) -> None:
+    monkeypatch.setenv("OIDC_ISSUER", "https://identity.example.com/")
+    monkeypatch.setenv("OIDC_AUDIENCE", "ponto-fora-api")
+    monkeypatch.setenv(
+        "OIDC_JWKS_URL",
+        "https://identity.example.com/.well-known/jwks.json",
+    )
+    monkeypatch.setenv("OIDC_LEEWAY_SECONDS", "45")
+
+    settings = auth.OIDCSettings.from_env()
+
+    assert settings.issuer == "https://identity.example.com/"
+    assert settings.audience == "ponto-fora-api"
+    assert settings.leeway_seconds == 45
