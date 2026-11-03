@@ -7,8 +7,8 @@
 **Estado:** Em revisão  
 **Responsável:** Engenharia de Software  
 **Âmbito:** Procedimento local e transacional para criar a primeira identidade interna com o papel técnico PLATFORM_ADMIN.  
-**SHA-256 (conteúdo normalizado):** df436408ab3655abacd48a85f511e0e5db00adb9d06b8244d2ad51188de94b97  
-**Commit de referência (base documental):** 6ed842788df04670d724559c10103975f60ae9b4
+**SHA-256 (conteúdo normalizado):** 8998e72eb3d724ecd68f1407455c48bb6f7138050b679efa51d22423a2f0523a  
+**Commit de referência (base documental):** f9203c1e0bf16e18e78a3bed8259324d3b53f8cd
 
 ## Objetivo e fronteira de confiança
 
@@ -23,7 +23,7 @@ O email é apenas um atributo informativo. A identidade é vinculada exclusivame
 3. Configurar `OIDC_ISSUER` com o issuer oficial do provedor e validar previamente o par exato `issuer` + `subject` do operador. O comando recusa um issuer diferente da configuração.
 4. Confirmar que `DATABASE_URL` aponta para PostgreSQL. O comando recusa engines SQLite ou qualquer dialeto diferente de PostgreSQL.
 5. Executar o comando num ambiente administrativo controlado.
-5. Confirmar que a conta OIDC indicada pertence à pessoa autorizada a assumir a administração técnica inicial.
+6. Confirmar que a conta OIDC indicada pertence à pessoa autorizada a assumir a administração técnica inicial.
 
 ## Execução
 
