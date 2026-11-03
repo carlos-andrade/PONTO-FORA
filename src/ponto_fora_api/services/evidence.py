@@ -33,7 +33,7 @@ def _audit(db: Session, assignment_id: UUID, event_type: str, actor_id: str, pay
 
 def create_source(db: Session, assignment_id: UUID, data: SourceCreate, actor_id: str) -> SourceRecord:
     _assignment(db, assignment_id)
-    item = SourceRecord(assignment_id=assignment_id, **data.model_dump())
+    item = SourceRecord(assignment_id=assignment_id, **data.model_dump(exclude={"metadata"}) | {"metadata_json": data.metadata})
     db.add(item)
     _audit(db, assignment_id, "SOURCE_RECORDED", actor_id, {"source_id": str(item.id)})
     db.commit()
