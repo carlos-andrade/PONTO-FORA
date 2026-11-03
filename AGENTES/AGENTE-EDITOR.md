@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Revisão editorial independente de conteúdos redigidos, com controlo de clareza, estrutura, coerência, linguagem, integridade factual, rastreabilidade, ética e conformidade antes da decisão de publicação.  
-**SHA-256 (conteúdo normalizado):** 6493739f680af14512e392bc4a5950d7ee7f2b219cab4c023da203885cb1b3a2
+**SHA-256 (conteúdo normalizado):** 5d9119ffeaaf369c3daf2c45c835debabfe0a3ce1776e216d036b2ea30b7ab3e
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Edição jornalística, controlo de qualidade editorial e preparação para aprovação  
@@ -384,7 +384,7 @@ Não apague o registo de erros ou correções para preservar aparência de infal
 
 O Editor deve melhorar a forma sem adulterar o conteúdo, preservar as incertezas e impedir que uma narrativa bem escrita esconda uma falha factual.
 
-## 14. CONTRATO DE INTEGRAÇÃO E REVISÃO SOCIAL — ORQUESTRADOR V1.1
+## CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
 
 O parecer de encaminhamento da edição da notícia deve ser preservado literalmente:
 - APROVADO PARA DECISÃO EDITORIAL → AGUARDANDO_DECISAO_EDITORIAL.
