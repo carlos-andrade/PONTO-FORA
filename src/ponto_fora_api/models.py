@@ -1,13 +1,14 @@
 # PONTO-FORA — modelos relacionais do núcleo editorial e factual
 # Identificador: PF-COD-MODELS-001
-# Versão: 1.1
+# Versão: 1.2
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
-# Âmbito: Pautas, auditoria, tarefas, versões, fontes, afirmações, evidências e fact-checking.
-# SHA-256 (conteúdo normalizado): 77cc91bbb71b37e21948df294404644f2a7441f2f57d23398db81a4df0394fd9
-# Commit de referência (base documental): c5d4cf29b6d2ab23b99439852235868c3b422195
+# Âmbito: Pautas, auditoria, tarefas, versões, fontes, afirmações e fact-checking.
+# Inclui registo imutável das execuções dos agentes editoriais.
+# SHA-256 (conteúdo normalizado): 8cead1ebce063d342ccfebf55a097ced207258f3f92e87123329f26196255cf4
+# Commit de referência (base documental): 025804dfc3f79256d48e3c04aab9a15495893c5a
 
 from datetime import UTC, datetime
 from uuid import UUID, uuid4
@@ -430,5 +431,42 @@ class SystemBootstrap(Base):
         Uuid(as_uuid=True), ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
     completed_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
+
+
+class AgentExecution(Base):
+    __tablename__ = "agent_executions"
+    __table_args__ = (
+        UniqueConstraint("execution_id", name="uq_agent_execution_id"),
+        CheckConstraint(
+            "execution_status IN ('SUCCESS','FAILED','RETRYABLE')",
+            name="ck_agent_execution_status",
+        ),
+        CheckConstraint("length(request_sha256) = 64", name="ck_agent_execution_sha256"),
+        Index("ix_agent_execution_assignment_created", "assignment_id", "created_at"),
+        Index("ix_agent_execution_agent_status", "agent_id", "execution_status"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    assignment_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True),
+        ForeignKey("assignments.id", ondelete="RESTRICT"),
+        nullable=False,
+    )
+    execution_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    agent_id: Mapped[str] = mapped_column(String(32), nullable=False)
+    agent_version: Mapped[str] = mapped_column(String(40), nullable=False)
+    prompt_version: Mapped[str] = mapped_column(String(40), nullable=False)
+    artifact_id: Mapped[str] = mapped_column(String(160), nullable=False)
+    artifact_version: Mapped[str] = mapped_column(String(40), nullable=False)
+    output_artifact_id: Mapped[str] = mapped_column(String(160), nullable=False)
+    output_version: Mapped[str] = mapped_column(String(40), nullable=False)
+    execution_status: Mapped[str] = mapped_column(String(16), nullable=False)
+    editorial_opinion: Mapped[str] = mapped_column(String(120), nullable=False)
+    mapped_target_status: Mapped[str | None] = mapped_column(String(48))
+    payload: Mapped[dict] = mapped_column(JSON, nullable=False)
+    request_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    correlation_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=utc_now
     )
