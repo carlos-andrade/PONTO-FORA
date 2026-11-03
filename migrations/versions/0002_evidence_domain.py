@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Persistir fontes, afirmações, evidências, relações probatórias e avaliações factuais.
-# SHA-256 (conteúdo normalizado): PENDENTE
+# SHA-256 (conteúdo normalizado): 6a12e195c29c3e0e42f6d87c5b9dd0122cbead9133a2316397906828cc2aead7
 # Commit de referência (base documental): c5d4cf29b6d2ab23b99439852235868c3b422195
 
 import sqlalchemy as sa
