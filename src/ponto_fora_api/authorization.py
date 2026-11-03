@@ -186,3 +186,47 @@ def revoke_role(
     db.commit()
     db.refresh(assignment)
     return assignment
+
+
+def link_external_identity(
+    db: Session,
+    *,
+    user_id: UUID,
+    issuer: str,
+    subject: str,
+    actor_user_id: UUID,
+    reason: str,
+) -> ExternalIdentity:
+    if not issuer.startswith("https://") or not subject.strip() or not reason.strip():
+        raise ValueError("Issuer HTTPS, subject e fundamentação são obrigatórios.")
+    require_permission(db, actor_user_id, "identity.manage")
+    user = db.get(User, user_id)
+    if user is None or user.status != "ACTIVE":
+        raise InactiveUser("Não é possível associar identidade a utilizador inativo.")
+    existing = db.scalar(
+        select(ExternalIdentity).where(
+            ExternalIdentity.issuer == issuer,
+            ExternalIdentity.subject == subject,
+        )
+    )
+    if existing is not None:
+        raise ValueError("A identidade externa já está associada.")
+    identity = ExternalIdentity(
+        user_id=user_id,
+        issuer=issuer,
+        subject=subject,
+        created_at=utc_now(),
+    )
+    db.add(identity)
+    db.add(AuthorizationEvent(
+        user_id=user_id,
+        actor_id=f"user:{actor_user_id}",
+        event_type="IDENTITY_LINKED",
+        role_key="IDENTITY",
+        reason=reason.strip(),
+        payload={"issuer": issuer, "subject": subject},
+        occurred_at=utc_now(),
+    ))
+    db.commit()
+    db.refresh(identity)
+    return identity
