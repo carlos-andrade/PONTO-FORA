@@ -200,6 +200,15 @@ Exigir:
 - Alterações identificáveis.
 - Confirmação de que não foram introduzidos factos sem verificação.
 - Parecer de encaminhamento.
+- `editorial_findings` como lista estruturada; lista vazia é válida quando não há ocorrências.
+- Cada finding deve conter `finding_id`, `severity`, `excerpt`, `problem`, `resolution_status`, `resolution_note`, `resolved_artifact_version` e `revalidated`.
+- `resolution_status` deve ser `RESOLVED`; findings abertos ou pendentes bloqueiam a transição.
+- `resolved_artifact_version` deve corresponder exatamente a `output_version` da execução do Editor.
+- `revalidated` deve ser booleano `true`; IDs duplicados e divergência entre severidade agregada e individual bloqueiam.
+- Findings HIGH e CRITICAL não podem ser encerrados apenas por declaração do Editor; exigem encaminhamento e evidência externa, fora do gate G4 atual.
+- `editorial_decision` deve coincidir com o parecer do envelope: `APROVADO PARA DECISÃO EDITORIAL`.
+
+O gate G4 valida o relatório imutável da execução persistida. Não substitui a decisão humana G5 nem autoriza publicação.
 
 Saída:
 - AGUARDANDO_DECISAO_EDITORIAL.
