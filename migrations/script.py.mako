@@ -1,6 +1,6 @@
-"""PONTO-FORA migration template
+# PONTO-FORA — template de migrações Alembic
 # Identificador: PF-CFG-MIG-TEMPLATE-001
-# Versão: 1.0
+# Versão: 1.1
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
@@ -8,9 +8,13 @@
 # Âmbito: Template de revisões Alembic.
 # SHA-256 (conteúdo normalizado): PENDING
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
+
+""" ${message}
+
 Revision ID: ${up_revision}
 Revises: ${down_revision | comma,n}
 Create Date: ${create_date}
+"""
 
 from typing import Sequence, Union
 
@@ -30,4 +34,3 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     ${downgrades if downgrades else "pass"}
-""
