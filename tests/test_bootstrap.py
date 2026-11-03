@@ -10,6 +10,7 @@ from ponto_fora_api.bootstrap import (
     BOOTSTRAP_KEY,
     CONFIRMATION_PHRASE,
     BootstrapAlreadyCompleted,
+    BootstrapError,
     bootstrap_first_admin,
 )
 from ponto_fora_api.db import Base
@@ -188,7 +189,7 @@ def test_bootstrap_requires_expected_technical_permissions(db) -> None:
     db.add(RolePermission(role_id=role.id, permission_id=permission.id))
     db.commit()
 
-    with pytest.raises(Exception, match="permissões técnicas mínimas"):
+    with pytest.raises(BootstrapError, match="permissões técnicas mínimas"):
         run_bootstrap(db)
 
     assert db.scalar(select(User)) is None
