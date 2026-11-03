@@ -14,6 +14,7 @@ from uuid import UUID, uuid4
 
 from sqlalchemy import (
     JSON,
+    Boolean,
     CheckConstraint,
     DateTime,
     ForeignKey,
@@ -285,3 +286,110 @@ class FactCheckAssessment(Base):
         default=utc_now)
     assessment_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     supersedes_assessment_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True))
+
+
+
+class User(Base):
+    __tablename__ = "users"
+    __table_args__ = (
+        CheckConstraint("status IN ('ACTIVE','DISABLED')", name="ck_users_status"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    display_name: Mapped[str | None] = mapped_column(String(240))
+    email: Mapped[str | None] = mapped_column(String(320))
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="ACTIVE")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class ExternalIdentity(Base):
+    __tablename__ = "external_identities"
+    __table_args__ = (
+        UniqueConstraint("issuer", "subject", name="uq_external_identity_issuer_subject"),
+        Index("ix_external_identity_user", "user_id"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    user_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
+    )
+    issuer: Mapped[str] = mapped_column(String(2048), nullable=False)
+    subject: Mapped[str] = mapped_column(String(512), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+
+
+class Role(Base):
+    __tablename__ = "roles"
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    key: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
+    description: Mapped[str] = mapped_column(String(500), nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+
+
+class Permission(Base):
+    __tablename__ = "permissions"
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    key: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
+    description: Mapped[str] = mapped_column(String(500), nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+
+
+class RolePermission(Base):
+    __tablename__ = "role_permissions"
+    __table_args__ = (
+        UniqueConstraint("role_id", "permission_id", name="uq_role_permission"),
+        Index("ix_role_permissions_permission", "permission_id"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    role_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("roles.id", ondelete="RESTRICT"), nullable=False
+    )
+    permission_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("permissions.id", ondelete="RESTRICT"), nullable=False
+    )
+
+
+class UserRole(Base):
+    __tablename__ = "user_roles"
+    __table_args__ = (
+        CheckConstraint("status IN ('ACTIVE','REVOKED')", name="ck_user_roles_status"),
+        CheckConstraint(
+            "valid_until IS NULL OR valid_until > valid_from",
+            name="ck_user_roles_validity",
+        ),
+        Index("ix_user_roles_user_status", "user_id", "status"),
+        Index("ix_user_roles_role_status", "role_id", "status"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    user_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
+    )
+    role_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("roles.id", ondelete="RESTRICT"), nullable=False
+    )
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="ACTIVE")
+    scope_type: Mapped[str | None] = mapped_column(String(64))
+    scope_id: Mapped[str | None] = mapped_column(String(160))
+    valid_from: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    valid_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    granted_by: Mapped[str] = mapped_column(String(160), nullable=False)
+    granted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    revoked_by: Mapped[str | None] = mapped_column(String(160))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class AuthorizationEvent(Base):
+    __tablename__ = "authorization_events"
+    __table_args__ = (
+        Index("ix_authorization_events_user_time", "user_id", "occurred_at"),
+        Index("ix_authorization_events_actor_time", "actor_id", "occurred_at"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    user_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
+    )
+    actor_id: Mapped[str] = mapped_column(String(160), nullable=False)
+    event_type: Mapped[str] = mapped_column(String(40), nullable=False)
+    role_key: Mapped[str] = mapped_column(String(64), nullable=False)
+    reason: Mapped[str] = mapped_column(Text, nullable=False)
+    payload: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
