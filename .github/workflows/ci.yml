@@ -1,0 +1,40 @@
+# PONTO-FORA — integração contínua
+# Identificador: PF-CI-PYTHON-001
+# Versão: 1.0
+# Data de criação: 03/11/2026
+# Data da última atualização: 03/11/2026
+# Estado: Em desenvolvimento controlado
+# Responsável: Engenharia de Software
+# Âmbito: Lint e testes do backend em pull requests e pushes.
+# SHA-256 (conteúdo normalizado): bee61d07d376d8d41b70d0e9a283665093e0c7762e0fd6956e0ef3b935389f86
+# Commit de referência (base documental): ab40c30648ce632f24df6f7b767e7d026d23fffc
+
+name: CI
+
+on:
+  push:
+    branches: ["main", "phase-a/**"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Lint e testes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Instalar projeto e dependências de desenvolvimento
+        run: python -m pip install --upgrade pip && pip install -e ".[dev]"
+      - name: Verificar estilo e erros estáticos
+        run: ruff check .
+      - name: Executar testes
+        run: pytest
