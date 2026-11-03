@@ -1,14 +1,14 @@
 # ORQUESTRADOR EDITORIAL — PONTO-FORA
 
 **Identificador:** PF-SYS-ORQ-001  
-**Versão:** 1.3  
+**Versão:** 1.4  
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção Editorial e Governança do PONTO-FORA  
 **Âmbito:** Coordenação do fluxo editorial, controlo de estados, encaminhamento entre agentes, gestão de dependências, bloqueios, versões, auditoria e preparação para integração tecnológica.  
-**SHA-256 (conteúdo normalizado):** 782ae70053018170cb084afd6d6fcf7a5a30a96ecc473c1335f44fe4fe66db7d
-**Commit de referência (base documental):** 3439b36f8468ce420cd46cb1135d98dc9170c6c8
+**SHA-256 (conteúdo normalizado):** 96b88899b8b60f264774f5cd9ca34c3b170f282fe2ee5ac84f2953ae2733edce
+**Commit de referência (base documental):** 3d371b987707f7ba3a5b52c34144ec1b6d96460e
 
 **Função:** Orquestração do processo editorial e aplicação das regras de transição  
 **Posição no fluxo editorial:** Camada central de coordenação de todo o processo  
@@ -493,6 +493,36 @@ Repetir o mesmo comando com o mesmo conteúdo devolve o resultado idempotente. R
 
 A CI do PR #18 confirmou Ruff, migrações PostgreSQL 16 até `0005_agent_execution_records` e **92 testes aprovados**. A validação comprova o mecanismo transacional e os bloqueios; não declara o fluxo editorial completo operacional.
 
+### 11.5 Gates G1–G3 com validação de evidências persistidas
+
+A aplicação de uma transição de aprovação deixou de depender apenas do texto do parecer. Antes de alterar o estado, o serviço executa validações sobre os registos factuais persistidos na mesma pauta.
+
+**G1 — Investigador**
+- Exige pelo menos uma afirmação e uma evidência.
+- Confirma que todos os IDs pertencem à pauta.
+- Exige ligações persistidas entre cada afirmação e pelo menos uma evidência.
+- Exige que cada evidência declarada esteja ligada a uma afirmação.
+
+**G2 — Fact-checker**
+- Exige um veredicto para cada afirmação declarada.
+- Confirma a existência da última avaliação factual persistida por afirmação.
+- Compara o veredicto do envelope com o veredicto persistido.
+- Reutiliza a validação de pertença e ligação entre afirmações e evidências.
+
+**G3 — Redator**
+- Exige rastreabilidade para todas as afirmações declaradas no texto.
+- Exige referências não vazias por afirmação.
+- Confirma que cada afirmação possui avaliação factual persistida.
+
+**Gates ainda bloqueados**
+- **G4 — Editor:** não avança enquanto os findings não tiverem estrutura persistida com estado de resolução verificável.
+- **G5 — Decisão editorial humana:** ainda exige modelo persistente para decisão, responsável, timestamp, fundamentação e versão aprovada.
+- **G6/G7 — Social Media e revisão/autorização:** não avança enquanto a notícia-base não tiver decisão humana persistida e não existir autorização vinculada à peça, canal e versão.
+
+Os bloqueios G4 e G6 são explícitos no serviço; não são aprovações presumidas. A política de transições de produção continua sem novas etapas ativadas.
+
+A CI do PR #19 confirmou Ruff, migrações PostgreSQL 16 até `0005_agent_execution_records` e **101 testes aprovados**. A validação cobre G1–G3 e os bloqueios conhecidos; não equivale à aprovação do fluxo editorial ponta a ponta.
+
 ## 12. INDICADORES OPERACIONAIS
 
 Indicadores possíveis:
@@ -588,6 +618,7 @@ O Orquestrador garante que o trabalho certo chega ao agente certo, na versão ce
 | 03/11/2026 | 1.1 | Harmonização dos pareceres e estados, contrato comum de agentes, separação entre execução técnica e parecer editorial, revisão social pelo Editor, autorização granular e regras de reabertura. |
 | 03/11/2026 | 1.2 | Registo da persistência idempotente e append-only das execuções dos agentes; separação explícita entre estado-alvo registado e transição efetivamente autorizada. |
 | 03/11/2026 | 1.3 | Implementação do comando transacional de transição com lock da pauta, controlo de versão, autorização, auditoria e idempotência; política de produção preservada. |
+| 03/11/2026 | 1.4 | Implementação dos gates de evidência G1–G3; bloqueio explícito de G4 e G6 até existirem findings estruturados e decisão humana persistida. |
 
 ---
 
