@@ -30,7 +30,7 @@ class GateValidationError(DomainError):
 
 
 class GateNotImplemented(GateValidationError):
-    """O gate ainda não tem estrutura de dados suficiente para ser validado."""
+    """O gate ainda depende de estrutura ou autorização humana não implementada."""
 
 
 def _uuid_set(values: list[str], field: str) -> set[UUID]:
@@ -107,10 +107,10 @@ def _latest_assessment(db: Session, assignment_id: UUID, claim_id: UUID):
 
 
 def validate_agent_gate(db: Session, execution) -> None:
-    """Valida apenas gates cuja estrutura persistida já permite prova objetiva.
+    """Valida gates cuja estrutura persistida permite prova objetiva.
 
-    G4 e G6 permanecem bloqueados até existirem contratos estruturados para
-    findings resolvidos e decisões/autorização humana vinculadas a versões.
+    G1-G4 são verificáveis por dados persistidos. G5 e G6 continuam dependentes
+    de decisão/autorização humana estruturada e permanecem bloqueados.
     """
     opinion = execution.editorial_opinion
     agent_id = AgentId(execution.agent_id)
