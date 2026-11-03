@@ -147,6 +147,8 @@ def test_unproven_and_contradicted_are_distinct_verdicts(db, two_assignments):
         reviewer_type=ReviewerType.HUMAN,
         reviewer_id="editor:test",
         assessed_at=datetime.now(UTC),
+        assessment_version=2,
+        supersedes_assessment_id=unproven.id,
     ))
     assert unproven.verdict != contradicted.verdict
     assert db.scalar(select(func.count()).select_from(FactCheckAssessment)) == 2
