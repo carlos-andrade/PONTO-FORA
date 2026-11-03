@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Validação de tokens Bearer JWT emitidos por um provedor OIDC.
-# SHA-256 (conteúdo normalizado): 4c36f4356a9c93bac792512d8df20626433fc4db8a8f9e7e6629eecaeb4dbff7
+# SHA-256 (conteúdo normalizado): a7b855e71c9fc3507812e1f48b0ecbf7c0a5ed760016e2f8616f428221ef2c20
 # Commit de referência (base documental): 88db30df8317ad26a44fa4be7b2c794984cc9f1c
 
 from dataclasses import dataclass
@@ -14,13 +14,18 @@ from os import getenv
 from typing import Annotated
 from urllib.parse import urlsplit
 
-import fastapi
-import fastapi.security
-import jwt
-import starlette.status
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from jwt import (
+    PyJWKClient,
+    PyJWKClientConnectionError,
+    PyJWKClientError,
+    PyJWTError,
+    decode,
+)
 
 
-bearer_scheme = fastapi.security.HTTPBearer(auto_error=False, scheme_name="OIDC Bearer")
+bearer_scheme = HTTPBearer(auto_error=False, scheme_name="OIDC Bearer")
 
 
 class OIDCConfigurationError(ValueError):
@@ -94,36 +99,36 @@ def get_oidc_settings() -> OIDCSettings:
     try:
         return OIDCSettings.from_env()
     except OIDCConfigurationError as exc:
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_503_SERVICE_UNAVAILABLE,
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Autenticação não está configurada corretamente.",
         ) from exc
 
 
 def get_current_principal(
     credentials: Annotated[
-        fastapi.security.HTTPAuthorizationCredentials | None,
-        fastapi.Depends(bearer_scheme),
+        HTTPAuthorizationCredentials | None,
+        Depends(bearer_scheme),
     ],
-    settings: Annotated[OIDCSettings, fastapi.Depends(get_oidc_settings)],
+    settings: Annotated[OIDCSettings, Depends(get_oidc_settings)],
 ) -> AuthenticatedPrincipal:
     if credentials is None or credentials.scheme.lower() != "bearer":
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_401_UNAUTHORIZED,
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Credenciais Bearer obrigatórias.",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
     token = credentials.credentials
     if not token or len(token) > 16_384:
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_401_UNAUTHORIZED,
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token de acesso inválido.",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
     try:
-        jwks = jwt.PyJWKClient(
+        jwks = PyJWKClient(
             settings.jwks_url,
             cache_jwk_set=True,
             lifespan=300,
@@ -131,27 +136,27 @@ def get_current_principal(
             cache_keys=True,
         )
         signing_key = jwks.get_signing_key_from_jwt(token)
-    except jwt.PyJWKClientConnectionError as exc:
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_503_SERVICE_UNAVAILABLE,
+    except PyJWKClientConnectionError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Provedor de identidade temporariamente indisponível.",
             headers={"Retry-After": "30"},
         ) from exc
-    except jwt.PyJWKClientError as exc:
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_401_UNAUTHORIZED,
+    except PyJWKClientError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token de acesso inválido.",
             headers={"WWW-Authenticate": "Bearer"},
         ) from exc
-    except jwt.PyJWTError as exc:
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_401_UNAUTHORIZED,
+    except PyJWTError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token de acesso inválido.",
             headers={"WWW-Authenticate": "Bearer"},
         ) from exc
 
     try:
-        claims = jwt.decode(
+        claims = decode(
             token,
             signing_key.key,
             algorithms=["RS256"],
@@ -160,17 +165,17 @@ def get_current_principal(
             leeway=settings.leeway_seconds,
             options={"require": ["exp", "sub"]},
         )
-    except jwt.PyJWTError as exc:
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_401_UNAUTHORIZED,
+    except PyJWTError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token de acesso inválido ou expirado.",
             headers={"WWW-Authenticate": "Bearer"},
         ) from exc
 
     subject = claims.get("sub")
     if not isinstance(subject, str) or not subject.strip() or len(subject) > 512:
-        raise fastapi.HTTPException(
-            status_code=starlette.status.HTTP_401_UNAUTHORIZED,
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token sem identificador de utilizador válido.",
             headers={"WWW-Authenticate": "Bearer"},
         )
