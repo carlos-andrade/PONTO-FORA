@@ -7,7 +7,7 @@
 # Responsável: Engenharia de Software
 # Âmbito: Registo imutável de envelopes de execução, pareceres e mapeamentos editoriais.
 # SHA-256 (conteúdo normalizado): ec13eaeef26586bd211a87b2b11cb6991131b714bfe82c2ee2ff79e374b934f6
-# Commit de referência (base documental): ec13eaeef26586bd211a87b2b11cb6991131b714bfe82c2ee2ff79e374b934f6
+# Commit de referência (base documental): 025804dfc3f79256d48e3c04aab9a15495893c5a
 
 """Persist immutable agent execution envelopes.
 
