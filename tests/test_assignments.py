@@ -186,3 +186,22 @@ def test_missing_assignment_is_rejected(db, system_actor) -> None:
             db, uuid4(), target=AssignmentStatus.EM_TRIAGEM,
             actor=system_actor, expected_row_version=1, command_id=uuid4()
         )
+
+
+
+def test_replaying_same_transition_command_does_not_duplicate_event(db, system_actor) -> None:
+    assignment, _ = create_assignment(
+        db, title="Comando repetido", actor=system_actor, idempotency_key="triage-replay"
+    )
+    command_id = uuid4()
+    first = transition_assignment(
+        db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
+        actor=system_actor, expected_row_version=1, command_id=command_id
+    )
+    second = transition_assignment(
+        db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
+        actor=system_actor, expected_row_version=1, command_id=command_id
+    )
+    assert first.id == second.id
+    assert second.status == AssignmentStatus.EM_TRIAGEM.value
+    assert db.scalar(select(func.count()).select_from(AuditEvent)) == 2
