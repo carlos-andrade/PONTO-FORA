@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Revisão editorial independente de conteúdos redigidos, com controlo de clareza, estrutura, coerência, linguagem, integridade factual, rastreabilidade, ética e conformidade antes da decisão de publicação.  
-**SHA-256 (conteúdo normalizado):** 5d9119ffeaaf369c3daf2c45c835debabfe0a3ce1776e216d036b2ea30b7ab3e
+**SHA-256 (conteúdo normalizado):** 96311be2c3365d336597761c14cd1a71c361444308c9d5d51dfd8d14b9d32124
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Edição jornalística, controlo de qualidade editorial e preparação para aprovação  
