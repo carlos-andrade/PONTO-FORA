@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Testes unitários de configuração, validação JWT e falhas do provedor.
-# SHA-256 (conteúdo normalizado): c233efff92a9c1d231b0a9590d267ec41c41adfd16c99b2304e41a7be9cb561a
+# SHA-256 (conteúdo normalizado): 57ef3cd77c10bc77c6d38a70e9f2589dd728db57ece57685c0e8457f241794f6
 # Commit de referência (base documental): eaf2197a52de48c498f284a60d1aaf805b49e5b1
 
 from unittest.mock import Mock
@@ -81,7 +81,7 @@ def test_valid_token_returns_identity_without_roles(
         "name": "Editorial User",
         "roles": ["ADMIN"],
     })
-    monkeypatch.setattr(auth.jwt, "decode", decode)
+    monkeypatch.setattr(auth, "decode", decode)
 
     principal = auth.get_current_principal(credentials=credentials, settings=settings)
 
@@ -101,7 +101,7 @@ def test_invalid_signature_is_rejected(monkeypatch, settings, credentials) -> No
     jwks.get_signing_key_from_jwt.return_value = Mock(key="public-key")
     monkeypatch.setattr(auth, "PyJWKClient", Mock(return_value=jwks))
     monkeypatch.setattr(
-        auth.jwt, "decode", Mock(side_effect=jwt.InvalidSignatureError("invalid"))
+        auth, "decode", Mock(side_effect=jwt.InvalidSignatureError("invalid"))
     )
     with pytest.raises(HTTPException) as error:
         auth.get_current_principal(credentials=credentials, settings=settings)
@@ -124,7 +124,16 @@ def test_token_without_subject_is_rejected(monkeypatch, settings, credentials) -
     jwks = Mock()
     jwks.get_signing_key_from_jwt.return_value = Mock(key="public-key")
     monkeypatch.setattr(auth, "PyJWKClient", Mock(return_value=jwks))
-    monkeypatch.setattr(auth.jwt, "decode", Mock(return_value={"exp": 2_000_000_000}))
+    monkeypatch.setattr(auth, "decode", Mock(return_value={"exp": 2_000_000_000}))
+    with pytest.raises(HTTPException) as error:
+        auth.get_current_principal(credentials=credentials, settings=settings)
+    assert error.value.status_code == 401
+
+
+def test_malformed_token_header_is_rejected(monkeypatch, settings, credentials) -> None:
+    jwks = Mock()
+    jwks.get_signing_key_from_jwt.side_effect = jwt.DecodeError("malformed")
+    monkeypatch.setattr(auth, "PyJWKClient", Mock(return_value=jwks))
     with pytest.raises(HTTPException) as error:
         auth.get_current_principal(credentials=credentials, settings=settings)
     assert error.value.status_code == 401
