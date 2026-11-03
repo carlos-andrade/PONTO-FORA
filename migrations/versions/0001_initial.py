@@ -35,6 +35,10 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False),
         sa.CheckConstraint("row_version >= 1", name="ck_assignments_row_version"),
+        sa.CheckConstraint(
+            "priority IN ('low', 'normal', 'high', 'urgent')",
+            name="ck_assignments_priority",
+        ),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("reference_code"),
     )
@@ -94,6 +98,7 @@ def upgrade() -> None:
         sa.Column("created_by", sa.String(160), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.CheckConstraint("version_number >= 1", name="ck_artifact_version_number"),
+        sa.CheckConstraint("length(content_sha256) = 64", name="ck_artifact_sha256_length"),
         sa.ForeignKeyConstraint(["assignment_id"], ["assignments.id"], ondelete="RESTRICT"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint(
