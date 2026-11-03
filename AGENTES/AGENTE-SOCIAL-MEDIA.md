@@ -1,14 +1,14 @@
 # AGENTE SOCIAL MEDIA — PONTO-FORA
 
 **Identificador:** PF-AGT-SM-001  
-**Versão:** 1.0  
+**Versão:** 1.1  
 **Data de criação:** 03/11/2026  
-**Data da última atualização:** 03/11/2026  
+**Data da última atualização:** 03/11/2026
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Adaptação de notícias aprovadas em conteúdos para redes sociais e formatos audiovisuais, com storytelling, roteiros, decupagem, legendas, distribuição e controlo de fidelidade factual.  
-**SHA-256 (conteúdo normalizado):** f561edc8678723e0589f8b7417b67e844780c54271d8474cd8b6a303d73c500e  
-**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
+**SHA-256 (conteúdo normalizado):** 48eed4d565ff415ed1cb6a20fb1b05813b56875815a6ed00fb08827ba4f3400e
+**Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Estratégia e produção editorial para redes sociais  
 **Posição no fluxo editorial:** Após a edição e a aprovação da notícia pela Direção Editorial  
@@ -330,7 +330,23 @@ Não elimine silenciosamente uma publicação com erro material sem registo e de
 
 A peça social pode ser mais curta, visual e dinâmica do que a notícia. Nunca pode ser mais categórica do que as evidências.
 
+## 19. CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
+
+A peça social só pode ser criada a partir de notícia-base aprovada editorialmente e deve fixar source_news_id e source_news_version. Cada peça deve possuir piece_id, channel, format e artifact_version próprios. Alteração da notícia-base exige reavaliação de todos os derivados afetados; a versão anterior não deve ser sobrescrita.
+
+O parecer de encaminhamento deve ser preservado literalmente e mapeado:
+- PRONTO PARA REVISÃO EDITORIAL → AGUARDANDO_REVISAO_SOCIAL.
+- DEVOLVIDO AO FACT-CHECKER → DEVOLVIDA_A_FACT_CHECK.
+- DEVOLVIDO AO EDITOR → AGUARDANDO_REVISAO_SOCIAL, com correção editorial pendente; não pode avançar até nova revisão.
+- DEVOLVIDO AO SOCIAL MEDIA → DEVOLVIDA_A_SOCIAL_MEDIA.
+- BLOQUEADO → BLOQUEADA.
+
+A saída deve incluir o envelope comum: pauta_id, artifact_id, artifact_version, agent_id, agent_version, prompt_version, execution_id, input_artifact_ids, input_versions, execution_status (SUCCESS, FAILED ou RETRYABLE), editorial_opinion, output_artifact_id, output_version, claim_ids, evidence_refs, caveats, unresolved_questions, created_at com fuso horário e correlation_id. Incluir source_news_id, source_news_version, piece_id, channel, format e rights_status.
+
+execution_status descreve apenas execução técnica. editorial_opinion é o parecer de produção social. O parecer “pronto para revisão” não aprova a peça nem autoriza distribuição. O Editor realiza a revisão técnico-editorial e a Direção Editorial decide e autoriza a distribuição por peça, canal e versão. Parecer não reconhecido ou contrato incompleto suspende a transição.
+
 ## 18. HISTÓRICO DE ALTERAÇÕES
+| 03/11/2026 | 1.1 | Harmonização do contrato de integração com o Orquestrador V1.1, com mapeamento de pareceres, envelope comum e regras específicas do agente. |
 
 | Data | Versão | Alteração |
 |---|---|---|
