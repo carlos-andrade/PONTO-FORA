@@ -7,8 +7,8 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção Editorial e Governança do PONTO-FORA  
 **Âmbito:** Coordenação do fluxo editorial, controlo de estados, encaminhamento entre agentes, gestão de dependências, bloqueios, versões, auditoria e preparação para integração tecnológica.  
-**SHA-256 (conteúdo normalizado):** A CALCULAR APÓS A REVISÃO
-**Commit de referência (base documental):** 3d371b987707f7ba3a5b52c34144ec1b6d96460e
+**SHA-256 (conteúdo normalizado):** 531b66d84dd176f8e664ff9ee3dbf552f1ca1ec6027314a63a619fa3e4ff2556
+**Commit de referência (base documental):** d38c872e44e1e0ab946f55e2f28261e995c99a39
 
 **Função:** Orquestração do processo editorial e aplicação das regras de transição  
 **Posição no fluxo editorial:** Camada central de coordenação de todo o processo  
