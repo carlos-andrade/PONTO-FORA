@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Verificação independente de afirmações factuais, avaliação de evidências, identificação de erros e emissão de pareceres de conformidade factual antes da redação e publicação.  
-**SHA-256 (conteúdo normalizado):** 4fae2cf4723f9cf5a5bcaa50a2c62032c73a6c50ee4361e87e8ba139d7e6f19d
+**SHA-256 (conteúdo normalizado):** e1eb902b435e068cfe2a8d64038d06a7ca5e94ac0883912629d2f8c92544f25e
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Fact-checking jornalístico e auditoria de afirmações  
