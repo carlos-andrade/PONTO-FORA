@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 2.4  
+**Versão:** 2.5  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
-**Âmbito:** Inventário de todos os ficheiros rastreados na branch main e respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** dacc9b624c60b62dca16a6455675991c0df27e899a20f224ae84b4c4da7cd16e
-**Commit de referência (base documental):** 1589c2299db96354e5ca1e2e7454743a4edc12a0
+**Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos da implementação em branches de trabalho, com respetiva conformidade documental.  
+**SHA-256 (conteúdo normalizado):** 4a5cefdf8130ecb0f943705ea4a72049a4597fcefbc5d053c94224ee2c9f4993
+**Commit de referência (base documental):** 3d6e12a9f086c2cf5108b19e77d15a66aa507423
 
 ## Finalidade
 
@@ -53,6 +53,21 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 
 O SHA-256 do próprio Inventário consta no seu cabeçalho. O commit efetivo que publica o próprio Inventário não pode ser inscrito dentro do mesmo ficheiro sem autorreferência circular; consulte o histórico Git do repositório. O campo de commit no cabeçalho identifica o commit-base documental.
 
+
+## Artefactos de implementação — branch `phase-a/fundacao`
+
+Os ficheiros abaixo foram criados na branch de trabalho da Fase A. Ainda não fazem parte da branch `main`. Os commits indicados são os commits efetivos de publicação devolvidos pelo GitHub.
+
+| Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
+|---|---|---|---|---|
+| `.gitignore` | PF-COD-GITIGNORE-001 | `ea12f593093ecaea5d62d2ba237c2b128247e1f09a0931e5a16c618510c5f979` | `264fb26c2696d53eb7a9102943d2690e842d2272` | Criado |
+| `pyproject.toml` | PF-COD-CONFIG-001 | `63e6639d2fe16986e3fe0f5e03502f33d52c0ee135fc41370d3d54ecc886b348` | `add73736f125a8cf74d90c0b2e716bac95da3ce8` | Criado |
+| `src/ponto_fora_api/__init__.py` | PF-COD-PKG-001 | `40faa39f5e5853f5ea4afb654fb54b06c24cac44773dd9d4d062afbe9d336df4` | `de82699b2857312768503bad870f2812b9f6a653` | Criado |
+| `src/ponto_fora_api/main.py` | PF-COD-API-001 | `2deff6ae9348eec64aba63e80297b38cc6f4755e012a15710c8e22fa38ee60b4` | `bf51fd2e932f090aab58cf475a65f0dfbc9e1157` | Criado |
+| `tests/test_health.py` | PF-COD-TEST-001 | `dfa825008d3e5aabfee18e91892f5d356a5ac5d19644c74d3d81708c72ce6b21` | `81bf9fceb887e779d5a5032ff9603ecc448933d1` | Criado |
+| `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `bee61d07d376d8d41b70d0e9a283665093e0c7762e0fd6956e0ef3b935389f86` | `29425bc3166b08f27a1248f18ce72ec40b129d0d` | Criado; CI validada |
+| `docs/GUIA-DE-DESENVOLVIMENTO.md` | PF-DOC-DEV-001 | `482414b762d642d50266c2a24c99cb0e99eedbff58d541dc1b7f450850c05f2a` | `3d6e12a9f086c2cf5108b19e77d15a66aa507423` | Criado |
+
 ## Regra de manutenção
 
 Sempre que um ficheiro documental for criado ou alterado:
@@ -82,3 +97,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 2.0 | Inclusão do Orquestrador Editorial no inventário e atualização da versão documental. |
 | 03/11/2026 | 2.3 | Inclusão do próprio Inventário no registo de integridade, com tratamento explícito da autorreferência Git/SHA-256. |
 | 03/11/2026 | 2.4 | Registo da arquitetura de software, correção dos metadados do Fact-checker e atualização da integridade documental. |
+| 03/11/2026 | 2.5 | Registo dos sete artefactos técnicos e documentais da Fase A na branch de trabalho, com hashes e commits confirmados. |
