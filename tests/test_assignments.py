@@ -114,7 +114,7 @@ def test_director_can_release_triage_to_investigation(db, system_actor, director
     )
     transition_assignment(
         db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
-        actor=system_actor, expected_row_version=1
+        actor=system_actor, expected_row_version=1, command_id=uuid4()
     )
     changed = transition_assignment(
         db, assignment.id, target=AssignmentStatus.AGUARDANDO_INVESTIGACAO,
@@ -130,7 +130,7 @@ def test_wrong_role_cannot_release_triage(db, system_actor) -> None:
     )
     transition_assignment(
         db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
-        actor=system_actor, expected_row_version=1
+        actor=system_actor, expected_row_version=1, command_id=uuid4()
     )
     with pytest.raises(PermissionDenied):
         transition_assignment(
@@ -145,7 +145,7 @@ def test_rejection_requires_reason(db, system_actor, director) -> None:
     )
     transition_assignment(
         db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
-        actor=system_actor, expected_row_version=1
+        actor=system_actor, expected_row_version=1, command_id=uuid4()
     )
     with pytest.raises(DomainError):
         transition_assignment(
@@ -161,7 +161,7 @@ def test_unsupported_transition_is_rejected(db, system_actor) -> None:
     with pytest.raises(InvalidTransition):
         transition_assignment(
             db, assignment.id, target=AssignmentStatus.EM_INVESTIGACAO,
-            actor=system_actor, expected_row_version=1
+            actor=system_actor, expected_row_version=1, command_id=uuid4()
         )
 
 
@@ -171,12 +171,12 @@ def test_stale_row_version_is_rejected(db, system_actor) -> None:
     )
     transition_assignment(
         db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
-        actor=system_actor, expected_row_version=1
+        actor=system_actor, expected_row_version=1, command_id=uuid4()
     )
     with pytest.raises(VersionConflict):
         transition_assignment(
             db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
-            actor=system_actor, expected_row_version=1
+            actor=system_actor, expected_row_version=1, command_id=uuid4()
         )
 
 
@@ -184,5 +184,5 @@ def test_missing_assignment_is_rejected(db, system_actor) -> None:
     with pytest.raises(DomainError):
         transition_assignment(
             db, uuid4(), target=AssignmentStatus.EM_TRIAGEM,
-            actor=system_actor, expected_row_version=1
+            actor=system_actor, expected_row_version=1, command_id=uuid4()
         )
