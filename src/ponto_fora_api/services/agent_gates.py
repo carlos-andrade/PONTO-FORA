@@ -203,10 +203,88 @@ def validate_agent_gate(db: Session, execution) -> None:
         return
 
     if agent_id == AgentId.EDITOR and opinion == "APROVADO PARA DECISÃO EDITORIAL":
-        raise GateNotImplemented(
-            "G4 permanece bloqueado: findings precisam de estado de resolução "
-            "estruturado e rastreável antes da transição."
-        )
+        findings = payload.get("editorial_findings")
+        aggregate_severity = payload.get("severity")
+        decision = payload.get("editorial_decision")
+        output_version = execution.payload.get("output_version")
+
+        if not isinstance(findings, list):
+            raise GateValidationError(
+                "G4 exige editorial_findings como lista estruturada."
+            )
+        if decision != opinion:
+            raise GateValidationError(
+                "A decisão editorial do payload diverge do parecer do envelope."
+            )
+        severity_rank = {"LOW": 1, "MODERATE": 2, "HIGH": 3, "CRITICAL": 4}
+        if aggregate_severity not in severity_rank:
+            raise GateValidationError("severity deve ser LOW, MODERATE, HIGH ou CRITICAL.")
+
+        seen_ids: set[str] = set()
+        observed_severity = "LOW"
+        for index, finding in enumerate(findings):
+            if not isinstance(finding, dict):
+                raise GateValidationError(
+                    f"Finding na posição {index} deve ser um objeto."
+                )
+            required = {
+                "finding_id",
+                "severity",
+                "excerpt",
+                "problem",
+                "resolution_status",
+                "resolution_note",
+                "resolved_artifact_version",
+                "revalidated",
+            }
+            missing = required - finding.keys()
+            if missing:
+                raise GateValidationError(
+                    f"Finding {index} sem campos obrigatórios: {', '.join(sorted(missing))}."
+                )
+            finding_id = finding["finding_id"]
+            if not isinstance(finding_id, str) or not finding_id.strip():
+                raise GateValidationError("finding_id deve ser uma string não vazia.")
+            if finding_id in seen_ids:
+                raise GateValidationError(f"finding_id duplicado: {finding_id}.")
+            seen_ids.add(finding_id)
+
+            finding_severity = finding["severity"]
+            if finding_severity not in severity_rank:
+                raise GateValidationError(
+                    f"Severidade inválida no finding {finding_id}."
+                )
+            if severity_rank[finding_severity] > severity_rank[observed_severity]:
+                observed_severity = finding_severity
+            for field in ("excerpt", "problem", "resolution_note"):
+                if not isinstance(finding[field], str) or not finding[field].strip():
+                    raise GateValidationError(
+                        f"{field} deve estar preenchido no finding {finding_id}."
+                    )
+            if finding["resolution_status"] != "RESOLVED":
+                raise GateValidationError(
+                    f"Finding {finding_id} permanece sem resolução confirmada."
+                )
+            if finding["resolved_artifact_version"] != output_version:
+                raise GateValidationError(
+                    f"Finding {finding_id} não aponta para a versão de saída atual."
+                )
+            if finding["revalidated"] is not True:
+                raise GateValidationError(
+                    f"Finding {finding_id} não foi revalidado pelo Editor."
+                )
+            if finding_severity in {"CRITICAL", "HIGH"}:
+                raise GateValidationError(
+                    f"Finding {finding_id} de severidade {finding_severity} "
+                    "exige encaminhamento e evidência de resolução fora do gate G4; "
+                    "não pode ser encerrado apenas por declaração do Editor."
+                )
+
+        if aggregate_severity != observed_severity:
+            raise GateValidationError(
+                "severity agregado não corresponde à maior severidade dos findings."
+            )
+        return
 
     if agent_id == AgentId.SOCIAL_MEDIA and opinion == "PRONTO PARA REVISÃO EDITORIAL":
         raise GateNotImplemented(
