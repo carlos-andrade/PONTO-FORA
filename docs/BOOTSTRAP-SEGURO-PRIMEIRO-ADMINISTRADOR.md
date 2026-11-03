@@ -20,7 +20,7 @@ O email é apenas um atributo informativo. A identidade é vinculada exclusivame
 
 1. Aplicar as migrações até `0004_system_bootstrap`.
 2. Configurar `DATABASE_URL` para a base de dados pretendida.
-3. Configurar o provedor OIDC e validar previamente o par exato `issuer` + `subject` do operador.
+3. Configurar `OIDC_ISSUER` com o issuer oficial do provedor e validar previamente o par exato `issuer` + `subject` do operador. O comando recusa um issuer diferente da configuração.
 4. Executar o comando num ambiente administrativo controlado.
 5. Confirmar que a conta OIDC indicada pertence à pessoa autorizada a assumir a administração técnica inicial.
 
