@@ -203,6 +203,7 @@ class FactCheckAssessment(Base):
     __tablename__ = "fact_check_assessments"
     __table_args__ = (
         UniqueConstraint("id", "assignment_id", name="uq_assessment_id_assignment"),
+        UniqueConstraint("assignment_id", "claim_id", "assessment_version", name="uq_assessment_claim_version"),
         ForeignKeyConstraint(["claim_id", "assignment_id"], ["claims.id", "claims.assignment_id"], ondelete="RESTRICT", name="fk_assessment_claim_same_assignment"),
         ForeignKeyConstraint(["supersedes_assessment_id", "assignment_id"], ["fact_check_assessments.id", "fact_check_assessments.assignment_id"], ondelete="RESTRICT", name="fk_assessment_supersedes_same_assignment"),
         CheckConstraint("verdict IN ('CONFIRMADA','MAIORITARIAMENTE_CONFIRMADA','PARCIALMENTE_CONFIRMADA','ENGANOSA','DESCONTEXTUALIZADA','CONTRADITA','NAO_COMPROVADA','INCONCLUSIVA','DESATUALIZADA','NAO_FACTUAL')", name="ck_fact_check_verdict"),
