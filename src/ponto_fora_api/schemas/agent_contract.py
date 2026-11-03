@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
 # Âmbito: Validação do envelope comum e dos campos específicos de cada agente.
-# SHA-256 (conteúdo normalizado): 08cadbdbeaf4607a20ba4c813be5022fec5b3c1f3d4f29ccbddb212d2b3aa4ee
+# SHA-256 (conteúdo normalizado): cc584c44ba1f8b60e1b0d2f6f8d86ee83d6c30a346656ffbed901c12821ad22d
 # Commit de referência (base documental): cb1a16e6be6e890e64f3d0ca67f9ad22dcc974df
 
 from datetime import datetime
@@ -102,4 +102,11 @@ class AgentEnvelope(BaseModel):
                 f"Campos específicos obrigatórios para {self.agent_id}: "
                 + ", ".join(missing)
             )
+        missing_versions = set(self.input_artifact_ids) - set(self.input_versions)
+        if missing_versions:
+            raise ValueError(
+                "Faltam versões de entrada para: " + ", ".join(sorted(missing_versions))
+            )
+        if "RESSALVAS" in self.editorial_opinion.upper() and not self.caveats:
+            raise ValueError("Parecer com ressalvas exige caveats não vazios.")
         return self
