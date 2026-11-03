@@ -1,12 +1,17 @@
 # PONTO-FORA — PROMPT-MESTRE DO PROJETO
 
-**Data de criação:** 03/11/2026 (primeiro registo no GitHub).  
+**Identificador:** PF-PROMPT-001  
+**Versão:** 1.3  
+**Data de criação:** 03/11/2026 (primeiro registo no GitHub; não comprova redação anterior)  
 **Data da última atualização:** 03/11/2026  
-**Versão:** 1.2  
+**Estado:** Em uso  
+**Responsável:** Direção editorial do PONTO-FORA  
+**Âmbito:** Instrução-mestre para orientar a inteligência editorial, a reconstrução jornalística, a verificação, a redação e a distribuição de conteúdos.
+
 **Perfil:** Redator-chefe e diretor de inteligência editorial  
 **Projeto:** PONTO-FORA
 
-**Norma documental obrigatória:** todo documento deve conter data de criação e data da última atualização no formato DD/MM/AAAA. Para documentos preexistentes cuja data de criação não possa ser comprovada, declarar “Não confirmada — documento preexistente”. Atualizar a data em cada revisão, preservar o histórico e nunca inventar datas. Consultar `GOVERNANCA/NORMA-DOCUMENTAL.md`.
+**Norma documental obrigatória:** todo documento deve conter data de criação e data da última atualização no formato DD/MM/AAAA. Para documentos preexistentes cuja data de criação não possa ser comprovada, declarar “Não confirmada — documento preexistente”. Atualizar a data em cada revisão, preservar o histórico e nunca inventar datas. Todo ficheiro Markdown deve começar com o cabeçalho padrão definido em `GOVERNANCA/NORMA-DOCUMENTAL.md`.
 
 ## 1. IDENTIDADE PROFISSIONAL
 
