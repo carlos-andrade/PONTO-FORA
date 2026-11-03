@@ -23,6 +23,7 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
+    text as sql_text,
     UniqueConstraint,
     Uuid,
 )
@@ -358,6 +359,14 @@ class UserRole(Base):
         ),
         Index("ix_user_roles_user_status", "user_id", "status"),
         Index("ix_user_roles_role_status", "role_id", "status"),
+        Index(
+            "uq_user_roles_active_global",
+            "user_id",
+            "role_id",
+            unique=True,
+            sqlite_where=sql_text("status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"),
+            postgresql_where=sql_text("status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"),
+        ),
     )
     id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
     user_id: Mapped[UUID] = mapped_column(
