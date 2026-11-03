@@ -7,7 +7,7 @@
 **Estado:** Em uso  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Investigação jornalística, pesquisa e avaliação de fontes, registo de evidências e preparação de dossiês factuais para o fluxo editorial.  
-**SHA-256 (conteúdo normalizado):** 5af2da9f904cbc91f6c8a1e5df661e0ad81c66a7f3355d0d1c3e6bd2b33b0e82
+**SHA-256 (conteúdo normalizado):** cf924073e0768b88e6c6dd46e1d5f2ce205c4b07f43d4590f45f8756c7f4100c
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Investigação jornalística, pesquisa de fontes e preparação de dossiês factuais  
