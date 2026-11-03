@@ -132,6 +132,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(["supersedes_assessment_id", "assignment_id"], ["fact_check_assessments.id", "fact_check_assessments.assignment_id"], ondelete="RESTRICT", name="fk_assessment_supersedes_same_assignment"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("id", "assignment_id", name="uq_assessment_id_assignment"),
+        sa.UniqueConstraint("assignment_id", "claim_id", "assessment_version", name="uq_assessment_claim_version"),
     )
     op.create_index("ix_assessments_assignment_claim", "fact_check_assessments", ["assignment_id", "claim_id", "assessment_version"])
 
