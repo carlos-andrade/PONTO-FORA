@@ -98,7 +98,7 @@ def test_orchestrator_can_start_triage(db, system_actor) -> None:
     )
     changed = transition_assignment(
         db, assignment.id, target=AssignmentStatus.EM_TRIAGEM,
-        actor=system_actor, expected_row_version=1
+        actor=system_actor, expected_row_version=1, command_id=uuid4()
     )
     assert changed.status == AssignmentStatus.EM_TRIAGEM.value
     assert changed.row_version == 2
@@ -118,7 +118,7 @@ def test_director_can_release_triage_to_investigation(db, system_actor, director
     )
     changed = transition_assignment(
         db, assignment.id, target=AssignmentStatus.AGUARDANDO_INVESTIGACAO,
-        actor=director, expected_row_version=2, reason="Escopo e relevância confirmados."
+        actor=director, expected_row_version=2, command_id=uuid4(), reason="Escopo e relevância confirmados."
     )
     assert changed.status == AssignmentStatus.AGUARDANDO_INVESTIGACAO.value
     assert changed.row_version == 3
@@ -135,7 +135,7 @@ def test_wrong_role_cannot_release_triage(db, system_actor) -> None:
     with pytest.raises(PermissionDenied):
         transition_assignment(
             db, assignment.id, target=AssignmentStatus.AGUARDANDO_INVESTIGACAO,
-            actor=system_actor, expected_row_version=2
+            actor=system_actor, expected_row_version=2, command_id=uuid4()
         )
 
 
@@ -150,7 +150,7 @@ def test_rejection_requires_reason(db, system_actor, director) -> None:
     with pytest.raises(DomainError):
         transition_assignment(
             db, assignment.id, target=AssignmentStatus.REJEITADA,
-            actor=director, expected_row_version=2
+            actor=director, expected_row_version=2, command_id=uuid4()
         )
 
 
