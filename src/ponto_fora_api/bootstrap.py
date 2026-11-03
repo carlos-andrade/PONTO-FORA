@@ -35,6 +35,14 @@ class BootstrapAlreadyCompleted(BootstrapError):
     """A bootstrap marker or prior administrator assignment already exists."""
 
 
+def require_postgresql(db: Session) -> None:
+    """Reject execution of the administrative bootstrap outside PostgreSQL."""
+    if db.get_bind().dialect.name != "postgresql":
+        raise BootstrapError(
+            "O bootstrap administrativo exige PostgreSQL; SQLite não é suportado."
+        )
+
+
 def _validate_identity(issuer: str, subject: str, display_name: str, email: str | None) -> None:
     parsed = urlsplit(issuer)
     if (
@@ -201,6 +209,7 @@ def _build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     args = _build_parser().parse_args()
     with SessionLocal() as db:
+        require_postgresql(db)
         user = bootstrap_first_admin(
             db,
             issuer=args.issuer,
