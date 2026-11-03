@@ -43,7 +43,7 @@ def list_assignments(
 
 
 @router.get("/{assignment_id}")
-def get_assignment(assignment_id: UUID, db: Session = Depends(get_db)) -> dict:
+def get_assignment(assignment_id: UUID, db: DbSession) -> dict:
     assignment = db.get(Assignment, assignment_id)
     if assignment is None:
         raise HTTPException(status_code=404, detail="Pauta não encontrada.")
@@ -51,7 +51,7 @@ def get_assignment(assignment_id: UUID, db: Session = Depends(get_db)) -> dict:
 
 
 @router.get("/{assignment_id}/audit")
-def get_assignment_audit(assignment_id: UUID, db: Session = Depends(get_db)) -> dict:
+def get_assignment_audit(assignment_id: UUID, db: DbSession) -> dict:
     if db.get(Assignment, assignment_id) is None:
         raise HTTPException(status_code=404, detail="Pauta não encontrada.")
     events = db.scalars(
