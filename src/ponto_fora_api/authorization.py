@@ -91,12 +91,14 @@ def grant_role(
     *,
     user_id: UUID,
     role_key: str,
-    actor_id: str,
+    actor_user_id: UUID,
     reason: str,
     valid_until: datetime | None = None,
 ) -> UserRole:
     if not reason.strip():
         raise ValueError("A concessão de papel exige fundamentação.")
+    require_permission(db, actor_user_id, "roles.manage")
+    actor_id = f"user:{actor_user_id}"
     user = db.get(User, user_id)
     if user is None or user.status != "ACTIVE":
         raise InactiveUser("Não é possível atribuir papéis a utilizador inativo.")
@@ -147,11 +149,13 @@ def revoke_role(
     *,
     user_id: UUID,
     role_key: str,
-    actor_id: str,
+    actor_user_id: UUID,
     reason: str,
 ) -> UserRole:
     if not reason.strip():
         raise ValueError("A revogação de papel exige fundamentação.")
+    require_permission(db, actor_user_id, "roles.manage")
+    actor_id = f"user:{actor_user_id}"
     role = db.scalar(select(Role).where(Role.key == role_key))
     if role is None:
         raise ValueError("Papel inexistente.")
