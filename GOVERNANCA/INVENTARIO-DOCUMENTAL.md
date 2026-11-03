@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 3.8  
+**Versão:** 3.9  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** 639936751a05b10c8cb46109b6c6f3e432c1914148a7ae1e2748ea6b328f1a7d
-**Commit de referência (base documental):** 9df3f35df25823636e75bedd0dbfa80dcde75c5b
+**SHA-256 (conteúdo normalizado):** 124dd17e07a87c83fd477e75159734015280133c86c3faf4c947988ec3677bc8
+**Commit de referência (base documental):** 0f15c6f4bc4660933892594e326e9a5df9f878af
 
 ## Finalidade
 
@@ -25,7 +25,7 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `AGENTES/AGENTE-REDATOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
 | `AGENTES/AGENTE-EDITOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; revisão social incluída; versão 1.1. |
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato comum + mapeamentos + SHA-256 | Harmonizado e atualizado com persistência das execuções; versão 1.2. |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contratos + mapeamentos + SHA-256 | Persistência e transições transacionais sob política ativa; versão 1.3. |
 | `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Auditoria documental concluída; 12 pontos de harmonização; versão 1.0. |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.5. |
@@ -41,8 +41,8 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `tests/test_agent_contract.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 | Testes do envelope, ressalvas, versões, pareceres e estados; PR #16. |
 | `src/ponto_fora_api/models.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Inclui AgentExecution; execução persistida com integridade e auditoria; PR #17. |
 | `migrations/versions/0005_agent_execution_records.py` | 03/11/2026 | 03/11/2026 | Metadados de migração + SHA-256 + commit-base | Migração 0005; tabela de execuções e proteção append-only em PostgreSQL; PR #17. |
-| `src/ponto_fora_api/services/agent_executions.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Serviço transacional idempotente de persistência dos envelopes; PR #17. |
-| `tests/test_agent_execution_persistence.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Testes de persistência, idempotência, auditoria e bloqueio de avanço implícito; PR #17. |
+| `src/ponto_fora_api/services/agent_executions.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Persistência e aplicação transacional de transições sob política; PR #18. |
+| `tests/test_agent_execution_persistence.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Testes de persistência, transições autorizadas, idempotência e bloqueios; PR #18. |
 | `.github/workflows/ci.yml` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; lint e testes da Fase A na main. |
 | `docs/GUIA-DE-DESENVOLVIMENTO.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown + SHA-256 + commit-base | Conforme; guia de desenvolvimento, versão 1.0. |
 
@@ -56,7 +56,7 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `README.md` | `57c066a7b515de4558224466154cd2cf887aec016c4c776d93f2e6687626e7eb` | `e4f4913d5e33c6fc20cdd422f0c2447e5e185f64` |
 | `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | `77d6bd94dd7e9280144a6247b2a68b798d767eb9473f6bba9afaaab4da3f8ea7` | `8f5dd7d53644e65d62cb17ed59944e88a21a20d0` |
 | `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | `246cc737f6c6fe49fe53fe63355cd9749e4aa7db9d862b2a5664457ee607c510` | `5ba38d82ebad536b14cee3c94b1bffc049cbcf43` |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `9af521a4562dd6267e2cedd4fe8671c781fc21e96ece18a13aff521de594bd61` | `9df3f35df25823636e75bedd0dbfa80dcde75c5b` |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `782ae70053018170cb084afd6d6fcf7a5a30a96ecc473c1335f44fe4fe66db7d` | `0f15c6f4bc4660933892594e326e9a5df9f878af` |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | `1ae725ea77e73a4039f14b8adcf181d11b2771b7b6f114dc689ed1354c44eb17` | `8355e0162f2ee53abfba253cb9041b88d419ed1b` |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | `f731f940fef6e542d103aa0f83765c6e7749be62a510112032b4433d835e4e44` | `243a1bea864253e9b870931e6a5b1841c05816f1` |
 | `LICENSE` | `a3b6bf7bfaa2b3b9cb6f8edafb531eb9ca07b84f7b595200198116538acfceaa` | `fc7ac004e8335ee20641c75b1263aadc8f2e5e40` |
@@ -71,8 +71,8 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `tests/test_agent_contract.py` | `e621835259401399e2d034e80d5870c30cac4d7d1237ad32f81533ff956c1565` | `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa` |
 | `src/ponto_fora_api/models.py` | `8cead1ebce063d342ccfebf55a097ced207258f3f92e87123329f26196255cf4` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` |
 | `migrations/versions/0005_agent_execution_records.py` | `ec13eaeef26586bd211a87b2b11cb6991131b714bfe82c2ee2ff79e374b934f6` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` |
-| `src/ponto_fora_api/services/agent_executions.py` | `3d2dee9e5f1fde9d33e9ac5e2cef5b9abbfbd0f1dc6f0279798978e03ef05ab6` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` |
-| `tests/test_agent_execution_persistence.py` | `58eabcdf51eb701a6f6408374f8e0baa181d077e0034c189acb49ec7477a684f` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` |
+| `src/ponto_fora_api/services/agent_executions.py` | `42b1c421c01d9af90dc3343267d86e2136588dd9b2281d58a19deb2b30a03e17` | `3439b36f8468ce420cd46cb1135d98dc9170c6c8` |
+| `tests/test_agent_execution_persistence.py` | `12d909419e6e2629b33b06f903960295bcedd568b38a3dc0dcdaf5b9d2234fb6` | `3439b36f8468ce420cd46cb1135d98dc9170c6c8` |
 
 O SHA-256 do próprio Inventário consta no seu cabeçalho. O commit efetivo que publica o próprio Inventário não pode ser inscrito dentro do mesmo ficheiro sem autorreferência circular; consulte o histórico Git do repositório. O campo de commit no cabeçalho identifica o commit-base documental.
 
@@ -155,6 +155,17 @@ O serviço grava o envelope do agente e o evento de auditoria na mesma transaç�
 | `src/ponto_fora_api/services/agent_executions.py` | PF-COD-SVC-AGENT-EXECUTION-001 | `3d2dee9e5f1fde9d33e9ac5e2cef5b9abbfbd0f1dc6f0279798978e03ef05ab6` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` | Persistência idempotente, transacional e auditável. |
 | `tests/test_agent_execution_persistence.py` | PF-TEST-AGENT-EXECUTION-001 | `58eabcdf51eb701a6f6408374f8e0baa181d077e0034c189acb49ec7477a684f` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` | Testes de persistência e segurança do fluxo. |
 
+## Artefactos de implementação — Transições transacionais dos agentes (PR #18, integrados na main)
+
+O PR #18 integrou o comando explícito de aplicação de transições editoriais, ligado à política de estados e ao controlo de autorização. A CI concluiu com sucesso: Ruff aprovado, migrações PostgreSQL 16 aplicadas até `0005_agent_execution_records`, revisão Alembic confirmada e **92 testes aprovados**.
+
+A política de produção não foi ampliada. Os testes usam uma transição temporária para validar o caminho permitido; nenhuma etapa editorial adicional foi habilitada em produção.
+
+| Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
+|---|---|---|---|---|
+| `src/ponto_fora_api/services/agent_executions.py` | PF-COD-SVC-AGENT-EXECUTION-001 | `42b1c421c01d9af90dc3343267d86e2136588dd9b2281d58a19deb2b30a03e17` | `3439b36f8468ce420cd46cb1135d98dc9170c6c8` | Comando transacional, lock, controlo de versão, autorização e idempotência. |
+| `tests/test_agent_execution_persistence.py` | PF-TEST-AGENT-EXECUTION-001 | `12d909419e6e2629b33b06f903960295bcedd568b38a3dc0dcdaf5b9d2234fb6` | `3439b36f8468ce420cd46cb1135d98dc9170c6c8` | Testes de transição autorizada, bloqueios, concorrência e replay idempotente. |
+
 ## Regra de manutenção
 
 Sempre que um ficheiro documental for criado ou alterado:
@@ -198,3 +209,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 3.6 | Registo na main dos contratos executáveis dos agentes e respetivos testes após merge do PR #16; CI com 79 testes aprovados. |
 | 03/11/2026 | 3.7 | Registo da persistência transacional de execuções dos agentes após merge do PR #17; migração 0005 aplicada e 87 testes aprovados. |
 | 03/11/2026 | 3.8 | Atualização do Orquestrador Editorial para V1.2, com a separação entre persistência do parecer e transição efetiva; reconciliação da integridade e remoção de linha duplicada. |
+| 03/11/2026 | 3.9 | Registo do comando transacional de transições dos agentes após merge do PR #18; CI com 92 testes aprovados; Orquestrador V1.3. |
