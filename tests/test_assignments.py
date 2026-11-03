@@ -118,7 +118,8 @@ def test_director_can_release_triage_to_investigation(db, system_actor, director
     )
     changed = transition_assignment(
         db, assignment.id, target=AssignmentStatus.AGUARDANDO_INVESTIGACAO,
-        actor=director, expected_row_version=2, command_id=uuid4(), reason="Escopo e relevância confirmados."
+        actor=director, expected_row_version=2, command_id=uuid4(),
+        reason="Escopo e relevância confirmados.",
     )
     assert changed.status == AssignmentStatus.AGUARDANDO_INVESTIGACAO.value
     assert changed.row_version == 3
