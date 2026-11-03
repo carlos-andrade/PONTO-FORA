@@ -46,7 +46,7 @@ def _validate_identity(issuer: str, subject: str, display_name: str, email: str 
         or issuer != issuer.strip()
     ):
         raise ValueError("Issuer deve ser uma URL HTTPS válida, sem credenciais, query ou fragmento.")
-    if not subject.strip() or len(subject) > 512:
+    if not subject.strip() or subject != subject.strip() or len(subject) > 512:
         raise ValueError("Subject é obrigatório e deve ter até 512 caracteres.")
     if not display_name.strip() or len(display_name) > 240:
         raise ValueError("Nome de apresentação é obrigatório e deve ter até 240 caracteres.")
