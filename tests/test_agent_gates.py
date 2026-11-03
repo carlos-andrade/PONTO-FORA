@@ -6,8 +6,8 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
 # Âmbito: Testes dos gates de investigação, fact-checking, redação e bloqueios.
-# SHA-256 (conteúdo normalizado): d4ff36853f61cbe78bfe82ed324e0c729e27bbf46d3175d9a681002ef318434a
-# Commit de referência (base documental): 3439b36f8468ce420cd46cb1135d98dc9170c6c8
+# SHA-256 (conteúdo normalizado): 5d5ca4102f3abd4656a7cd9fcdc2b311f2babfafd5289db30a4f1ae15e38d50d
+# Commit de referência (base documental): d38c872e44e1e0ab946f55e2f28261e995c99a39
 
 from datetime import UTC, datetime
 from types import SimpleNamespace
