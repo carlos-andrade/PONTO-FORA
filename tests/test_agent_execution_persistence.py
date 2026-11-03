@@ -5,8 +5,8 @@
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
-# Âmbito: Atomicidade, idempotência, integridade referencial, auditoria e gates de transição editorial.
-# SHA-256 (conteúdo normalizado): 804c99056db963e8d2025f98bb45185bf3189009767b47865889f50873c4eefd
+# Âmbito: Testes de atomicidade, idempotência, auditoria e gates editoriais.
+# SHA-256 (conteúdo normalizado): 12d909419e6e2629b33b06f903960295bcedd568b38a3dc0dcdaf5b9d2234fb6
 # Commit de referência (base documental): 5d064a9430f0c8066ec0bbce4ab06d35b5232c8f
 
 from datetime import UTC, datetime
