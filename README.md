@@ -6,6 +6,8 @@
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em uso  
 **Responsável:** Direção editorial e equipa do projeto  
-**Âmbito:** Apresentação institucional, missão e propósito do portal PONTO-FORA.
+**Âmbito:** Apresentação institucional, missão e propósito do portal PONTO-FORA.  
+**SHA-256 (conteúdo normalizado):** 57c066a7b515de4558224466154cd2cf887aec016c4c776d93f2e6687626e7eb  
+**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
 O PONTO FORA é um portal de notícias que transforma informações já publicadas em conteúdos originais, claros e acessíveis. Com inteligência artificial, contextualiza os fatos, simplifica temas complexos e adapta a linguagem a diferentes públicos, preservando o sentido, distinguindo fatos de análises e valorizando fontes confiáveis com ética real.
