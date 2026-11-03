@@ -37,14 +37,23 @@ def upgrade() -> None:
         sa.Column("access_status", sa.String(24), nullable=False),
         sa.Column("independence_group", sa.String(240)),
         sa.Column("metadata", sa.JSON(), nullable=False),
-        sa.CheckConstraint("source_type IN ('PRIMARY','SECONDARY','REFERENCE','SOCIAL','UNKNOWN')", name="ck_source_type"),
-        sa.CheckConstraint("access_status IN ('AVAILABLE','UNAVAILABLE','RESTRICTED','REMOVED','NOT_CHECKED')", name="ck_source_access_status"),
-        sa.CheckConstraint("content_sha256 IS NULL OR length(content_sha256) = 64", name="ck_source_sha256"),
+        sa.CheckConstraint((
+            "source_type IN ('PRIMARY','SECONDARY','REFERENCE"
+            "','SOCIAL','UNKNOWN')"
+        ), name="ck_source_type"),
+        sa.CheckConstraint((
+            "access_status IN"
+            " ('AVAILABLE','UNAVAILABLE','RESTRICTED','REMOVE"
+            "D','NOT_CHECKED')"
+        ), name="ck_source_access_status"),
+        sa.CheckConstraint("content_sha256 IS NULL OR length(content_sha256) = 64",
+            name="ck_source_sha256"),
         sa.ForeignKeyConstraint(["assignment_id"], ["assignments.id"], ondelete="RESTRICT"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("id", "assignment_id", name="uq_source_id_assignment"),
     )
-    op.create_index("ix_sources_assignment_retrieved", "source_records", ["assignment_id", "retrieved_at"])
+    op.create_index("ix_sources_assignment_retrieved", "source_records", ["assignment_id",
+        "retrieved_at"])
 
     op.create_table(
         "claims",
@@ -58,10 +67,16 @@ def upgrade() -> None:
         sa.Column("created_by", sa.String(160), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("supersedes_claim_id", sa.Uuid()),
-        sa.CheckConstraint("claim_type IN ('FACTUAL','QUANTITATIVE','QUOTE','DATE','CAUSAL','PREDICTIVE','OPINION','MIXED')", name="ck_claim_type"),
-        sa.CheckConstraint("materiality IN ('LOW','MEDIUM','HIGH','CRITICAL')", name="ck_claim_materiality"),
+        sa.CheckConstraint((
+            "claim_type IN ('FACTUAL','QUANTITATIVE','QUOTE',"
+            "'DATE','CAUSAL','PREDICTIVE','OPINION','MIXED')"
+        ), name="ck_claim_type"),
+        sa.CheckConstraint("materiality IN ('LOW','MEDIUM','HIGH','CRITICAL')",
+            name="ck_claim_materiality"),
         sa.ForeignKeyConstraint(["assignment_id"], ["assignments.id"], ondelete="RESTRICT"),
-        sa.ForeignKeyConstraint(["supersedes_claim_id", "assignment_id"], ["claims.id", "claims.assignment_id"], ondelete="RESTRICT", name="fk_claim_supersedes_same_assignment"),
+        sa.ForeignKeyConstraint(["supersedes_claim_id", "assignment_id"], ["claims.id",
+            "claims.assignment_id"], ondelete="RESTRICT",
+                name="fk_claim_supersedes_same_assignment"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("id", "assignment_id", name="uq_claim_id_assignment"),
     )
@@ -81,15 +96,24 @@ def upgrade() -> None:
         sa.Column("collected_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("content_sha256", sa.String(64)),
         sa.Column("limitations", sa.Text()),
-        sa.CheckConstraint("evidence_type IN ('DOCUMENT','DATASET','QUOTE','IMAGE','AUDIO','VIDEO','OBSERVATION','OTHER')", name="ck_evidence_type"),
-        sa.CheckConstraint("polarity IN ('SUPPORTS','CONTRADICTS','CONTEXTUALIZES','NEUTRAL')", name="ck_evidence_polarity"),
-        sa.CheckConstraint("content_sha256 IS NULL OR length(content_sha256) = 64", name="ck_evidence_sha256"),
+        sa.CheckConstraint((
+            "evidence_type IN"
+            " ('DOCUMENT','DATASET','QUOTE','IMAGE','AUDIO','"
+            "VIDEO','OBSERVATION','OTHER')"
+        ), name="ck_evidence_type"),
+        sa.CheckConstraint("polarity IN ('SUPPORTS','CONTRADICTS','CONTEXTUALIZES','NEUTRAL')",
+            name="ck_evidence_polarity"),
+        sa.CheckConstraint("content_sha256 IS NULL OR length(content_sha256) = 64",
+            name="ck_evidence_sha256"),
         sa.ForeignKeyConstraint(["assignment_id"], ["assignments.id"], ondelete="RESTRICT"),
-        sa.ForeignKeyConstraint(["source_id", "assignment_id"], ["source_records.id", "source_records.assignment_id"], ondelete="RESTRICT", name="fk_evidence_source_same_assignment"),
+        sa.ForeignKeyConstraint(["source_id", "assignment_id"], ["source_records.id",
+            "source_records.assignment_id"], ondelete="RESTRICT",
+                name="fk_evidence_source_same_assignment"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("id", "assignment_id", name="uq_evidence_id_assignment"),
     )
-    op.create_index("ix_evidence_assignment_collected", "evidence_records", ["assignment_id", "collected_at"])
+    op.create_index("ix_evidence_assignment_collected", "evidence_records", ["assignment_id",
+        "collected_at"])
 
     op.create_table(
         "claim_evidence_links",
@@ -102,10 +126,16 @@ def upgrade() -> None:
         sa.Column("assessed_by", sa.String(160), nullable=False),
         sa.Column("assessed_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("assessment_version", sa.Integer(), nullable=False),
-        sa.CheckConstraint("relationship IN ('SUPPORTS','CONTRADICTS','CONTEXTUALIZES','DOES_NOT_ADDRESS')", name="ck_claim_evidence_relationship"),
+        sa.CheckConstraint((
+            "relationship IN ('SUPPORTS','CONTRADICTS','CONTE"
+            "XTUALIZES','DOES_NOT_ADDRESS')"
+        ), name="ck_claim_evidence_relationship"),
         sa.CheckConstraint("assessment_version >= 1", name="ck_link_assessment_version"),
-        sa.ForeignKeyConstraint(["claim_id", "assignment_id"], ["claims.id", "claims.assignment_id"], ondelete="RESTRICT", name="fk_link_claim_same_assignment"),
-        sa.ForeignKeyConstraint(["evidence_id", "assignment_id"], ["evidence_records.id", "evidence_records.assignment_id"], ondelete="RESTRICT", name="fk_link_evidence_same_assignment"),
+        sa.ForeignKeyConstraint(["claim_id", "assignment_id"], ["claims.id",
+            "claims.assignment_id"], ondelete="RESTRICT", name="fk_link_claim_same_assignment"),
+        sa.ForeignKeyConstraint(["evidence_id", "assignment_id"], ["evidence_records.id",
+            "evidence_records.assignment_id"], ondelete="RESTRICT",
+                name="fk_link_evidence_same_assignment"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("claim_id", "evidence_id", name="uq_claim_evidence_pair"),
     )
@@ -124,17 +154,28 @@ def upgrade() -> None:
         sa.Column("assessed_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("assessment_version", sa.Integer(), nullable=False),
         sa.Column("supersedes_assessment_id", sa.Uuid()),
-        sa.CheckConstraint("verdict IN ('CONFIRMADA','MAIORITARIAMENTE_CONFIRMADA','PARCIALMENTE_CONFIRMADA','ENGANOSA','DESCONTEXTUALIZADA','CONTRADITA','NAO_COMPROVADA','INCONCLUSIVA','DESATUALIZADA','NAO_FACTUAL')", name="ck_fact_check_verdict"),
+        sa.CheckConstraint((
+            "verdict IN ('CONFIRMADA','MAIORITARIAMENTE_CONFI"
+            "RMADA','PARCIALMENTE_CONFIRMADA','ENGANOSA','DES"
+            "CONTEXTUALIZADA','CONTRADITA','NAO_COMPROVADA','"
+            "INCONCLUSIVA','DESATUALIZADA','NAO_FACTUAL')"
+        ), name="ck_fact_check_verdict"),
         sa.CheckConstraint("reviewer_type IN ('HUMAN','AI')", name="ck_assessment_reviewer_type"),
         sa.CheckConstraint("assessment_version >= 1", name="ck_assessment_version"),
         sa.ForeignKeyConstraint(["assignment_id"], ["assignments.id"], ondelete="RESTRICT"),
-        sa.ForeignKeyConstraint(["claim_id", "assignment_id"], ["claims.id", "claims.assignment_id"], ondelete="RESTRICT", name="fk_assessment_claim_same_assignment"),
-        sa.ForeignKeyConstraint(["supersedes_assessment_id", "assignment_id"], ["fact_check_assessments.id", "fact_check_assessments.assignment_id"], ondelete="RESTRICT", name="fk_assessment_supersedes_same_assignment"),
+        sa.ForeignKeyConstraint(["claim_id", "assignment_id"], ["claims.id",
+            "claims.assignment_id"], ondelete="RESTRICT",
+                name="fk_assessment_claim_same_assignment"),
+        sa.ForeignKeyConstraint(["supersedes_assessment_id", "assignment_id"],
+            ["fact_check_assessments.id", "fact_check_assessments.assignment_id"],
+                ondelete="RESTRICT", name="fk_assessment_supersedes_same_assignment"),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("id", "assignment_id", name="uq_assessment_id_assignment"),
-        sa.UniqueConstraint("assignment_id", "claim_id", "assessment_version", name="uq_assessment_claim_version"),
+        sa.UniqueConstraint("assignment_id", "claim_id", "assessment_version",
+            name="uq_assessment_claim_version"),
     )
-    op.create_index("ix_assessments_assignment_claim", "fact_check_assessments", ["assignment_id", "claim_id", "assessment_version"])
+    op.create_index("ix_assessments_assignment_claim", "fact_check_assessments",
+        ["assignment_id", "claim_id", "assessment_version"])
 
 
 def downgrade() -> None:

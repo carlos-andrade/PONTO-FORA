@@ -47,7 +47,8 @@ from ponto_fora_api.services.evidence import (
 
 @pytest.fixture
 def db():
-    engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
+    engine = create_engine("sqlite://", connect_args={"check_same_thread": False},
+        poolclass=StaticPool)
     from ponto_fora_api.db import Base
     Base.metadata.create_all(engine)
     with Session(engine, expire_on_commit=False) as session:
@@ -99,7 +100,8 @@ def test_source_claim_evidence_and_link_are_persisted(db, two_assignments):
     assert db.scalar(select(func.count()).select_from(Claim)) == 1
     assert db.scalar(select(func.count()).select_from(EvidenceRecord)) == 1
     assert link.assignment_id == assignment.id
-    assert db.scalar(select(func.count()).select_from(AuditEvent).where(AuditEvent.assignment_id == assignment.id)) == 5
+    assert db.scalar(select(func.count()).select_from(AuditEvent).where(
+        AuditEvent.assignment_id == assignment.id)) == 5
 
 
 def test_evidence_cannot_use_source_from_another_assignment(db, two_assignments):
@@ -170,6 +172,8 @@ def test_unproven_and_contradicted_are_distinct_verdicts(db, two_assignments):
 
 def test_source_url_rejects_non_http_and_credentials():
     with pytest.raises(ValueError):
-        SourceCreate(canonical_url="file:///etc/passwd", title="Invalid", retrieved_at=datetime.now(UTC))
+        SourceCreate(canonical_url="file:///etc/passwd", title="Invalid",
+            retrieved_at=datetime.now(UTC))
     with pytest.raises(ValueError):
-        SourceCreate(canonical_url="https://user:pass@example.org/x", title="Invalid", retrieved_at=datetime.now(UTC))
+        SourceCreate(canonical_url="https://user:pass@example.org/x", title="Invalid",
+            retrieved_at=datetime.now(UTC))
