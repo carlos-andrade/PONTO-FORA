@@ -419,6 +419,7 @@ class AuthorizationEvent(Base):
         DateTime(timezone=True), nullable=False, default=utc_now
     )
 
+
 class SystemBootstrap(Base):
     __tablename__ = "system_bootstrap"
     __table_args__ = (
