@@ -6,17 +6,23 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Validação de tokens Bearer JWT emitidos por um provedor OIDC.
-# SHA-256 (conteúdo normalizado): 25f6d78a201c5b686d672d658c1e81493738a9aa34417f14354ffd1b992aa480
-# Commit de referência (base documental): eaf2197a52de48c498f284a60d1aaf805b49e5b1
+# SHA-256 (conteúdo normalizado): 41d143ed83964fc660291b8ee722e07991f5fabddac3a868fa76e4e80c6057d5
+# Commit de referência (base documental): 88db30df8317ad26a44fa4be7b2c794984cc9f1c
 
 from dataclasses import dataclass
 from os import getenv
+from typing import Annotated
 from urllib.parse import urlsplit
 
-import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from jwt import PyJWKClient, PyJWKClientConnectionError, PyJWKClientError
+from jwt import (
+    decode,
+    PyJWKClient,
+    PyJWKClientConnectionError,
+    PyJWKClientError,
+    PyJWTError,
+)
 
 
 bearer_scheme = HTTPBearer(auto_error=False, scheme_name="OIDC Bearer")
@@ -100,8 +106,11 @@ def get_oidc_settings() -> OIDCSettings:
 
 
 def get_current_principal(
-    credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
-    settings: OIDCSettings = Depends(get_oidc_settings),
+    credentials: Annotated[
+        HTTPAuthorizationCredentials | None,
+        Depends(bearer_scheme),
+    ],
+    settings: Annotated[OIDCSettings, Depends(get_oidc_settings)],
 ) -> AuthenticatedPrincipal:
     if credentials is None or credentials.scheme.lower() != "bearer":
         raise HTTPException(
@@ -139,9 +148,15 @@ def get_current_principal(
             detail="Token de acesso inválido.",
             headers={"WWW-Authenticate": "Bearer"},
         ) from exc
+    except PyJWTError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token de acesso inválido.",
+            headers={"WWW-Authenticate": "Bearer"},
+        ) from exc
 
     try:
-        claims = jwt.decode(
+        claims = decode(
             token,
             signing_key.key,
             algorithms=["RS256"],
@@ -150,7 +165,7 @@ def get_current_principal(
             leeway=settings.leeway_seconds,
             options={"require": ["exp", "sub"]},
         )
-    except jwt.PyJWTError as exc:
+    except PyJWTError as exc:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token de acesso inválido ou expirado.",
