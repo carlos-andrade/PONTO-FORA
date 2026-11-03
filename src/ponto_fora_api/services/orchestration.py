@@ -6,13 +6,17 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
 # Âmbito: Mapeamento explícito de pareceres dos agentes para estados editoriais.
-# SHA-256 (conteúdo normalizado): b082434ada44c8deb05ba11771eb196d0651a2bd02c386487028c273b8cd9715
+# SHA-256 (conteúdo normalizado): 52964ae593e75a2e4e2d10c521aad46c9da448dc992f443c6b186f747d285378
 # Commit de referência (base documental): cb1a16e6be6e890e64f3d0ca67f9ad22dcc974df
 
 from dataclasses import dataclass
 
 from ponto_fora_api.domain import AssignmentStatus
-from ponto_fora_api.schemas.agent_contract import AgentId
+from ponto_fora_api.schemas.agent_contract import AgentEnvelope, AgentId, ExecutionStatus
+
+
+class AgentExecutionNotSuccessful(ValueError):
+    """Execução não concluída; não pode provocar avanço editorial."""
 
 
 class UnsupportedEditorialOpinion(ValueError):
@@ -108,3 +112,12 @@ def map_editorial_opinion(agent_id: AgentId, opinion: str) -> OpinionMapping:
         raise UnsupportedEditorialOpinion(
             f"Parecer não mapeado para {agent_id}: {opinion!r}"
         ) from exc
+
+
+def resolve_agent_envelope(envelope: AgentEnvelope) -> OpinionMapping:
+    """Resolve o parecer apenas após execução técnica bem-sucedida."""
+    if envelope.execution_status != ExecutionStatus.SUCCESS:
+        raise AgentExecutionNotSuccessful(
+            f"Execução {envelope.execution_status}: estado editorial não pode avançar."
+        )
+    return map_editorial_opinion(envelope.agent_id, envelope.editorial_opinion)
