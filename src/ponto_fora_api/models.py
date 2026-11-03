@@ -13,8 +13,17 @@ from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
 from sqlalchemy import (
-    JSON, CheckConstraint, DateTime, ForeignKey, ForeignKeyConstraint, Index,
-    Integer, String, Text, UniqueConstraint, Uuid,
+    JSON,
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    ForeignKeyConstraint,
+    Index,
+    Integer,
+    String,
+    Text,
+    UniqueConstraint,
+    Uuid,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
