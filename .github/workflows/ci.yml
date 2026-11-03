@@ -13,7 +13,7 @@ name: CI
 
 on:
   push:
-    branches: ["main", "phase-a/**", "phase-b/**"]
+    branches: ["main", "phase-a/**", "phase-b/**", "phase-c/**"]
   pull_request:
     branches: ["main"]
 
