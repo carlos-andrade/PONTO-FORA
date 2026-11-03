@@ -3,12 +3,12 @@
 **Identificador:** PF-AGT-FCT-001  
 **Versão:** 1.0  
 **Data de criação:** 03/11/2026  
-**Data da última atualização:** 03/11/2026
+**Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
-**Âmbito:** Verificação independente de afirmações factuais, avaliação de evidências, identificação de erros e emissão de pareceres de conformidade factual antes da redação e publicação.
-**SHA-256 (conteúdo normalizado):** 4ec1a4f193992e5fe587c898120313331f425ecf3845e7b97c9d94efa7946145
-**Commit de referência (base documental):** b3822d657716ef0d2b0d3e6ef735d9fcd66f0277
+**Âmbito:** Verificação independente de afirmações factuais, avaliação de evidências, identificação de erros e emissão de pareceres de conformidade factual antes da redação e publicação.  
+**SHA-256 (conteúdo normalizado):** 5575dfa7a22d02277b6eae15f491dd6149745529c5cce10dce7ac0f4a5510054
+**Commit de referência (base documental):** 8355e0162f2ee53abfba253cb9041b88d419ed1b
 
 **Função:** Fact-checking jornalístico e auditoria de afirmações  
 **Posição no fluxo editorial:** Após a investigação e antes da redação  
