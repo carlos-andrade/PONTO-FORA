@@ -1,13 +1,13 @@
 # PONTO-FORA — configuração do projeto Python
 # Identificador: PF-COD-CONFIG-001
-# Versão: 1.0
+# Versão: 1.1
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Dependências, ferramentas e configuração do backend.
-# SHA-256 (conteúdo normalizado): 63e6639d2fe16986e3fe0f5e03502f33d52c0ee135fc41370d3d54ecc886b348
-# Commit de referência (base documental): ab40c30648ce632f24df6f7b767e7d026d23fffc
+# SHA-256 (conteúdo normalizado): PENDING
+# Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]
@@ -15,13 +15,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ponto-fora"
-version = "0.1.0"
+version = "0.2.0"
 description = "Plataforma editorial PONTO-FORA"
 requires-python = ">=3.12"
-dependencies = ["fastapi>=0.115,<1.0", "uvicorn[standard]>=0.30,<1.0"]
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "uvicorn[standard]>=0.30,<1.0",
+  "SQLAlchemy>=2.0,<3.0",
+  "alembic>=1.13,<2.0",
+  "psycopg[binary]>=3.2,<4.0",
+]
 
 [project.optional-dependencies]
-dev = ["httpx>=0.27,<1.0", "pytest>=8.0,<9.0", "ruff>=0.6,<1.0"]
+dev = [
+  "httpx>=0.27,<1.0",
+  "pytest>=8.0,<9.0",
+  "ruff>=0.6,<1.0",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
