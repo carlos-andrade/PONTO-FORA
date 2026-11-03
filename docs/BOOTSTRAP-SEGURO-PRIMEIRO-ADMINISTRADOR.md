@@ -1,7 +1,7 @@
 # BOOTSTRAP SEGURO DO PRIMEIRO ADMINISTRADOR
 
 **Identificador:** PF-SYS-BOOTSTRAP-001  
-**Versão:** 1.0  
+**Versão:** 1.1  
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em revisão  
@@ -21,7 +21,8 @@ O email é apenas um atributo informativo. A identidade é vinculada exclusivame
 1. Aplicar as migrações até `0004_system_bootstrap`.
 2. Configurar `DATABASE_URL` para a base de dados pretendida.
 3. Configurar `OIDC_ISSUER` com o issuer oficial do provedor e validar previamente o par exato `issuer` + `subject` do operador. O comando recusa um issuer diferente da configuração.
-4. Executar o comando num ambiente administrativo controlado.
+4. Confirmar que `DATABASE_URL` aponta para PostgreSQL. O comando recusa engines SQLite ou qualquer dialeto diferente de PostgreSQL.
+5. Executar o comando num ambiente administrativo controlado.
 5. Confirmar que a conta OIDC indicada pertence à pessoa autorizada a assumir a administração técnica inicial.
 
 ## Execução
@@ -41,6 +42,7 @@ O parâmetro `--email` é opcional e não participa na identificação.
 ## Garantias implementadas
 
 - Confirmação textual obrigatória.
+- Verificação do dialeto SQLAlchemy: o comando só executa com PostgreSQL.
 - Validação HTTPS do issuer, sem credenciais, query ou fragmento.
 - Validação de comprimento e presença de subject e nome.
 - Verificação da existência e atividade de `PLATFORM_ADMIN`.
@@ -66,3 +68,4 @@ Não apagar o marcador `system_bootstrap` para repetir o procedimento. Perda de 
 | Data | Versão | Alteração |
 |---|---|---|
 | 03/11/2026 | 1.0 | Especificação inicial do bootstrap local e de execução única. |
+| 03/11/2026 | 1.1 | Exigência explícita de PostgreSQL para a execução administrativa. |
