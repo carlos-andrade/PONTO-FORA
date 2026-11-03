@@ -418,3 +418,17 @@ class AuthorizationEvent(Base):
     occurred_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=utc_now
     )
+
+
+class SystemBootstrap(Base):
+    __tablename__ = "system_bootstrap"
+    __table_args__ = (
+        CheckConstraint("bootstrap_key = 'initial-admin'", name="ck_system_bootstrap_key"),
+    )
+    bootstrap_key: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[UUID] = mapped_column(
+        Uuid(as_uuid=True), ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
+    )
+    completed_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
