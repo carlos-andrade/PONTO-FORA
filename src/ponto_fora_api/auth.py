@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Validação de tokens Bearer JWT emitidos por um provedor OIDC.
-# SHA-256 (conteúdo normalizado): a7b855e71c9fc3507812e1f48b0ecbf7c0a5ed760016e2f8616f428221ef2c20
+# SHA-256 (conteúdo normalizado): 1ffc971aa970e775d970eb0d50e426b8a05101953617aac0d9f5364810a17335
 # Commit de referência (base documental): b227a3aa3984e2909f14b9458abf20b68c57aebf
 
 from dataclasses import dataclass
@@ -23,7 +23,6 @@ from jwt import (
     PyJWTError,
     decode,
 )
-
 
 bearer_scheme = HTTPBearer(auto_error=False, scheme_name="OIDC Bearer")
 
