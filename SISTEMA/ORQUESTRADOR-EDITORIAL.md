@@ -1,14 +1,14 @@
 # ORQUESTRADOR EDITORIAL — PONTO-FORA
 
 **Identificador:** PF-SYS-ORQ-001  
-**Versão:** 1.0  
+**Versão:** 1.1  
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção Editorial e Governança do PONTO-FORA  
 **Âmbito:** Coordenação do fluxo editorial, controlo de estados, encaminhamento entre agentes, gestão de dependências, bloqueios, versões, auditoria e preparação para integração tecnológica.  
-**SHA-256 (conteúdo normalizado):** f5029ff10730e6b533e4dd1034512bc4cba8becc626f52a8ecb24c80066ec37b  
-**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
+**SHA-256 (conteúdo normalizado):** c447fd647c5d9668ea5cc7a0770adba7e8a11307add7d7bca8b339089ff0c542
+**Commit de referência (base documental):** 5ba38d82ebad536b14cee3c94b1bffc049cbcf43
 
 **Função:** Orquestração do processo editorial e aplicação das regras de transição  
 **Posição no fluxo editorial:** Camada central de coordenação de todo o processo  
@@ -111,7 +111,7 @@ Cada pauta deve possuir um estado principal único. Estados auxiliares e tarefas
 | DEVOLVIDA_A_REDACAO | Correções editoriais solicitadas. | Editor |
 | DEVOLVIDA_A_FACT_CHECK | Dúvida factual exige nova verificação. | Editor / Orquestrador |
 | AGUARDANDO_DECISAO_EDITORIAL | Revisão concluída; aguarda decisão humana. | Direção Editorial |
-| APROVADA_PARA_PUBLICACAO | Notícia aprovada por pessoa autorizada. | Direção Editorial |
+| APROVADA_PARA_PUBLICACAO | Notícia-base aprovada editorialmente por pessoa autorizada; não constitui autorização operacional para publicar ou distribuir. | Direção Editorial |
 | REJEITADA | Pauta ou conteúdo rejeitado por decisão registada. | Direção Editorial |
 | AGUARDANDO_SOCIAL_MEDIA | Notícia aprovada pronta para adaptação social. | Orquestrador |
 | EM_PRODUCAO_SOCIAL | Peças sociais em preparação. | Social Media |
@@ -218,7 +218,7 @@ A decisão é humana e deve conter:
 - Fundamentação ou observações.
 - Eventuais condições de aprovação.
 
-Só uma decisão de aprovação explícita pode colocar a notícia em APROVADA_PARA_PUBLICACAO e permitir a preparação social.
+Só uma decisão de aprovação explícita pode colocar a notícia em APROVADA_PARA_PUBLICACAO e permitir a preparação social. Este estado significa exclusivamente aprovação editorial da notícia-base. Não autoriza publicação no portal, envio, distribuição ou publicação em redes sociais. A autorização operacional é separada, posterior e vinculada à peça, canal e versão exatos.
 
 ### G6 — Produção social
 Entrada: notícia aprovada, versão congelada e respetivos pareceres.
@@ -236,7 +236,7 @@ Saída: AGUARDANDO_REVISAO_SOCIAL.
 ### G7 — Revisão e autorização social
 A revisão pode devolver peças para correção ou encaminhar o pacote à Direção Editorial.
 
-A publicação exige autorização explícita, por canal, peça e versão. A aprovação da notícia não equivale automaticamente à aprovação de todas as peças sociais.
+A revisão técnico-editorial das peças sociais cabe ao Editor, que verifica fidelidade à notícia-base, claims, ressalvas, linguagem, cortes, decupagem, atribuições, direitos e acessibilidade. O Editor pode aprovar para decisão, devolver para correção ou bloquear. A Direção Editorial mantém a decisão final humana. A publicação/distribuição exige autorização explícita, por canal, peça e versão. A aprovação da notícia não equivale automaticamente à aprovação de todas as peças sociais, nem a aprovação do pacote social equivale à autorização operacional de publicação.
 
 ### G8 — Publicação e monitorização
 O estado PUBLICADA só pode ser registado quando existir evidência verificável, como URL, ID da publicação, canal, data/hora e responsável ou integração executora.
@@ -282,6 +282,60 @@ Cada agente deve devolver, no mínimo:
 
 Se faltar um campo obrigatório, o resultado fica incompleto e não pode provocar uma transição automática.
 
+O envelope comum obrigatório deve conter: `pauta_id`, `artifact_id`, `artifact_version`, `agent_id`, `agent_version`, `prompt_version`, `execution_id`, `input_artifact_ids`, `input_versions`, `execution_status`, `editorial_opinion`, `output_artifact_id`, `output_version`, `claim_ids`, `evidence_refs`, `caveats`, `unresolved_questions`, `created_at` com fuso horário e `correlation_id`.
+
+Valores de `execution_status`: SUCCESS, FAILED ou RETRYABLE. Este campo descreve apenas a execução técnica. `editorial_opinion` preserva o parecer próprio do agente e não pode ser inferido do sucesso técnico. SUCCESS não significa aprovação editorial; parecer favorável não converte FAILED em sucesso.
+
+Campos especializados obrigatórios:
+- Fact-checker: `claim_verdicts` e `fact_check_decision`.
+- Redator: `news_draft_id` e `claim_traceability`.
+- Editor: `editorial_findings`, `severity` e `editorial_decision`.
+- Social Media: `source_news_id`, `source_news_version`, `piece_id`, `channel`, `format` e `rights_status`.
+
+### 6.2 Mapeamento obrigatório dos pareceres para estados
+
+O parecer original do agente deve ser preservado literalmente no histórico e no artefacto de saída. O Orquestrador aplica apenas a tradução operacional seguinte:
+
+| Agente | Parecer | Estado/ação do Orquestrador |
+|---|---|---|
+| Investigador | APTO PARA FACT-CHECKING | AGUARDANDO_FACT_CHECK |
+| Investigador | APTO COM RESSALVAS | AGUARDANDO_FACT_CHECK; transportar ressalvas |
+| Investigador | INVESTIGAÇÃO INSUFICIENTE | INVESTIGACAO_PENDENTE |
+| Investigador | BLOQUEADO | BLOQUEADA |
+| Fact-checker | APROVADO PARA REDAÇÃO | AGUARDANDO_REDACAO |
+| Fact-checker | APROVADO COM RESSALVAS | AGUARDANDO_REDACAO; transportar ressalvas e claims |
+| Fact-checker | DEVOLVIDO À INVESTIGAÇÃO | INVESTIGACAO_PENDENTE |
+| Fact-checker | BLOQUEADO | BLOQUEADA |
+| Redator | REDAÇÃO CONCLUÍDA — PRONTA PARA EDIÇÃO | AGUARDANDO_EDICAO |
+| Redator | DEVOLVIDO AO FACT-CHECKER | DEVOLVIDA_A_FACT_CHECK |
+| Redator | DEVOLVIDO À INVESTIGAÇÃO | INVESTIGACAO_PENDENTE |
+| Redator | BLOQUEADO | BLOQUEADA |
+| Editor | APROVADO PARA DECISÃO EDITORIAL | AGUARDANDO_DECISAO_EDITORIAL |
+| Editor | APROVADO COM AJUSTES MENORES | Manter EM_EDICAO até ajustes aplicados e revalidados |
+| Editor | DEVOLVIDO AO REDATOR | DEVOLVIDA_A_REDACAO |
+| Editor | DEVOLVIDO AO FACT-CHECKER | DEVOLVIDA_A_FACT_CHECK |
+| Editor | DEVOLVIDO À INVESTIGAÇÃO | INVESTIGACAO_PENDENTE |
+| Editor | BLOQUEADO | BLOQUEADA |
+| Social Media | PRONTO PARA REVISÃO EDITORIAL | AGUARDANDO_REVISAO_SOCIAL |
+| Social Media | DEVOLVIDO AO FACT-CHECKER | DEVOLVIDA_A_FACT_CHECK |
+| Social Media | DEVOLVIDO AO EDITOR | AGUARDANDO_REVISAO_SOCIAL, com correção editorial pendente |
+| Social Media | DEVOLVIDO AO SOCIAL MEDIA | DEVOLVIDA_A_SOCIAL_MEDIA |
+| Social Media | BLOQUEADO | BLOQUEADA |
+
+Parecer não previsto ou escrito de forma não reconhecida suspende a transição. O Orquestrador não deve inferir equivalência por semelhança textual: deve solicitar correção do contrato ou decisão humana registada.
+
+### 6.3 Autorização operacional de publicação e distribuição
+
+A aprovação editorial da notícia-base e a autorização operacional de publicação são decisões distintas. Cada autorização deve estar vinculada, no mínimo, a:
+- `piece_id`: identificador da peça concreta;
+- `channel`: portal ou canal/plataforma de destino;
+- `artifact_version`: versão exata autorizada;
+- `approved_by`: responsável humano autorizado;
+- `approved_at`: data/hora com fuso horário;
+- `authorization_scope`: operação e limites autorizados.
+
+Ausência de qualquer campo obrigatório implica ausência de autorização. Alteração posterior da peça, da notícia-base ou do canal invalida a autorização para o artefacto alterado e exige nova decisão.
+
 ## 7. HISTÓRICO DE EVENTOS E AUDITORIA
 
 O Orquestrador deve manter um registo cronológico e não destrutivo.
@@ -324,6 +378,10 @@ Chave lógica recomendada:
 `pauta_id + versao_entrada + agente_id + etapa`
 
 Uma nova execução intencional deve receber novo `execucao_id` e indicar por que motivo a anterior foi repetida ou substituída.
+
+### 8.3 Reabertura de estados terminais
+
+Estados terminais ou de encerramento — incluindo REJEITADA, ARQUIVADA, PUBLICADA e BLOQUEADA — não podem ser reescritos retroativamente. A reabertura exige novo evento append-only, com ator, timestamp, motivo, estado anterior, estado novo, artefacto/versão afetados e referência à decisão humana quando aplicável. A versão anteriormente aprovada deve permanecer preservada. Uma correção ou nova versão não herda automaticamente a autorização da versão anterior.
 
 ### 8.2 Concorrência e controlo de versões
 
@@ -490,6 +548,7 @@ O Orquestrador garante que o trabalho certo chega ao agente certo, na versão ce
 | Data | Versão | Alteração |
 |---|---|---|
 | 03/11/2026 | 1.0 | Criação do Orquestrador Editorial, com máquina de estados, portas de controlo, contratos de dados, auditoria, regras de recuperação, autoridade humana e plano de integração técnica. |
+| 03/11/2026 | 1.1 | Harmonização dos pareceres e estados, contrato comum de agentes, separação entre execução técnica e parecer editorial, revisão social pelo Editor, autorização granular e regras de reabertura. |
 
 ---
 
