@@ -1,8 +1,8 @@
 """One-time, local CLI bootstrap for the first platform administrator."""
 
 import argparse
-from os import getenv
 from datetime import UTC, datetime
+from os import getenv
 from urllib.parse import urlsplit
 from uuid import uuid4
 
