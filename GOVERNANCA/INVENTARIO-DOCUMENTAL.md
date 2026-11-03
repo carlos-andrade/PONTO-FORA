@@ -2,7 +2,7 @@
 
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
-**Versão:** 1.0
+**Versão:** 1.2
 
 ## Finalidade
 
@@ -12,11 +12,11 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 
 | Ficheiro | Data de criação | Data da última atualização / controlo | Estado e observação |
 |---|---|---|---|
-| `README.md` | Não confirmada — documento preexistente | 03/11/2026 | Atualizado com metadados documentais. |
-| `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | Não confirmada — documento preexistente | 03/11/2026 | Atualizado com metadados e referência à norma. |
-| `AGENTES/AGENTE-INVESTIGADOR.md` | Não confirmada — documento preexistente | 03/11/2026 | Atualizado com metadados e referência à norma. |
-| `LICENSE` | Não confirmada — ficheiro preexistente | 03/11/2026 — controlo documental | A licença MIT foi mantida intacta para preservar o texto jurídico canónico. A data de criação não confirmada e a data de controlo documental são registadas aqui, associadas inequivocamente ao ficheiro. |
-| `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 | 03/11/2026 | Criado para estabelecer a regra obrigatória. |
+| `README.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Data de criação identificada no commit inicial; metadados atualizados. |
+| `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Data de criação identificada no primeiro commit do ficheiro; metadados atualizados. |
+| `AGENTES/AGENTE-INVESTIGADOR.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Data de criação identificada no primeiro commit do ficheiro; metadados atualizados. |
+| `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Data identificada no commit inicial do repositório. O texto jurídico MIT foi preservado sem alteração; os metadados são registados neste inventário. |
+| `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Criado para estabelecer a regra obrigatória. |
 
 ## Regra de manutenção
 
@@ -27,4 +27,5 @@ Sempre que um ficheiro documental for criado ou alterado, atualizar os metadados
 | Data | Versão | Alteração |
 |---|---|---|
 | 03/11/2026 | 1.0 | Inventário inicial dos ficheiros existentes e respetivo estado documental. |
-| 03/11/2026 | 1.1 | Auditoria integral da branch main; confirmação da indicação de criação não confirmada nos documentos preexistentes; registo específico da LICENSE preservada sem alteração. |
+| 03/11/2026 | 1.1 | Auditoria integral da branch main; registo específico da LICENSE preservada sem alteração. |
+| 03/11/2026 | 1.2 | Datas de criação atualizadas com base no primeiro commit de cada ficheiro; atualização dos metadados e histórico. |
