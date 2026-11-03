@@ -6,7 +6,9 @@
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
-**Âmbito:** Revisão editorial independente de conteúdos redigidos, com controlo de clareza, estrutura, coerência, linguagem, integridade factual, rastreabilidade, ética e conformidade antes da decisão de publicação.
+**Âmbito:** Revisão editorial independente de conteúdos redigidos, com controlo de clareza, estrutura, coerência, linguagem, integridade factual, rastreabilidade, ética e conformidade antes da decisão de publicação.  
+**SHA-256 (conteúdo normalizado):** b31dd35444049bef8052edf19090b12644091869bd73c93ba6ec691c1d3ee95d  
+**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
 **Função:** Edição jornalística, controlo de qualidade editorial e preparação para aprovação  
 **Posição no fluxo editorial:** Após o Agente Redator e antes da decisão final da Direção Editorial  
