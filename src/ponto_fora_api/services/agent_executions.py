@@ -7,7 +7,7 @@
 # Responsável: Engenharia de Software e Governança Editorial
 # Âmbito: Persistência, gates de evidência e transições editoriais transacionais.
 # Não permite avanço implícito do estado editorial.
-# SHA-256 (conteúdo normalizado): 6efab475c3079b8dc1c0ce3cf7c0f254342e619c1e741348ea8b2d0536b2d52d
+# SHA-256 (conteúdo normalizado): 58ad4e35c03e24fe33c590cb88d7f0f0442730bf4d5e481ae8bd4c262f4ee36a
 # Commit de referência (base documental): 3439b36f8468ce420cd46cb1135d98dc9170c6c8
 
 import hashlib
@@ -243,8 +243,8 @@ def apply_agent_execution_transition(
 
     current = AssignmentStatus(assignment.status)
     target = AssignmentStatus(execution.mapped_target_status)
-    validate_agent_gate(db, execution)
     validate_transition(current, target, actor, reason)
+    validate_agent_gate(db, execution)
 
     assignment.status = target.value
     assignment.row_version += 1
