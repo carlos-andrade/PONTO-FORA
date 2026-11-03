@@ -6,8 +6,8 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
 # Âmbito: Validar evidências e rastreabilidade antes de aplicar transições de aprovação.
-# SHA-256 (conteúdo normalizado): 545d88181a971e3f65413366a2fad2d2c969a8f709e67f2a95e15891898e2801
-# Commit de referência (base documental): 3439b36f8468ce420cd46cb1135d98dc9170c6c8
+# SHA-256 (conteúdo normalizado): a537b9fa639f907d08fb54fece0042f175f72eb95d926ff7b6292cc50ce7030a
+# Commit de referência (base documental): d38c872e44e1e0ab946f55e2f28261e995c99a39
 
 from uuid import UUID
 
