@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Atomicidade, idempotência, integridade referencial e ausência de avanço implícito.
-# SHA-256 (conteúdo normalizado): 4309ffcd77474e7e92569c7ff7c2d54318bfa3955d83da2a862a8b18467cf279
+# SHA-256 (conteúdo normalizado): 58eabcdf51eb701a6f6408374f8e0baa181d077e0034c189acb49ec7477a684f
 # Commit de referência (base documental): 025804dfc3f79256d48e3c04aab9a15495893c5a
 
 from datetime import UTC, datetime
@@ -19,7 +19,7 @@ from sqlalchemy.pool import StaticPool
 
 from ponto_fora_api.db import Base
 from ponto_fora_api.domain import Actor, ActorRole, ActorType, AssignmentStatus, DomainError
-from ponto_fora_api.models import AgentExecution, Assignment, AuditEvent
+from ponto_fora_api.models import AgentExecution, AuditEvent
 from ponto_fora_api.schemas.agent_contract import AgentEnvelope, AgentId, ExecutionStatus
 from ponto_fora_api.services.agent_executions import (
     AgentExecutionConflict,
