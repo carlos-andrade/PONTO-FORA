@@ -171,6 +171,13 @@ def transition_assignment(
     )
     if assignment is None:
         raise DomainError("Pauta não encontrada.")
+    # Revalidar a chave depois do lock: uma repetição concorrente pode ter
+    # sido confirmada enquanto esta transação aguardava a linha.
+    existing = _find_idempotent_result(
+        db, scope=scope, key=str(command_id), request_hash=request_hash
+    )
+    if existing is not None:
+        return existing
     if assignment.row_version != expected_row_version:
         raise VersionConflict(
             f"Versão desatualizada: esperada {expected_row_version}, atual {assignment.row_version}."
