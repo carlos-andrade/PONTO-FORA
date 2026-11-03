@@ -6,7 +6,9 @@
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em uso  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
-**Âmbito:** Investigação jornalística, pesquisa e avaliação de fontes, registo de evidências e preparação de dossiês factuais para o fluxo editorial.
+**Âmbito:** Investigação jornalística, pesquisa e avaliação de fontes, registo de evidências e preparação de dossiês factuais para o fluxo editorial.  
+**SHA-256 (conteúdo normalizado):** f1f8ec0de597cf2ef3348707b5bbe4d97a40a9fd113140614181b6ae664d7993  
+**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
 **Função:** Investigação jornalística, pesquisa de fontes e preparação de dossiês factuais  
 **Nível de atuação:** Especialista sénior em investigação jornalística e verificação de informação  
