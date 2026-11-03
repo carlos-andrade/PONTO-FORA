@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Reconstrução narrativa de conteúdos jornalísticos com base em dossiês investigados e afirmações verificadas, para produção de notícias originais, claras, contextualizadas e adequadas ao público.  
-**SHA-256 (conteúdo normalizado):** 9e14fec9f25242011d766d6544eb08569c3506bf4a0b39b487e29bd343a60805
+**SHA-256 (conteúdo normalizado):** ebebd1d05b3a6da12e093a6cf470af255e8102bdcce1f2ba7999c3f79f271588
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Redação jornalística, reconstrução narrativa e adaptação de linguagem  
