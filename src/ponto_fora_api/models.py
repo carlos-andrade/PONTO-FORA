@@ -7,7 +7,7 @@
 # Responsável: Engenharia de Software
 # Âmbito: Pautas, auditoria, tarefas, versões, fontes, afirmações, fact-checking e execuções imutáveis de agentes.
 # SHA-256 (conteúdo normalizado): 2db8177af6051d325c6037f78b432852d7ae27dbd94e3eaface78cd30f2fa1af
-# Commit de referência (base documental): PENDING
+# Commit de referência (base documental): 025804dfc3f79256d48e3c04aab9a15495893c5a
 
 from datetime import UTC, datetime
 from uuid import UUID, uuid4
