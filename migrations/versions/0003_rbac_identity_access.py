@@ -142,6 +142,18 @@ def upgrade() -> None:
     )
     op.create_index("ix_user_roles_user_status", "user_roles", ["user_id", "status"])
     op.create_index("ix_user_roles_role_status", "user_roles", ["role_id", "status"])
+    op.create_index(
+        "uq_user_roles_active_global",
+        "user_roles",
+        ["user_id", "role_id"],
+        unique=True,
+        sqlite_where=sa.text(
+            "status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"
+        ),
+        postgresql_where=sa.text(
+            "status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"
+        ),
+    )
     op.create_table(
         "authorization_events",
         sa.Column("id", sa.Uuid(), nullable=False),
@@ -222,6 +234,7 @@ def downgrade() -> None:
     op.drop_index("ix_authorization_events_actor_time", table_name="authorization_events")
     op.drop_index("ix_authorization_events_user_time", table_name="authorization_events")
     op.drop_table("authorization_events")
+    op.drop_index("uq_user_roles_active_global", table_name="user_roles")
     op.drop_index("ix_user_roles_role_status", table_name="user_roles")
     op.drop_index("ix_user_roles_user_status", table_name="user_roles")
     op.drop_table("user_roles")
