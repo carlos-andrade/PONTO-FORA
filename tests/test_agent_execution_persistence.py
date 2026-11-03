@@ -7,7 +7,7 @@
 # Responsável: Engenharia de Software
 # Âmbito: Atomicidade, idempotência, integridade referencial e ausência de avanço implícito.
 # SHA-256 (conteúdo normalizado): 4309ffcd77474e7e92569c7ff7c2d54318bfa3955d83da2a862a8b18467cf279
-# Commit de referência (base documental): 4309ffcd77474e7e92569c7ff7c2d54318bfa3955d83da2a862a8b18467cf279
+# Commit de referência (base documental): 025804dfc3f79256d48e3c04aab9a15495893c5a
 
 from datetime import UTC, datetime
 from uuid import uuid4
