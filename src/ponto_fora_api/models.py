@@ -25,8 +25,8 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     Uuid,
-    text as sql_text,
 )
+from sqlalchemy import text as sql_text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from ponto_fora_api.db import Base
