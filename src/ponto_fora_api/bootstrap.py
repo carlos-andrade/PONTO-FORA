@@ -1,6 +1,7 @@
 """One-time, local CLI bootstrap for the first platform administrator."""
 
 import argparse
+from os import getenv
 from datetime import UTC, datetime
 from urllib.parse import urlsplit
 from uuid import uuid4
@@ -58,6 +59,7 @@ def bootstrap_first_admin(
     db: Session,
     *,
     issuer: str,
+    expected_issuer: str,
     subject: str,
     display_name: str,
     email: str | None = None,
@@ -66,6 +68,8 @@ def bootstrap_first_admin(
 ) -> User:
     """Create the first platform administrator atomically and exactly once."""
     _validate_identity(issuer, subject, display_name, email)
+    if not expected_issuer or issuer != expected_issuer:
+        raise ValueError("Issuer informado não coincide com OIDC_ISSUER configurado.")
     if confirmation != CONFIRMATION_PHRASE:
         raise ValueError("Confirmação explícita inválida.")
     if not reason.strip() or len(reason) > 1000:
@@ -198,6 +202,7 @@ def main() -> int:
         user = bootstrap_first_admin(
             db,
             issuer=args.issuer,
+            expected_issuer=getenv("OIDC_ISSUER", "").strip(),
             subject=args.subject,
             display_name=args.display_name,
             email=args.email,
