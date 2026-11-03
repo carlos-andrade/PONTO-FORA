@@ -1,12 +1,12 @@
 # PONTO-FORA — validação de gates editoriais baseada em evidências persistidas
 # Identificador: PF-COD-SVC-EDITORIAL-GATES-001
-# Versão: 1.0
+# Versão: 1.1
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
 # Âmbito: Validar evidências e rastreabilidade antes de aplicar transições de aprovação.
-# SHA-256 (conteúdo normalizado): a537b9fa639f907d08fb54fece0042f175f72eb95d926ff7b6292cc50ce7030a
+# SHA-256 (conteúdo normalizado): 0b43dc9bb27085f9be9ca75eaafe26ac0adb87a3aa1fc361d9738334815abde4
 # Commit de referência (base documental): d38c872e44e1e0ab946f55e2f28261e995c99a39
 
 from uuid import UUID
