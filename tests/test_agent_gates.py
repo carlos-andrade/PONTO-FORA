@@ -258,7 +258,7 @@ def test_writer_gate_rejects_missing_claim_traceability(db):
         validate_agent_gate(db, item)
 
 
-def test_editor_gate_remains_blocked_until_findings_are_structured(db):
+def test_editor_gate_accepts_structured_empty_findings(db):
     assignment = create_assignment(db)
     item = execution(
         assignment.id,
@@ -268,11 +268,11 @@ def test_editor_gate_remains_blocked_until_findings_are_structured(db):
             "editorial_findings": [],
             "severity": "LOW",
             "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "1.0",
         },
     )
 
-    with pytest.raises(GateNotImplemented):
-        validate_agent_gate(db, item)
+    validate_agent_gate(db, item)
 
 
 def test_social_gate_remains_blocked_without_persisted_human_approval(db):
@@ -292,4 +292,166 @@ def test_social_gate_remains_blocked_without_persisted_human_approval(db):
     )
 
     with pytest.raises(GateNotImplemented):
+        validate_agent_gate(db, item)
+
+
+
+def test_editor_gate_accepts_empty_findings_with_consistent_decision(db):
+    assignment = create_assignment(db)
+    item = execution(
+        assignment.id,
+        AgentId.EDITOR,
+        "APROVADO PARA DECISÃO EDITORIAL",
+        {
+            "editorial_findings": [],
+            "severity": "LOW",
+            "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "2.0",
+        },
+    )
+
+    validate_agent_gate(db, item)
+
+
+def test_editor_gate_accepts_resolved_moderate_finding_for_current_version(db):
+    assignment = create_assignment(db)
+    item = execution(
+        assignment.id,
+        AgentId.EDITOR,
+        "APROVADO PARA DECISÃO EDITORIAL",
+        {
+            "editorial_findings": [
+                {
+                    "finding_id": "EDT-001",
+                    "severity": "MODERATE",
+                    "excerpt": "O texto analisado.",
+                    "problem": "Formulação ambígua.",
+                    "resolution_status": "RESOLVED",
+                    "resolution_note": "Formulação reescrita e conferida.",
+                    "resolved_artifact_version": "2.1",
+                    "revalidated": True,
+                }
+            ],
+            "severity": "MODERATE",
+            "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "2.1",
+        },
+    )
+
+    validate_agent_gate(db, item)
+
+
+def test_editor_gate_rejects_unresolved_finding(db):
+    assignment = create_assignment(db)
+    item = execution(
+        assignment.id,
+        AgentId.EDITOR,
+        "APROVADO PARA DECISÃO EDITORIAL",
+        {
+            "editorial_findings": [
+                {
+                    "finding_id": "EDT-002",
+                    "severity": "LOW",
+                    "excerpt": "Trecho.",
+                    "problem": "Repetição.",
+                    "resolution_status": "OPEN",
+                    "resolution_note": "Ainda não corrigido.",
+                    "resolved_artifact_version": "2.0",
+                    "revalidated": False,
+                }
+            ],
+            "severity": "LOW",
+            "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "2.0",
+        },
+    )
+
+    with pytest.raises(GateValidationError, match="sem resolução confirmada"):
+        validate_agent_gate(db, item)
+
+
+def test_editor_gate_rejects_resolution_for_another_artifact_version(db):
+    assignment = create_assignment(db)
+    item = execution(
+        assignment.id,
+        AgentId.EDITOR,
+        "APROVADO PARA DECISÃO EDITORIAL",
+        {
+            "editorial_findings": [
+                {
+                    "finding_id": "EDT-003",
+                    "severity": "LOW",
+                    "excerpt": "Trecho.",
+                    "problem": "Ajuste de estilo.",
+                    "resolution_status": "RESOLVED",
+                    "resolution_note": "Ajustado.",
+                    "resolved_artifact_version": "1.9",
+                    "revalidated": True,
+                }
+            ],
+            "severity": "LOW",
+            "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "2.0",
+        },
+    )
+
+    with pytest.raises(GateValidationError, match="versão de saída atual"):
+        validate_agent_gate(db, item)
+
+
+def test_editor_gate_rejects_critical_finding_even_when_claimed_resolved(db):
+    assignment = create_assignment(db)
+    item = execution(
+        assignment.id,
+        AgentId.EDITOR,
+        "APROVADO PARA DECISÃO EDITORIAL",
+        {
+            "editorial_findings": [
+                {
+                    "finding_id": "EDT-004",
+                    "severity": "CRITICAL",
+                    "excerpt": "Acusação não sustentada.",
+                    "problem": "Risco jurídico e factual.",
+                    "resolution_status": "RESOLVED",
+                    "resolution_note": "Texto alterado.",
+                    "resolved_artifact_version": "2.0",
+                    "revalidated": True,
+                }
+            ],
+            "severity": "CRITICAL",
+            "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "2.0",
+        },
+    )
+
+    with pytest.raises(GateValidationError, match="exige encaminhamento"):
+        validate_agent_gate(db, item)
+
+
+def test_editor_gate_rejects_aggregate_severity_mismatch(db):
+    assignment = create_assignment(db)
+    item = execution(
+        assignment.id,
+        AgentId.EDITOR,
+        "APROVADO PARA DECISÃO EDITORIAL",
+        {
+            "editorial_findings": [
+                {
+                    "finding_id": "EDT-005",
+                    "severity": "MODERATE",
+                    "excerpt": "Trecho.",
+                    "problem": "Ambiguidade.",
+                    "resolution_status": "RESOLVED",
+                    "resolution_note": "Reescrito.",
+                    "resolved_artifact_version": "2.0",
+                    "revalidated": True,
+                }
+            ],
+            "severity": "LOW",
+            "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "2.0",
+        },
+    )
+
+    with pytest.raises(GateValidationError, match="maior severidade"):
         validate_agent_gate(db, item)

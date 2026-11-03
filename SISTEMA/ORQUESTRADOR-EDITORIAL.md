@@ -1,13 +1,13 @@
 # ORQUESTRADOR EDITORIAL — PONTO-FORA
 
 **Identificador:** PF-SYS-ORQ-001  
-**Versão:** 1.4  
+**Versão:** 1.5  
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção Editorial e Governança do PONTO-FORA  
 **Âmbito:** Coordenação do fluxo editorial, controlo de estados, encaminhamento entre agentes, gestão de dependências, bloqueios, versões, auditoria e preparação para integração tecnológica.  
-**SHA-256 (conteúdo normalizado):** 96b88899b8b60f264774f5cd9ca34c3b170f282fe2ee5ac84f2953ae2733edce
+**SHA-256 (conteúdo normalizado):** A CALCULAR APÓS A REVISÃO
 **Commit de referência (base documental):** 3d371b987707f7ba3a5b52c34144ec1b6d96460e
 
 **Função:** Orquestração do processo editorial e aplicação das regras de transição  
@@ -200,6 +200,15 @@ Exigir:
 - Alterações identificáveis.
 - Confirmação de que não foram introduzidos factos sem verificação.
 - Parecer de encaminhamento.
+- `editorial_findings` como lista estruturada; lista vazia é válida quando não há ocorrências.
+- Cada finding deve conter `finding_id`, `severity`, `excerpt`, `problem`, `resolution_status`, `resolution_note`, `resolved_artifact_version` e `revalidated`.
+- `resolution_status` deve ser `RESOLVED`; findings abertos ou pendentes bloqueiam a transição.
+- `resolved_artifact_version` deve corresponder exatamente a `output_version` da execução do Editor.
+- `revalidated` deve ser booleano `true`; IDs duplicados e divergência entre severidade agregada e individual bloqueiam.
+- Findings HIGH e CRITICAL não podem ser encerrados apenas por declaração do Editor; exigem encaminhamento e evidência externa, fora do gate G4 atual.
+- `editorial_decision` deve coincidir com o parecer do envelope: `APROVADO PARA DECISÃO EDITORIAL`.
+
+O gate G4 valida o relatório imutável da execução persistida. Não substitui a decisão humana G5 nem autoriza publicação.
 
 Saída:
 - AGUARDANDO_DECISAO_EDITORIAL.
@@ -515,11 +524,11 @@ A aplicação de uma transição de aprovação deixou de depender apenas do tex
 - Confirma que cada afirmação possui avaliação factual persistida.
 
 **Gates ainda bloqueados**
-- **G4 — Editor:** não avança enquanto os findings não tiverem estrutura persistida com estado de resolução verificável.
+- **G4 — Editor:** gate implementado na branch do PR #20; exige findings estruturados, resolvidos, revalidados e associados à versão exata de saída. Aguarda CI e integração.
 - **G5 — Decisão editorial humana:** ainda exige modelo persistente para decisão, responsável, timestamp, fundamentação e versão aprovada.
 - **G6/G7 — Social Media e revisão/autorização:** não avança enquanto a notícia-base não tiver decisão humana persistida e não existir autorização vinculada à peça, canal e versão.
 
-Os bloqueios G4 e G6 são explícitos no serviço; não são aprovações presumidas. A política de transições de produção continua sem novas etapas ativadas.
+G4 deixa de ser um bloqueio sem implementação após integração do PR #20. G5 e G6/G7 permanecem bloqueados; a política de transições de produção não foi ampliada.
 
 A CI do PR #19 confirmou Ruff, migrações PostgreSQL 16 até `0005_agent_execution_records` e **101 testes aprovados**. A validação cobre G1–G3 e os bloqueios conhecidos; não equivale à aprovação do fluxo editorial ponta a ponta.
 
@@ -619,6 +628,7 @@ O Orquestrador garante que o trabalho certo chega ao agente certo, na versão ce
 | 03/11/2026 | 1.2 | Registo da persistência idempotente e append-only das execuções dos agentes; separação explícita entre estado-alvo registado e transição efetivamente autorizada. |
 | 03/11/2026 | 1.3 | Implementação do comando transacional de transição com lock da pauta, controlo de versão, autorização, auditoria e idempotência; política de produção preservada. |
 | 03/11/2026 | 1.4 | Implementação dos gates de evidência G1–G3; bloqueio explícito de G4 e G6 até existirem findings estruturados e decisão humana persistida. |
+| 03/11/2026 | 1.5 | Implementação do contrato verificável de findings editoriais G4; resolução ligada à versão de saída e revalidação explícita. G5 e G6/G7 continuam separados e bloqueados. |
 
 ---
 
