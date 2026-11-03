@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Configuração online/offline das migrações SQLAlchemy.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): 2725612c07b42febb50e885f2d348c985f87fdb89cd8e14e783d2b6981beb0c9
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 import os

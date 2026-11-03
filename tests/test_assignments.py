@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Persistência, idempotência, permissões, transições e auditoria.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): a3e8e480aacb7feda000b30ee7268ab420599044e4a837d0efe923f93b621547
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 from uuid import uuid4

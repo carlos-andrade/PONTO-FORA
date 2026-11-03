@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Criar pautas, auditoria, tarefas, idempotência e versões de artefactos.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): d8d0d97fd1396ab2304391747229f2cf422c512dae74f10a5ccf22461b2aaa32
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 import sqlalchemy as sa

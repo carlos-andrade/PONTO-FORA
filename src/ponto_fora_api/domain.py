@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Estados editoriais, atores e política explícita de transições.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): c69af0cc1225f48935ade424acb458d866bbd30abcf595f2e20ad960d46e984c
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 from dataclasses import dataclass

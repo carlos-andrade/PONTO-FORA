@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Consultas paginadas de pautas e eventos de auditoria.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): 243a9ba3614bf58afae502031719353eeb7d22327fff3bf146fb5553abb40344
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 from typing import Annotated

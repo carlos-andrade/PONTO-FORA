@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Engine SQLAlchemy, sessões e dependência de base de dados.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): 315e73a3c2bb467f069d734b7ef83529bdf8b3f5a44de01b0dbbb5df103a73e9
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 import os

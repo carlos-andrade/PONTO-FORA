@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Pautas, eventos append-only, tarefas, idempotência e versões imutáveis.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): 7c1961c338ac29d535e56d0cb206b04bf68d6a71b38f1f32b3193aefbb252d63
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 from datetime import UTC, datetime

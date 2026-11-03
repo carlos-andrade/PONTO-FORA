@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Criação idempotente, transições atómicas e eventos de auditoria.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): 4d16d85952bd3e8e6e2491b0de85490fc0b281f7b85980f584bc5be6c9d936fc
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 import hashlib

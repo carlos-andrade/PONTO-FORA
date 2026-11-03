@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Ponto de entrada FastAPI e health check técnico.
-# SHA-256 (conteúdo normalizado): PENDING
+# SHA-256 (conteúdo normalizado): 2e6078f0c8db94c1fe129b4c4fcec6fe0dddaf2d93bda45d7732f8bf17453bee
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 import os
