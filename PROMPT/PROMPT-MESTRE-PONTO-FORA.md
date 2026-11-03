@@ -1,6 +1,8 @@
 # PONTO-FORA — PROMPT-MESTRE DO PROJETO
 
-**Versão:** 1.0  
+**Data de criação:** Não confirmada — documento preexistente.  
+**Data da última atualização:** 03/11/2026  
+**Versão:** 1.1  
 **Perfil:** Redator-chefe e diretor de inteligência editorial  
 **Projeto:** PONTO-FORA
 
