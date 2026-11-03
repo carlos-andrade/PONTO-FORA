@@ -1,12 +1,14 @@
 # NORMA DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-DOC-001  
-**Versão:** 1.3  
+**Versão:** 1.4  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Obrigatória  
 **Responsável:** Governança do projeto PONTO-FORA  
-**Âmbito:** Todos os documentos e ficheiros documentais do projeto PONTO-FORA
+**Âmbito:** Todos os documentos e ficheiros documentais do projeto PONTO-FORA  
+**SHA-256 (conteúdo normalizado):** 462b052688aa2c74e9543f4c13f1017de4f9d1084675366bc0cb890e34aaf032  
+**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
 ## 1. PRINCÍPIO FUNDAMENTAL
 
@@ -109,11 +111,65 @@ Um ficheiro de outro formato só está conforme quando possui metadados equivale
 
 A data do commit, do upload ou da modificação no sistema de ficheiros não substitui os campos documentais.
 
-## 10. HISTÓRICO DE ALTERAÇÕES
+
+## 10. INTEGRIDADE CRIPTOGRÁFICA E RASTREABILIDADE GIT
+
+Todo documento e ficheiro mantido pelo projeto deve apresentar, no seu cabeçalho ou bloco de metadados associado:
+
+- **SHA-256 (conteúdo normalizado):** hash SHA-256 hexadecimal de 64 caracteres, calculado segundo esta secção.
+- **Commit de referência (base documental):** hash completo do commit Git que representa a versão-base imediatamente anterior à inclusão/atualização dos metadados de integridade.
+
+### 10.1 Limitação de autorreferência do commit
+
+O hash de um commit Git depende da árvore de ficheiros, incluindo o próprio conteúdo do documento. Portanto, não é tecnicamente possível gravar dentro de um ficheiro o hash do commit que contém exatamente essa mesma versão: a inclusão do hash altera o ficheiro e invalida o commit calculado.
+
+Por esse motivo, o campo no cabeçalho identifica explicitamente o **commit de referência (base documental)**, isto é, o commit que contém a versão do documento antes da atualização dos metadados de integridade. Não deve ser apresentado como o commit que publicou a versão atual.
+
+O **commit efetivo de publicação** de cada ficheiro deve ser registado no Inventário Documental, após confirmação do GitHub. Para o próprio Inventário, a impossibilidade de autorreferência deve ser declarada e o commit efetivo consultado no histórico Git do repositório.
+
+### 10.2 Cálculo do SHA-256 normalizado
+
+Para eliminar a autorreferência do próprio hash, o SHA-256 deve ser calculado sobre o conteúdo integral do ficheiro, removendo exclusivamente as linhas dos campos:
+
+- `**SHA-256 (conteúdo normalizado):**`
+- `**Commit de referência (base documental):**`
+
+Procedimento obrigatório:
+
+1. Ler o conteúdo em UTF-8, sem BOM.
+2. Converter terminações de linha para LF (\\n).
+3. Remover integralmente as linhas dos dois campos de integridade acima, sem remover quaisquer outros metadados ou conteúdo.
+4. Preservar a ordem, os espaços, a pontuação e todo o restante conteúdo.
+5. Preservar uma única quebra de linha final, se existente no conteúdo normalizado.
+6. Calcular SHA-256 dos bytes UTF-8 resultantes.
+7. Registar o resultado em hexadecimal minúsculo, com 64 caracteres.
+
+O cálculo deve ser reproduzível. Não utilizar o SHA-1 do objeto blob Git como substituto do SHA-256.
+
+### 10.3 Aplicação por formato
+
+- **Markdown e texto:** os dois campos devem constar no cabeçalho documental.
+- **LICENSE e textos legais:** preservar integralmente o texto jurídico. Inserir os campos apenas no bloco de metadados preexistente ou num registo documental associado, nunca no corpo da licença.
+- **JSON, YAML, TOML, código e configurações:** utilizar comentários ou metadados válidos para o formato, sem invalidar a sintaxe ou o funcionamento.
+- **PDF, DOCX, XLSX, imagens e outros binários:** inserir metadados internos quando suportados; caso contrário, utilizar um registo associado no Inventário Documental.
+- **Ficheiros gerados:** incluir os metadados no artefacto ou registo associado antes da distribuição.
+
+### 10.4 Atualização e auditoria
+
+1. Recalcular o SHA-256 sempre que o conteúdo do ficheiro mudar.
+2. Atualizar o commit de referência quando uma nova versão-base for estabelecida.
+3. Registar no Inventário o SHA-256 e o commit efetivo de publicação confirmado pelo GitHub.
+4. Não declarar um hash ou commit como verificado sem o calcular ou consultar.
+5. Após cada atualização, reler o ficheiro, recalcular o SHA-256 normalizado e comparar com o valor declarado.
+6. Se o conteúdo divergir do hash registado, marcar o ficheiro como **INTEGRIDADE NÃO VALIDADA** até à reconciliação.
+7. Não alterar silenciosamente ficheiros binários, licenças ou formatos especiais para inserir metadados; utilizar registo associado quando necessário.
+
+## 11. HISTÓRICO DE ALTERAÇÕES
 
 | Data | Versão | Alteração |
 |---|---|---|
 | 03/11/2026 | 1.0 | Criação e entrada em vigor da norma documental obrigatória. |
 | 03/11/2026 | 1.1 | Registo da data de criação com base no primeiro commit do GitHub e reforço da rastreabilidade documental. |
 | 03/11/2026 | 1.2 | Inclusão do cabeçalho Markdown padrão obrigatório e definição de metadados equivalentes para ficheiros em outros formatos. |
+| 03/11/2026 | 1.4 | Inclusão de regra de integridade criptográfica SHA-256, referência de commit Git, normalização de conteúdo, rastreabilidade e auditoria. |
 | 03/11/2026 | 1.3 | Aplicação do cabeçalho padrão aos documentos Markdown existentes e atualização do inventário de conformidade. |
