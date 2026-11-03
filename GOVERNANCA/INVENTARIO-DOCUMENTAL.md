@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 2.3  
+**Versão:** 2.4  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário de todos os ficheiros rastreados na branch main e respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** c96c5037dc2e94b8f144ea1be32827fccb82ee8353f460308a517ce23a13430c
-**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
+**SHA-256 (conteúdo normalizado):** dacc9b624c60b62dca16a6455675991c0df27e899a20f224ae84b4c4da7cd16e
+**Commit de referência (base documental):** 1589c2299db96354e5ca1e2e7454743a4edc12a0
 
 ## Finalidade
 
@@ -25,7 +25,8 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `AGENTES/AGENTE-REDATOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
 | `AGENTES/AGENTE-EDITOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo componente de sistema criado; versão 1.0; em desenvolvimento controlado. |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.0; em desenvolvimento controlado. |
+| `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.5. |
 | `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 2.0. |
 | `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados externos no preâmbulo; texto MIT preservado | Conforme; não inserir cabeçalho Markdown no texto jurídico. |
@@ -40,11 +41,12 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `README.md` | `57c066a7b515de4558224466154cd2cf887aec016c4c776d93f2e6687626e7eb` | `e4f4913d5e33c6fc20cdd422f0c2447e5e185f64` |
 | `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | `77d6bd94dd7e9280144a6247b2a68b798d767eb9473f6bba9afaaab4da3f8ea7` | `8f5dd7d53644e65d62cb17ed59944e88a21a20d0` |
 | `AGENTES/AGENTE-INVESTIGADOR.md` | `f1f8ec0de597cf2ef3348707b5bbe4d97a40a9fd113140614181b6ae664d7993` | `40f45381f7492b2ec0f7e86055b3574fae5ac8a7` |
-| `AGENTES/AGENTE-FACT-CHECKER.md` | `6b5049d8d3f0c7a0d07050fd04e80b9997055b2313ce1b8a39fe29d596a80710` | `dbeb744e01c54545f4f103f36a52187ba4f5ba79` |
+| `AGENTES/AGENTE-FACT-CHECKER.md` | `5575dfa7a22d02277b6eae15f491dd6149745529c5cce10dce7ac0f4a5510054` | `1589c2299db96354e5ca1e2e7454743a4edc12a0` |
 | `AGENTES/AGENTE-REDATOR.md` | `43d3501f3cccd8c82b99bea67bc2ea2c17f6382876dc545b7921728135b2f156` | `3a14818c90d12583fda7af61db970ee2e23dff2a` |
 | `AGENTES/AGENTE-EDITOR.md` | `b31dd35444049bef8052edf19090b12644091869bd73c93ba6ec691c1d3ee95d` | `6bcc5ded7555abfdf0b14aabea51fb4b7f1731f7` |
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | `f561edc8678723e0589f8b7417b67e844780c54271d8474cd8b6a303d73c500e` | `5f655ad23fee2e204591102e466c5bc6e134f563` |
 | `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `f5029ff10730e6b533e4dd1034512bc4cba8becc626f52a8ecb24c80066ec37b` | `ed8d469648a9d59497fedb38a4d8c626cda9f0df` |
+| `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | `1ae725ea77e73a4039f14b8adcf181d11b2771b7b6f114dc689ed1354c44eb17` | `8355e0162f2ee53abfba253cb9041b88d419ed1b` |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | `f731f940fef6e542d103aa0f83765c6e7749be62a510112032b4433d835e4e44` | `243a1bea864253e9b870931e6a5b1841c05816f1` |
 | `LICENSE` | `a3b6bf7bfaa2b3b9cb6f8edafb531eb9ca07b84f7b595200198116538acfceaa` | `fc7ac004e8335ee20641c75b1263aadc8f2e5e40` |
 | `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | Ver cabeçalho (não duplicar o próprio hash) | Autorreferência: consultar o histórico Git; commit atual confirmado no relatório de execução. |
@@ -77,5 +79,6 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 1.9 | Inclusão do Agente Social Media e correção da versão documental indicada na linha do próprio inventário. |
 | 03/11/2026 | 2.1 | Inclusão dos hashes SHA-256 normalizados e dos commits efetivos de publicação; atualização da norma de integridade. |
 | 03/11/2026 | 2.2 | Atualização da referência à Norma Documental 1.5 e do respetivo hash SHA-256/commit de publicação. |
-| 03/11/2026 | 2.3 | Inclusão do próprio Inventário no registo de integridade, com tratamento explícito da autorreferência Git/SHA-256. |
 | 03/11/2026 | 2.0 | Inclusão do Orquestrador Editorial no inventário e atualização da versão documental. |
+| 03/11/2026 | 2.3 | Inclusão do próprio Inventário no registo de integridade, com tratamento explícito da autorreferência Git/SHA-256. |
+| 03/11/2026 | 2.4 | Registo da arquitetura de software, correção dos metadados do Fact-checker e atualização da integridade documental. |
