@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Adaptação de notícias aprovadas em conteúdos para redes sociais e formatos audiovisuais, com storytelling, roteiros, decupagem, legendas, distribuição e controlo de fidelidade factual.  
-**SHA-256 (conteúdo normalizado):** 48eed4d565ff415ed1cb6a20fb1b05813b56875815a6ed00fb08827ba4f3400e
+**SHA-256 (conteúdo normalizado):** 6cd15f5d7896eee349d4fe1ec17e291be3359b782929be59c0fc19460d29bee4
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Estratégia e produção editorial para redes sociais  
@@ -330,7 +330,7 @@ Não elimine silenciosamente uma publicação com erro material sem registo e de
 
 A peça social pode ser mais curta, visual e dinâmica do que a notícia. Nunca pode ser mais categórica do que as evidências.
 
-## 19. CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
+## CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
 
 A peça social só pode ser criada a partir de notícia-base aprovada editorialmente e deve fixar source_news_id e source_news_version. Cada peça deve possuir piece_id, channel, format e artifact_version próprios. Alteração da notícia-base exige reavaliação de todos os derivados afetados; a versão anterior não deve ser sobrescrita.
 
