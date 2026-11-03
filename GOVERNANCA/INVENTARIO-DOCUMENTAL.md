@@ -1,13 +1,13 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 2.8  
+**Versão:** 3.2  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** d40e3026bb53f09d94b06c21fddafe6ab41c60400895826304750347a0d64dd7
+**SHA-256 (conteúdo normalizado):** 5ccc36106e717fa245917514b81a5698fcb1b44771fca79514b0a2d027542b93
 **Commit de referência (base documental):** 633eb45366f105b939d31149ee776979602d9bbe
 
 ## Finalidade
@@ -28,7 +28,7 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.0; em desenvolvimento controlado. |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.5. |
-| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 2.6. |
+| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 3.2. |
 | `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados externos no preâmbulo; texto MIT preservado | Conforme; não inserir cabeçalho Markdown no texto jurídico. |
 | `.gitignore` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; exclusões locais Python. |
 | `pyproject.toml` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; configuração de backend e ferramentas, versão 1.0 na main. |
@@ -75,13 +75,13 @@ A Fase A foi integrada na branch `main` através do Pull Request #1, com merge c
 | `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `bee61d07d376d8d41b70d0e9a283665093e0c7762e0fd6956e0ef3b935389f86` | `29425bc3166b08f27a1248f18ce72ec40b129d0d` | Criado; CI validada |
 | `docs/GUIA-DE-DESENVOLVIMENTO.md` | PF-DOC-DEV-001 | `482414b762d642d50266c2a24c99cb0e99eedbff58d541dc1b7f450850c05f2a` | `3d6e12a9f086c2cf5108b19e77d15a66aa507423` | Criado |
 
-## Artefactos de implementação — Fase B (branch `phase-b/nucleo-editorial`)
+## Artefactos de implementação — Fase B (integrados na branch `main`)
 
-Os artefactos abaixo foram publicados na branch de trabalho da Fase B. O commit de publicação da versão com hashes documentais é `41851dee6932347e2e55c6598ceb8658c9a7cac0`. Ainda não fazem parte da branch `main`.
+A Fase B foi integrada na branch `main` através do PR #2, com merge commit `c5d4cf29b6d2ab23b99439852235868c3b422195`. Os commits originais de cada ficheiro permanecem no histórico Git e os artefactos abaixo fazem parte da árvore integrada. O CI da versão submetida foi concluído com sucesso: Ruff aprovado, migração PostgreSQL 16 aplicada e 13 testes aprovados.
 
 | Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
 |---|---|---|---|---|
-| `pyproject.toml` | PF-COD-CONFIG-001 | `5ff8c7c6038509672a4490222b63c94e89f46fe3d2ec7ec4801073046b0078f0` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Atualizado para 0.2.0; dependências SQLAlchemy, Alembic e Psycopg. |
+| `pyproject.toml` | PF-COD-CONFIG-001 | `5ff8c7c6038509672a4490222b63c94e89f46fe3d2ec7ec4801073046b0078f0` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Integrado na main; versão 0.2.0; dependências SQLAlchemy, Alembic e Psycopg. |
 | `.env.example` | PF-CFG-ENV-001 | `be55eddeee8db66eb9c7d32d461e6f694b8bc82f2e74e950b9f2839960b02fd8` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; sem credenciais reais. |
 | `alembic.ini` | PF-CFG-ALEMBIC-001 | `f4da5c02c8aa04c5c98a6068e36edca071a8259824b6a62ff7bb299801601d98` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; configuração de migrações. |
 | `migrations/env.py` | PF-COD-MIG-ENV-001 | `2725612c07b42febb50e885f2d348c985f87fdb89cd8e14e783d2b6981beb0c9` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
@@ -90,7 +90,7 @@ Os artefactos abaixo foram publicados na branch de trabalho da Fase B. O commit 
 | `src/ponto_fora_api/__init__.py` | PF-COD-PKG-001 | `1b07b2af43caf591eceb3f62bbdb551fdcf4573fe47d89e700940cf1f2be2307` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Atualizado para versão 0.2.0. |
 | `src/ponto_fora_api/main.py` | PF-COD-API-001 | `2e6078f0c8db94c1fe129b4c4fcec6fe0dddaf2d93bda45d7732f8bf17453bee` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Health check; rotas editoriais não montadas sem autenticação. |
 | `src/ponto_fora_api/db.py` | PF-COD-DB-001 | `315e73a3c2bb467f069d734b7ef83529bdf8b3f5a44de01b0dbbb5df103a73e9` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; engine e sessões SQLAlchemy. |
-| `src/ponto_fora_api/models.py` | PF-COD-MODELS-001 | `7c1961c338ac29d535e56d0cb206b04bf68d6a71b38f1f32b3193aefbb252d63` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; cinco tabelas do núcleo. |
+| `src/ponto_fora_api/models.py` | PF-COD-MODELS-001 | `7c1961c338ac29d535e56d0cb206b04bf68d6a71b38f1f32b3193aefbb252d63` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Integrado na main; cinco tabelas do núcleo. |
 | `src/ponto_fora_api/domain.py` | PF-COD-DOMAIN-001 | `c69af0cc1225f48935ade424acb458d866bbd30abcf595f2e20ad960d46e984c` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; estados e política limitada de transições. |
 | `src/ponto_fora_api/services/__init__.py` | PF-COD-SVC-PKG-001 | `880334064a64455de4fac5352b5f596be904c685cd876d6b849c12a444dca9ed` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
 | `src/ponto_fora_api/services/assignments.py` | PF-COD-ASSIGNMENTS-001 | `4d16d85952bd3e8e6e2491b0de85490fc0b281f7b85980f584bc5be6c9d936fc` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; criação idempotente e transições auditadas. |
@@ -99,6 +99,22 @@ Os artefactos abaixo foram publicados na branch de trabalho da Fase B. O commit 
 | `tests/test_assignments.py` | PF-TEST-ASSIGNMENTS-001 | `a3e8e480aacb7feda000b30ee7268ab420599044e4a837d0efe923f93b621547` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; testes de domínio e persistência. |
 | `docs/FASE-B-NUCLEO-EDITORIAL.md` | PF-DOC-FASE-B-001 | `961dfc52323543d25b096270fc4b5ada87dfaabf8859077f1f109f68d1129463` | `633eb45366f105b939d31149ee776979602d9bbe` | Criado; escopo e limites da fase. |
 | `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `9d8e402fd0751a90c30fd7e1e2bce4d9d6044fcdb3fc56557ca87cb782349a4e` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Atualizado; PostgreSQL 16, Alembic, Ruff e Pytest. |
+
+
+## Artefactos de implementação — Fase C (branch `phase-c/evidencias-contratos`)
+
+A Fase C está em implementação controlada numa branch derivada do merge commit da Fase B. Os ficheiros abaixo foram criados ou atualizados na branch; ainda não estão integrados na `main`. A CI do PR #3 foi concluída com sucesso: migração PostgreSQL 16 aplicada até 0002_evidence_domain e 18 testes aprovados.
+
+| Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
+|---|---|---|---|---|
+| `docs/FASE-C-EVIDENCIAS-E-CONTRATOS.md` | PF-DOC-FASE-C-001 | `bb23dc33368d0175022792e17a6420b55de0f2aa3b6c66d1fee05a7bf66b6600` | `f5e137b5f7ff816e826fd2cc0d4ca4e4f81868d1` | Especificação criada; em revisão. |
+| `src/ponto_fora_api/models.py` | PF-COD-MODELS-001 | `77cc91bbb71b37e21948df294404644f2a7441f2f57d23398db81a4df0394fd9` | `3fb74baee95a89b983aa9dd5486488eed5849400` | Modelos factuais adicionados; CI aprovada. |
+| `migrations/versions/0002_evidence_domain.py` | PF-MIG-0002 | `6a12e195c29c3e0e42f6d87c5b9dd0122cbead9133a2316397906828cc2aead7` | `2ccc9b288fc174242562ca522df15e1aeff32539` | Migração criada; PostgreSQL 16 aplicado com sucesso. |
+| `src/ponto_fora_api/schemas/evidence.py` | PF-COD-SCHEMAS-EVIDENCE-001 | `622bdb45ce7c7d46a076e89f2727788a5deb30e5a0ab578a098909a6e1a077bb` | `33b4091aba3b2c1db13871ea2a9ca3a911d86a72` | Contratos Pydantic criados; CI aprovada. |
+| `src/ponto_fora_api/services/evidence.py` | PF-COD-SVC-EVIDENCE-001 | `c824b955602edca2696fb2b9dd89ebcd76627dd427793db14ccb332b33ee79d9` | `9d97ad8b3db7c0814d1e7bac61cd6c1ccc61fb36` | Serviços de persistência criados; CI aprovada. |
+| `tests/test_evidence.py` | PF-TEST-EVIDENCE-001 | `d2a91defd045b345a2033625bdf4c5d8132d68ce3a19aba848fbde6febe3ccd3` | `d01457e14fab9a7b4a90b31ce4e08c6c5bba6f80` | 18 testes aprovados em CI. |
+| `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `312833e5e03139e5703bdf3733c23619bceb91ea51ef12cd1d9b7333b8057643` | `da4886d96a654d5441acd087e113650b90c5fb92` | CI configurada para branches phase-c/**. |
+| `pyproject.toml` | PF-COD-CONFIG-001 | `1f5e61d9a402b1e0b779e5b5b807181c1f7f21f110ecb5326d30ac403f4be88c` | `4b7f26bb2bd7c4a648604e3d0a95aab7aa2fb07e` | Lint da Fase C; E501 temporariamente ignorado; revisão de estilo pendente. |
 
 ## Regra de manutenção
 
@@ -133,3 +149,7 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 2.6 | Atualização do estado da Fase A após integração na main e registo dos 18 artefactos da Fase B com hashes SHA-256 e commit de publicação. |
 | 03/11/2026 | 2.7 | Correção da assinatura das dependências FastAPI e atualização do hash/commit da rota de consulta no inventário. |
 | 03/11/2026 | 2.8 | Aplicação dos hashes SHA-256 em falta na rota de consulta e no documento da Fase B, com atualização dos commits de publicação. |
+| 03/11/2026 | 2.9 | Confirmação da integração da Fase B na main e inventário inicial dos artefactos da Fase C na branch de implementação. |
+| 03/11/2026 | 3.0 | Atualização do commit efetivo de publicação do serviço factual e revisão do inventário da Fase C. |
+| 03/11/2026 | 3.1 | Atualização dos hashes e commits dos ficheiros de modelos, serviços, testes, configuração e CI após correções de lint.
+| 03/11/2026 | 3.2 | Registo da CI aprovada para a Fase C: migração PostgreSQL 16 aplicada e 18 testes aprovados. | |

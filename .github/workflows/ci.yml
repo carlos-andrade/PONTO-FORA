@@ -6,14 +6,14 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Lint, migrações PostgreSQL e testes automatizados do backend.
-# SHA-256 (conteúdo normalizado): 9d8e402fd0751a90c30fd7e1e2bce4d9d6044fcdb3fc56557ca87cb782349a4e
+# SHA-256 (conteúdo normalizado): 312833e5e03139e5703bdf3733c23619bceb91ea51ef12cd1d9b7333b8057643
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 name: CI
 
 on:
   push:
-    branches: ["main", "phase-a/**", "phase-b/**"]
+    branches: ["main", "phase-a/**", "phase-b/**", "phase-c/**"]
   pull_request:
     branches: ["main"]
 

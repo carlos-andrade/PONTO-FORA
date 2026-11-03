@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Dependências, ferramentas e configuração do backend.
-# SHA-256 (conteúdo normalizado): 5ff8c7c6038509672a4490222b63c94e89f46fe3d2ec7ec4801073046b0078f0
+# SHA-256 (conteúdo normalizado): 1f5e61d9a402b1e0b779e5b5b807181c1f7f21f110ecb5326d30ac403f4be88c
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 [build-system]
@@ -47,3 +47,4 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
