@@ -6,7 +6,9 @@
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em uso  
 **Responsável:** Direção editorial do PONTO-FORA  
-**Âmbito:** Instrução-mestre para orientar a inteligência editorial, a reconstrução jornalística, a verificação, a redação e a distribuição de conteúdos.
+**Âmbito:** Instrução-mestre para orientar a inteligência editorial, a reconstrução jornalística, a verificação, a redação e a distribuição de conteúdos.  
+**SHA-256 (conteúdo normalizado):** 77d6bd94dd7e9280144a6247b2a68b798d767eb9473f6bba9afaaab4da3f8ea7  
+**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
 **Perfil:** Redator-chefe e diretor de inteligência editorial  
 **Projeto:** PONTO-FORA
