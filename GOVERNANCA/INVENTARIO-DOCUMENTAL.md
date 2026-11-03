@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 3.7  
+**Versão:** 3.8  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** 5c398c87e1f9f721fc912030df36ae81d0c81e13bd26758a724b83dea560e2e6
-**Commit de referência (base documental):** 5d064a9430f0c8066ec0bbce4ab06d35b5232c8f
+**SHA-256 (conteúdo normalizado):** 639936751a05b10c8cb46109b6c6f3e432c1914148a7ae1e2748ea6b328f1a7d
+**Commit de referência (base documental):** 9df3f35df25823636e75bedd0dbfa80dcde75c5b
 
 ## Finalidade
 
@@ -25,7 +25,7 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `AGENTES/AGENTE-REDATOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
 | `AGENTES/AGENTE-EDITOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; revisão social incluída; versão 1.1. |
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato comum + mapeamentos + SHA-256 | Harmonizado; versão 1.1. |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato comum + mapeamentos + SHA-256 | Harmonizado e atualizado com persistência das execuções; versão 1.2. |
 | `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Auditoria documental concluída; 12 pontos de harmonização; versão 1.0. |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.5. |
@@ -56,8 +56,7 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `README.md` | `57c066a7b515de4558224466154cd2cf887aec016c4c776d93f2e6687626e7eb` | `e4f4913d5e33c6fc20cdd422f0c2447e5e185f64` |
 | `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | `77d6bd94dd7e9280144a6247b2a68b798d767eb9473f6bba9afaaab4da3f8ea7` | `8f5dd7d53644e65d62cb17ed59944e88a21a20d0` |
 | `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | `246cc737f6c6fe49fe53fe63355cd9749e4aa7db9d862b2a5664457ee607c510` | `5ba38d82ebad536b14cee3c94b1bffc049cbcf43` |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `c447fd647c5d9668ea5cc7a0770adba7e8a11307add7d7bca8b339089ff0c542` | `774da1847e0448f0b4591f7a53c16dffa5eadfc6` |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `f5029ff10730e6b533e4dd1034512bc4cba8becc626f52a8ecb24c80066ec37b` | `ed8d469648a9d59497fedb38a4d8c626cda9f0df` |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `9af521a4562dd6267e2cedd4fe8671c781fc21e96ece18a13aff521de594bd61` | `9df3f35df25823636e75bedd0dbfa80dcde75c5b` |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | `1ae725ea77e73a4039f14b8adcf181d11b2771b7b6f114dc689ed1354c44eb17` | `8355e0162f2ee53abfba253cb9041b88d419ed1b` |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | `f731f940fef6e542d103aa0f83765c6e7749be62a510112032b4433d835e4e44` | `243a1bea864253e9b870931e6a5b1841c05816f1` |
 | `LICENSE` | `a3b6bf7bfaa2b3b9cb6f8edafb531eb9ca07b84f7b595200198116538acfceaa` | `fc7ac004e8335ee20641c75b1263aadc8f2e5e40` |
@@ -198,3 +197,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 3.5 | Reconciliação do quadro de integridade para manter uma única linha atual por agente, com SHA-256 e commit efetivo verificados. |
 | 03/11/2026 | 3.6 | Registo na main dos contratos executáveis dos agentes e respetivos testes após merge do PR #16; CI com 79 testes aprovados. |
 | 03/11/2026 | 3.7 | Registo da persistência transacional de execuções dos agentes após merge do PR #17; migração 0005 aplicada e 87 testes aprovados. |
+| 03/11/2026 | 3.8 | Atualização do Orquestrador Editorial para V1.2, com a separação entre persistência do parecer e transição efetiva; reconciliação da integridade e remoção de linha duplicada. |
