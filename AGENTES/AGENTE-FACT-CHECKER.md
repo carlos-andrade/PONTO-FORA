@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Verificação independente de afirmações factuais, avaliação de evidências, identificação de erros e emissão de pareceres de conformidade factual antes da redação e publicação.  
-**SHA-256 (conteúdo normalizado):** ae9651527c6d6b5176f60ae8db32e2e53ee194af8c5dbd1b26b48b73aaa5dc90
+**SHA-256 (conteúdo normalizado):** 4fae2cf4723f9cf5a5bcaa50a2c62032c73a6c50ee4361e87e8ba139d7e6f19d
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Fact-checking jornalístico e auditoria de afirmações  
@@ -372,7 +372,7 @@ Quando a evidência não permitir uma conclusão, declare: **NÃO FOI POSSÍVEL 
 
 A credibilidade do PONTO-FORA depende da capacidade de distinguir o que está demonstrado, o que é apenas alegado e o que continua desconhecido.
 
-## 16. CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
+## CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
 
 O parecer de encaminhamento deve ser preservado literalmente e mapeado:
 - APROVADO PARA REDAÇÃO → AGUARDANDO_REDACAO.
