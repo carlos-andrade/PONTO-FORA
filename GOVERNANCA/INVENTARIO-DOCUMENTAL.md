@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 2.7  
+**Versão:** 2.8  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** 69a293050923b61a7fe0bae4732ad78c0c8d704d34b11bbbfba32f08870dc6aa
-**Commit de referência (base documental):** 45fcb05adcb7f84f76379b82b04fa7505b277b79
+**SHA-256 (conteúdo normalizado):** d40e3026bb53f09d94b06c21fddafe6ab41c60400895826304750347a0d64dd7
+**Commit de referência (base documental):** 633eb45366f105b939d31149ee776979602d9bbe
 
 ## Finalidade
 
@@ -95,9 +95,9 @@ Os artefactos abaixo foram publicados na branch de trabalho da Fase B. O commit 
 | `src/ponto_fora_api/services/__init__.py` | PF-COD-SVC-PKG-001 | `880334064a64455de4fac5352b5f596be904c685cd876d6b849c12a444dca9ed` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
 | `src/ponto_fora_api/services/assignments.py` | PF-COD-ASSIGNMENTS-001 | `4d16d85952bd3e8e6e2491b0de85490fc0b281f7b85980f584bc5be6c9d936fc` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; criação idempotente e transições auditadas. |
 | `src/ponto_fora_api/api/__init__.py` | PF-COD-API-PKG-001 | `a073dc24fed665553c563c86b4d7e44dff0e2fbc439f60420bbd2abc4a1a65e0` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
-| `src/ponto_fora_api/api/assignments.py` | PF-COD-API-ASSIGN-001 | `a477491ddd832a0a98a1957432241379165f34d4437ede4f8e61752e35ec5ed1` | `45fcb05adcb7f84f76379b82b04fa7505b277b79` | Rotas de consulta preparadas, ainda não montadas. |
+| `src/ponto_fora_api/api/assignments.py` | PF-COD-API-ASSIGN-001 | `a477491ddd832a0a98a1957432241379165f34d4437ede4f8e61752e35ec5ed1` | `633eb45366f105b939d31149ee776979602d9bbe` | Rotas de consulta preparadas, ainda não montadas. |
 | `tests/test_assignments.py` | PF-TEST-ASSIGNMENTS-001 | `a3e8e480aacb7feda000b30ee7268ab420599044e4a837d0efe923f93b621547` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; testes de domínio e persistência. |
-| `docs/FASE-B-NUCLEO-EDITORIAL.md` | PF-DOC-FASE-B-001 | `961dfc52323543d25b096270fc4b5ada87dfaabf8859077f1f109f68d1129463` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; escopo e limites da fase. |
+| `docs/FASE-B-NUCLEO-EDITORIAL.md` | PF-DOC-FASE-B-001 | `961dfc52323543d25b096270fc4b5ada87dfaabf8859077f1f109f68d1129463` | `633eb45366f105b939d31149ee776979602d9bbe` | Criado; escopo e limites da fase. |
 | `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `9d8e402fd0751a90c30fd7e1e2bce4d9d6044fcdb3fc56557ca87cb782349a4e` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Atualizado; PostgreSQL 16, Alembic, Ruff e Pytest. |
 
 ## Regra de manutenção
@@ -132,3 +132,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 2.5 | Registo dos sete artefactos técnicos e documentais da Fase A na branch de trabalho, com hashes e commits confirmados. |
 | 03/11/2026 | 2.6 | Atualização do estado da Fase A após integração na main e registo dos 18 artefactos da Fase B com hashes SHA-256 e commit de publicação. |
 | 03/11/2026 | 2.7 | Correção da assinatura das dependências FastAPI e atualização do hash/commit da rota de consulta no inventário. |
+| 03/11/2026 | 2.8 | Aplicação dos hashes SHA-256 em falta na rota de consulta e no documento da Fase B, com atualização dos commits de publicação. |
