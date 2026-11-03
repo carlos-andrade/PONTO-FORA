@@ -1,7 +1,7 @@
 # NORMA DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-DOC-001  
-**Versão:** 1.2  
+**Versão:** 1.3  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Obrigatória  
@@ -116,3 +116,4 @@ A data do commit, do upload ou da modificação no sistema de ficheiros não sub
 | 03/11/2026 | 1.0 | Criação e entrada em vigor da norma documental obrigatória. |
 | 03/11/2026 | 1.1 | Registo da data de criação com base no primeiro commit do GitHub e reforço da rastreabilidade documental. |
 | 03/11/2026 | 1.2 | Inclusão do cabeçalho Markdown padrão obrigatório e definição de metadados equivalentes para ficheiros em outros formatos. |
+| 03/11/2026 | 1.3 | Aplicação do cabeçalho padrão aos documentos Markdown existentes e atualização do inventário de conformidade. |
