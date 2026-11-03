@@ -9,6 +9,7 @@
 # SHA-256 (conteúdo normalizado): PENDING
 # Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
+from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -19,6 +20,7 @@ from ponto_fora_api.db import get_db
 from ponto_fora_api.models import Assignment, AuditEvent
 
 router = APIRouter(prefix="/api/v1/assignments", tags=["Pautas"])
+DbSession = Annotated[Session, Depends(get_db)]
 
 
 @router.get("")
@@ -26,9 +28,14 @@ def list_assignments(
     limit: int = Query(default=50, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
     status: str | None = None,
-    db: Session = Depends(get_db),
+    db: DbSession,
 ) -> dict:
-    statement = select(Assignment).order_by(Assignment.created_at.desc()).limit(limit).offset(offset)
+    statement = (
+        select(Assignment)
+        .order_by(Assignment.created_at.desc())
+        .limit(limit)
+        .offset(offset)
+    )
     if status:
         statement = statement.where(Assignment.status == status)
     rows = db.scalars(statement).all()
