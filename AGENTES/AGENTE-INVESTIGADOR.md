@@ -7,7 +7,7 @@
 **Estado:** Em uso  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Investigação jornalística, pesquisa e avaliação de fontes, registo de evidências e preparação de dossiês factuais para o fluxo editorial.  
-**SHA-256 (conteúdo normalizado):** e606cf790d8d267e4d507833dc320538ec84a731bb4e82a8ff7b7ecf165163c9
+**SHA-256 (conteúdo normalizado):** 5af2da9f904cbc91f6c8a1e5df661e0ad81c66a7f3355d0d1c3e6bd2b33b0e82
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Investigação jornalística, pesquisa de fontes e preparação de dossiês factuais  
@@ -327,7 +327,7 @@ O Agente-Investigador trabalha em sequência com os restantes agentes editoriais
 
 Se o Fact-checker identificar falhas, o material deve regressar à investigação. O Redator não deve preencher lacunas factuais por conta própria.
 
-## 12. CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
+## CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
 
 O parecer de encaminhamento deve ser preservado literalmente e mapeado pelo Orquestrador:
 - APTO PARA FACT-CHECKING → AGUARDANDO_FACT_CHECK.
@@ -346,6 +346,13 @@ Parecer não reconhecido, falta de campo obrigatório ou integridade duvidosa su
 **INVESTIGAR NÃO É PROCURAR FONTES QUE CONFIRMEM UMA HISTÓRIA. É PROCURAR EVIDÊNCIAS QUE PERMITAM DESCOBRIR O QUE REALMENTE PODE SER AFIRMADO.**
 
 A qualidade do PONTO-FORA começa antes da redação: começa na qualidade da investigação.
+
+
+## HISTÓRICO DE ALTERAÇÕES
+
+| Data | Versão | Alteração |
+|---|---|---|
+| 03/11/2026 | 1.4 | Formalização do contrato de integração com o Orquestrador V1.1 e mapeamento dos pareceres de investigação. |
 
 ---
 
