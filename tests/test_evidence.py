@@ -18,11 +18,22 @@ from sqlalchemy.pool import StaticPool
 
 from ponto_fora_api.domain import Actor, ActorRole, ActorType, DomainError
 from ponto_fora_api.models import (
-    AuditEvent, Claim, EvidenceRecord, FactCheckAssessment, SourceRecord,
+    AuditEvent,
+    Claim,
+    EvidenceRecord,
+    FactCheckAssessment,
+    SourceRecord,
 )
 from ponto_fora_api.schemas.evidence import (
-    ClaimCreate, ClaimEvidenceCreate, EvidenceCreate, FactCheckAssessmentCreate,
-    FactCheckVerdict, ReviewerType, SourceCreate, SourceType, AccessStatus,
+    AccessStatus,
+    ClaimCreate,
+    ClaimEvidenceCreate,
+    EvidenceCreate,
+    FactCheckAssessmentCreate,
+    FactCheckVerdict,
+    ReviewerType,
+    SourceCreate,
+    SourceType,
 )
 from ponto_fora_api.services.assignments import create_assignment
 from ponto_fora_api.services.evidence import (
