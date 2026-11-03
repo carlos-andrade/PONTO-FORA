@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Validar proveniência, isolamento entre pautas e versionamento de pareceres.
-# SHA-256 (conteúdo normalizado): PENDENTE
+# SHA-256 (conteúdo normalizado): 9d639384047e8b889db32f1baed1003bba1b87311adacf31877e31f873b27301
 # Commit de referência (base documental): c5d4cf29b6d2ab23b99439852235868c3b422195
 
 from datetime import UTC, datetime
