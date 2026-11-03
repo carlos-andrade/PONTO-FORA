@@ -1,7 +1,7 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 1.8  
+**Versão:** 1.9  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
@@ -22,8 +22,9 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `AGENTES/AGENTE-FACT-CHECKER.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
 | `AGENTES/AGENTE-REDATOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
 | `AGENTES/AGENTE-EDITOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
+| `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.3. |
-| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.6. |
+| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.9. |
 | `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados externos no preâmbulo; texto MIT preservado | Conforme; não inserir cabeçalho Markdown no texto jurídico. |
 
 ## Regra de manutenção
@@ -49,3 +50,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 1.6 | Inclusão do Agente Fact-checker no inventário e registo da sua conformidade documental. |
 | 03/11/2026 | 1.7 | Inclusão do Agente Redator no inventário e registo da sua conformidade documental. |
 | 03/11/2026 | 1.8 | Inclusão do Agente Editor no inventário e registo da sua conformidade documental. |
+| 03/11/2026 | 1.9 | Inclusão do Agente Social Media e correção da versão documental indicada na linha do próprio inventário. |
