@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Validação de tokens Bearer JWT emitidos por um provedor OIDC.
-# SHA-256 (conteúdo normalizado): a7b855e71c9fc3507812e1f48b0ecbf7c0a5ed760016e2f8616f428221ef2c20
+# SHA-256 (conteúdo normalizado): 41d143ed83964fc660291b8ee722e07991f5fabddac3a868fa76e4e80c6057d5
 # Commit de referência (base documental): 88db30df8317ad26a44fa4be7b2c794984cc9f1c
 
 from dataclasses import dataclass
@@ -17,11 +17,11 @@ from urllib.parse import urlsplit
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jwt import (
+    decode,
     PyJWKClient,
     PyJWKClientConnectionError,
     PyJWKClientError,
     PyJWTError,
-    decode,
 )
 
 
