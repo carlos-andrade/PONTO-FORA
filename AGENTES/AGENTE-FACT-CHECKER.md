@@ -1,14 +1,14 @@
 # AGENTE FACT-CHECKER — PONTO-FORA
 
 **Identificador:** PF-AGT-FCT-001  
-**Versão:** 1.0  
+**Versão:** 1.1  
 **Data de criação:** 03/11/2026  
-**Data da última atualização:** 03/11/2026  
+**Data da última atualização:** 03/11/2026
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Verificação independente de afirmações factuais, avaliação de evidências, identificação de erros e emissão de pareceres de conformidade factual antes da redação e publicação.  
-**SHA-256 (conteúdo normalizado):** 5575dfa7a22d02277b6eae15f491dd6149745529c5cce10dce7ac0f4a5510054
-**Commit de referência (base documental):** 8355e0162f2ee53abfba253cb9041b88d419ed1b
+**SHA-256 (conteúdo normalizado):** ae9651527c6d6b5176f60ae8db32e2e53ee194af8c5dbd1b26b48b73aaa5dc90
+**Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Fact-checking jornalístico e auditoria de afirmações  
 **Posição no fluxo editorial:** Após a investigação e antes da redação  
@@ -372,7 +372,20 @@ Quando a evidência não permitir uma conclusão, declare: **NÃO FOI POSSÍVEL 
 
 A credibilidade do PONTO-FORA depende da capacidade de distinguir o que está demonstrado, o que é apenas alegado e o que continua desconhecido.
 
+## 16. CONTRATO DE INTEGRAÇÃO COM O ORQUESTRADOR V1.1
+
+O parecer de encaminhamento deve ser preservado literalmente e mapeado:
+- APROVADO PARA REDAÇÃO → AGUARDANDO_REDACAO.
+- APROVADO COM RESSALVAS → AGUARDANDO_REDACAO, transportando ressalvas, atribuições e limitações como campos obrigatórios.
+- DEVOLVIDO À INVESTIGAÇÃO → INVESTIGACAO_PENDENTE.
+- BLOQUEADO → BLOQUEADA.
+
+A saída deve incluir o envelope comum: pauta_id, artifact_id, artifact_version, agent_id, agent_version, prompt_version, execution_id, input_artifact_ids, input_versions, execution_status (SUCCESS, FAILED ou RETRYABLE), editorial_opinion, output_artifact_id, output_version, claim_ids, evidence_refs, caveats, unresolved_questions, created_at com fuso horário e correlation_id. Incluir ainda claim_verdicts e fact_check_decision.
+
+execution_status descreve apenas a execução técnica; editorial_opinion preserva a decisão factual. SUCCESS não equivale a aprovação factual. Um parecer favorável não elimina ressalvas, e nenhum campo pode ser inferido ou descartado pelo Orquestrador. Parecer não reconhecido ou contrato incompleto suspende a transição.
+
 ## 15. HISTÓRICO DE ALTERAÇÕES
+| 03/11/2026 | 1.1 | Harmonização do contrato de integração com o Orquestrador V1.1, com mapeamento de pareceres, envelope comum e regras específicas do agente. |
 
 | Data | Versão | Alteração |
 |---|---|---|
