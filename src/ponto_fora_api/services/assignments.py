@@ -180,7 +180,8 @@ def transition_assignment(
         return existing
     if assignment.row_version != expected_row_version:
         raise VersionConflict(
-            f"Versão desatualizada: esperada {expected_row_version}, atual {assignment.row_version}."
+            f"Versão desatualizada: esperada {expected_row_version}, "
+            f"atual {assignment.row_version}."
         )
     current = AssignmentStatus(assignment.status)
     validate_transition(current, target, actor, reason)
