@@ -7,7 +7,7 @@
 **Estado:** Obrigatória  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Todos os documentos e ficheiros documentais do projeto PONTO-FORA  
-**SHA-256 (conteúdo normalizado):** 462b052688aa2c74e9543f4c13f1017de4f9d1084675366bc0cb890e34aaf032  
+**SHA-256 (conteúdo normalizado):** d7ce746c3275258dd0e03df750fe13ab795a4f3103d22d47420da53de87631c3
 **Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
 ## 1. PRINCÍPIO FUNDAMENTAL
