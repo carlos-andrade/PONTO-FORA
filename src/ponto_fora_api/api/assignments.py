@@ -25,10 +25,10 @@ DbSession = Annotated[Session, Depends(get_db)]
 
 @router.get("")
 def list_assignments(
+    db: DbSession,
     limit: int = Query(default=50, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
     status: str | None = None,
-    db: DbSession,
 ) -> dict:
     statement = (
         select(Assignment)
