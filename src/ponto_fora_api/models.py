@@ -319,7 +319,9 @@ class ExternalIdentity(Base):
     )
     issuer: Mapped[str] = mapped_column(String(2048), nullable=False)
     subject: Mapped[str] = mapped_column(String(512), nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
 
 
 class Role(Base):
