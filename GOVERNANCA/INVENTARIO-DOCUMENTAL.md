@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 3.5  
+**Versão:** 3.6  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** c3f03d021204ae968b30511b306f37ab6493304d91c055e1917e260ee9ad295d
-**Commit de referência (base documental):** dc96862997aae3fc95383f6e290b095f3f393e76
+**SHA-256 (conteúdo normalizado):** eae14aefb993d2943211df08549c6b142d3ad7a31a94bc0d6b59fdc12f7c6e0d
+**Commit de referência (base documental):** bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa
 
 ## Finalidade
 
@@ -36,6 +36,9 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `src/ponto_fora_api/__init__.py` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; pacote Python, versão 0.1.0 na main. |
 | `src/ponto_fora_api/main.py` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; API inicial e health check, versão 1.0 na main. |
 | `tests/test_health.py` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; testes do health check e OpenAPI. |
+| `src/ponto_fora_api/schemas/agent_contract.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 | Contrato Pydantic comum dos cinco agentes; integrado na main via PR #16. |
+| `src/ponto_fora_api/services/orchestration.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 | Mapeamento explícito de pareceres e bloqueio de avanço quando execução não é SUCCESS; PR #16. |
+| `tests/test_agent_contract.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 | Testes do envelope, ressalvas, versões, pareceres e estados; PR #16. |
 | `.github/workflows/ci.yml` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; lint e testes da Fase A na main. |
 | `docs/GUIA-DE-DESENVOLVIMENTO.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown + SHA-256 + commit-base | Conforme; guia de desenvolvimento, versão 1.0. |
 
@@ -60,6 +63,9 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `AGENTES/AGENTE-REDATOR.md` | `ebebd1d05b3a6da12e093a6cf470af255e8102bdcce1f2ba7999c3f79f271588` | `d0d4e13708cd4adf5cbd6964009efef19591dbb7` |
 | `AGENTES/AGENTE-EDITOR.md` | `96311be2c3365d336597761c14cd1a71c361444308c9d5d51dfd8d14b9d32124` | `85ba9ca4e2d3d9e9e48c2916918c996499dc6f7e` |
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | `93bf5b8545f0d308f276a99a627d7c650e29414ec002674f39504b6a81e0a91d` | `dc96862997aae3fc95383f6e290b095f3f393e76` |
+| `src/ponto_fora_api/schemas/agent_contract.py` | `cc584c44ba1f8b60e1b0d2f6f8d86ee83d6c30a346656ffbed901c12821ad22d` | `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa` |
+| `src/ponto_fora_api/services/orchestration.py` | `52964ae593e75a2e4e2d10c521aad46c9da448dc992f443c6b186f747d285378` | `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa` |
+| `tests/test_agent_contract.py` | `e621835259401399e2d034e80d5870c30cac4d7d1237ad32f81533ff956c1565` | `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa` |
 
 O SHA-256 do próprio Inventário consta no seu cabeçalho. O commit efetivo que publica o próprio Inventário não pode ser inscrito dentro do mesmo ficheiro sem autorreferência circular; consulte o histórico Git do repositório. O campo de commit no cabeçalho identifica o commit-base documental.
 
@@ -119,6 +125,16 @@ A Fase C está em implementação controlada numa branch derivada do merge commi
 | `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `312833e5e03139e5703bdf3733c23619bceb91ea51ef12cd1d9b7333b8057643` | `da4886d96a654d5441acd087e113650b90c5fb92` | CI configurada para branches phase-c/**. |
 | `pyproject.toml` | PF-COD-CONFIG-001 | `1f5e61d9a402b1e0b779e5b5b807181c1f7f21f110ecb5326d30ac403f4be88c` | `4b7f26bb2bd7c4a648604e3d0a95aab7aa2fb07e` | Lint da Fase C; E501 temporariamente ignorado; revisão de estilo pendente. |
 
+## Artefactos de implementação — Contratos editoriais (PR #16, integrados na branch main)
+
+A primeira camada executável do contrato editorial V1.1 foi integrada na branch `main` pelo Pull Request #16, através do merge squash `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa`. A CI do GitHub Actions concluiu com sucesso: Ruff aprovado, migrações PostgreSQL aplicadas e **79 testes aprovados**.
+
+| Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
+|---|---|---|---|---|
+| `src/ponto_fora_api/schemas/agent_contract.py` | PF-COD-SCHEMA-AGENT-001 | `cc584c44ba1f8b60e1b0d2f6f8d86ee83d6c30a346656ffbed901c12821ad22d` | `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa` | Integrado; envelope Pydantic e validação por agente. |
+| `src/ponto_fora_api/services/orchestration.py` | PF-COD-SVC-ORCHESTRATION-001 | `52964ae593e75a2e4e2d10c521aad46c9da448dc992f443c6b186f747d285378` | `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa` | Integrado; mapeamento de pareceres e bloqueio de execução falhada. |
+| `tests/test_agent_contract.py` | PF-TEST-AGENT-CONTRACT-001 | `e621835259401399e2d034e80d5870c30cac4d7d1237ad32f81533ff956c1565` | `bb8d6b268d66ac44ff2443a9ae9389d8f49a7ffa` | Integrado; testes automatizados do contrato e do encaminhamento. |
+
 ## Regra de manutenção
 
 Sempre que um ficheiro documental for criado ou alterado:
@@ -158,4 +174,5 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 3.2 | Registo da CI aprovada para a Fase C: migração PostgreSQL 16 aplicada e 18 testes aprovados. |
 | 03/11/2026 | 3.3 | Registo da auditoria de coerência, Orquestrador Editorial V1.1 e harmonização inicial dos cinco contratos. |
 | 03/11/2026 | 3.4 | Correção estrutural dos títulos de secção, inclusão do histórico do Investigador e recálculo dos hashes SHA-256 e commits efetivos dos cinco agentes. |
-| 03/11/2026 | 3.5 | Reconciliação do quadro de integridade para manter uma única linha atual por agente, com SHA-256 e commit efetivo verificados. | |
+| 03/11/2026 | 3.5 | Reconciliação do quadro de integridade para manter uma única linha atual por agente, com SHA-256 e commit efetivo verificados. |
+| 03/11/2026 | 3.6 | Registo na main dos contratos executáveis dos agentes e respetivos testes após merge do PR #16; CI com 79 testes aprovados. | |
