@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
 # Âmbito: Validação do envelope comum e do mapeamento de pareceres para estados.
-# SHA-256 (conteúdo normalizado): 53ab7161411166477daec014b8993442e8c9b76dbe43fd9e3c6725d0ffaaf2fc
+# SHA-256 (conteúdo normalizado): e621835259401399e2d034e80d5870c30cac4d7d1237ad32f81533ff956c1565
 # Commit de referência (base documental): cb1a16e6be6e890e64f3d0ca67f9ad22dcc974df
 
 from datetime import UTC, datetime
@@ -22,8 +22,10 @@ from ponto_fora_api.schemas.agent_contract import (
     ExecutionStatus,
 )
 from ponto_fora_api.services.orchestration import (
+    AgentExecutionNotSuccessful,
     UnsupportedEditorialOpinion,
     map_editorial_opinion,
+    resolve_agent_envelope,
 )
 
 
@@ -200,3 +202,39 @@ def test_social_media_envelope_accepts_complete_source_reference() -> None:
     )
     assert result.source_news_id == "news-001"
     assert result.source_news_version == "2.1"
+
+
+def test_caveats_are_required_when_opinion_contains_reservations() -> None:
+    with pytest.raises(ValidationError):
+        AgentEnvelope.model_validate(
+            envelope(editorial_opinion="APTO COM RESSALVAS")
+        )
+
+
+def test_input_artifact_versions_must_cover_all_inputs() -> None:
+    with pytest.raises(ValidationError):
+        AgentEnvelope.model_validate(
+            envelope(input_artifact_ids=["dossier-001", "source-002"])
+        )
+
+
+def test_failed_execution_cannot_advance_editorial_state() -> None:
+    result = AgentEnvelope.model_validate(
+        envelope(execution_status=ExecutionStatus.FAILED.value)
+    )
+    with pytest.raises(AgentExecutionNotSuccessful):
+        resolve_agent_envelope(result)
+
+
+def test_retryable_execution_cannot_advance_editorial_state() -> None:
+    result = AgentEnvelope.model_validate(
+        envelope(execution_status=ExecutionStatus.RETRYABLE.value)
+    )
+    with pytest.raises(AgentExecutionNotSuccessful):
+        resolve_agent_envelope(result)
+
+
+def test_successful_execution_resolves_opinion() -> None:
+    result = AgentEnvelope.model_validate(envelope())
+    mapped = resolve_agent_envelope(result)
+    assert mapped.target_status == AssignmentStatus.AGUARDANDO_FACT_CHECK
