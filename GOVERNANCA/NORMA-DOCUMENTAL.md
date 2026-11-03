@@ -1,7 +1,7 @@
 # NORMA DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-DOC-001  
-**Versão:** 1.0  
+**Versão:** 1.1  
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Obrigatória  
@@ -76,3 +76,4 @@ A data do commit, do upload ou da modificação no sistema de ficheiros não sub
 | Data | Versão | Alteração |
 |---|---|---|
 | 03/11/2026 | 1.0 | Criação e entrada em vigor da norma documental obrigatória. |
+| 03/11/2026 | 1.1 | Registo da data de criação com base no primeiro commit do GitHub e reforço da rastreabilidade documental. |
