@@ -7,8 +7,8 @@
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** afb9880291f411c6b816d9312323c114411d304fc251dd39fbb45aba6a96476d
-**Commit de referência (base documental):** 4925e84618efcf3d859dc3b603ffcefa548e2a1d
+**SHA-256 (conteúdo normalizado):** b37d442bd075e95ec0733a745fbf1f57a2119e68ed693536fc3f73bda77b5166
+**Commit de referência (base documental):** 441d86142067836d268d9855a575063377dcec56
 
 ## Finalidade
 
@@ -75,7 +75,7 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `migrations/versions/0005_agent_execution_records.py` | `ec13eaeef26586bd211a87b2b11cb6991131b714bfe82c2ee2ff79e374b934f6` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` |
 | `src/ponto_fora_api/services/agent_executions.py` | `58ad4e35c03e24fe33c590cb88d7f0f0442730bf4d5e481ae8bd4c262f4ee36a` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` |
 | `tests/test_agent_execution_persistence.py` | `11c4cd252171323ae6893e046e50fdc601e17f393565d8ed85485fed41770696` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` |
-| `src/ponto_fora_api/services/agent_gates.py` | `a537b9fa639f907d08fb54fece0042f175f72eb95d926ff7b6292cc50ce7030a` | `ed7f2a939d267f9c33a6909c42400c4519a346a0` |
+| `src/ponto_fora_api/services/agent_gates.py` | `0b43dc9bb27085f9be9ca75eaafe26ac0adb87a3aa1fc361d9738334815abde4` | `441d86142067836d268d9855a575063377dcec56` |
 | `tests/test_agent_gates.py` | `5d5ca4102f3abd4656a7cd9fcdc2b311f2babfafd5289db30a4f1ae15e38d50d` | `4925e84618efcf3d859dc3b603ffcefa548e2a1d` |
 
 O SHA-256 do próprio Inventário consta no seu cabeçalho. O commit efetivo que publica o próprio Inventário não pode ser inscrito dentro do mesmo ficheiro sem autorreferência circular; consulte o histórico Git do repositório. O campo de commit no cabeçalho identifica o commit-base documental.
@@ -189,7 +189,7 @@ O PR #20 implementou o gate G4 para validar findings editoriais estruturados, es
 
 | Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
 |---|---|---|---|---|
-| `src/ponto_fora_api/services/agent_gates.py` | PF-COD-SVC-EDITORIAL-GATES-001 | `a537b9fa639f907d08fb54fece0042f175f72eb95d926ff7b6292cc50ce7030a` | `ed7f2a939d267f9c33a6909c42400c4519a346a0` | G1–G4 implementados; G5/G6 permanecem fora do escopo. |
+| `src/ponto_fora_api/services/agent_gates.py` | PF-COD-SVC-EDITORIAL-GATES-001 | `0b43dc9bb27085f9be9ca75eaafe26ac0adb87a3aa1fc361d9738334815abde4` | `441d86142067836d268d9855a575063377dcec56` | G1–G4 implementados; G5/G6 permanecem fora do escopo. |
 | `tests/test_agent_gates.py` | PF-TEST-EDITORIAL-GATES-001 | `5d5ca4102f3abd4656a7cd9fcdc2b311f2babfafd5289db30a4f1ae15e38d50d` | `4925e84618efcf3d859dc3b603ffcefa548e2a1d` | Cobertura de validações positivas e negativas de G4; 107 testes na suíte. |
 
 ## Regra de manutenção
