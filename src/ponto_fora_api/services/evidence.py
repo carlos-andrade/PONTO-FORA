@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Serviços transacionais de fontes, afirmações, evidências e avaliações.
-# SHA-256 (conteúdo normalizado): b5daf8a118fdeb203b7aa19573ab276c9c23e0b11c10db5ccea54309e82e5819
+# SHA-256 (conteúdo normalizado): c824b955602edca2696fb2b9dd89ebcd76627dd427793db14ccb332b33ee79d9
 # Commit de referência (base documental): c5d4cf29b6d2ab23b99439852235868c3b422195
 
 from uuid import UUID
