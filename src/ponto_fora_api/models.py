@@ -1,28 +1,20 @@
-# PONTO-FORA — modelos relacionais do núcleo editorial
+# PONTO-FORA — modelos relacionais do núcleo editorial e factual
 # Identificador: PF-COD-MODELS-001
-# Versão: 1.0
+# Versão: 1.1
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
-# Âmbito: Pautas, eventos append-only, tarefas, idempotência e versões imutáveis.
-# SHA-256 (conteúdo normalizado): 7c1961c338ac29d535e56d0cb206b04bf68d6a71b38f1f32b3193aefbb252d63
-# Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
+# Âmbito: Pautas, auditoria, tarefas, versões, fontes, afirmações, evidências e fact-checking.
+# SHA-256 (conteúdo normalizado): PENDENTE
+# Commit de referência (base documental): c5d4cf29b6d2ab23b99439852235868c3b422195
 
 from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
 from sqlalchemy import (
-    JSON,
-    CheckConstraint,
-    DateTime,
-    ForeignKey,
-    Index,
-    Integer,
-    String,
-    Text,
-    UniqueConstraint,
-    Uuid,
+    JSON, CheckConstraint, DateTime, ForeignKey, ForeignKeyConstraint, Index,
+    Integer, String, Text, UniqueConstraint, Uuid,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -37,13 +29,9 @@ class Assignment(Base):
     __tablename__ = "assignments"
     __table_args__ = (
         CheckConstraint("row_version >= 1", name="ck_assignments_row_version"),
-        CheckConstraint(
-            "priority IN ('low', 'normal', 'high', 'urgent')",
-            name="ck_assignments_priority",
-        ),
+        CheckConstraint("priority IN ('low', 'normal', 'high', 'urgent')", name="ck_assignments_priority"),
         Index("ix_assignments_status_updated", "status", "updated_at"),
     )
-
     id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
     reference_code: Mapped[str] = mapped_column(String(32), unique=True, nullable=False)
     title: Mapped[str] = mapped_column(String(300), nullable=False)
@@ -61,14 +49,9 @@ class Assignment(Base):
 
 class AuditEvent(Base):
     __tablename__ = "audit_events"
-    __table_args__ = (
-        Index("ix_audit_assignment_time", "assignment_id", "occurred_at"),
-    )
-
+    __table_args__ = (Index("ix_audit_assignment_time", "assignment_id", "occurred_at"),)
     id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
-    assignment_id: Mapped[UUID] = mapped_column(
-        Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False
-    )
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
     event_type: Mapped[str] = mapped_column(String(80), nullable=False)
     actor_type: Mapped[str] = mapped_column(String(24), nullable=False)
     actor_id: Mapped[str] = mapped_column(String(160), nullable=False)
@@ -85,11 +68,8 @@ class WorkflowTask(Base):
         UniqueConstraint("task_key", name="uq_workflow_tasks_task_key"),
         Index("ix_workflow_tasks_assignment_status", "assignment_id", "status"),
     )
-
     id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
-    assignment_id: Mapped[UUID] = mapped_column(
-        Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False
-    )
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
     task_key: Mapped[str] = mapped_column(String(240), nullable=False)
     task_type: Mapped[str] = mapped_column(String(80), nullable=False)
     status: Mapped[str] = mapped_column(String(24), nullable=False, default="PENDING")
@@ -100,38 +80,144 @@ class WorkflowTask(Base):
 
 class IdempotencyRecord(Base):
     __tablename__ = "idempotency_records"
-    __table_args__ = (
-        UniqueConstraint("scope", "idempotency_key", name="uq_idempotency_scope_key"),
-    )
-
+    __table_args__ = (UniqueConstraint("scope", "idempotency_key", name="uq_idempotency_scope_key"),)
     id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
     scope: Mapped[str] = mapped_column(String(120), nullable=False)
     idempotency_key: Mapped[str] = mapped_column(String(160), nullable=False)
     request_hash: Mapped[str] = mapped_column(String(64), nullable=False)
-    resource_id: Mapped[UUID] = mapped_column(
-        Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False
-    )
+    resource_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
 
 
 class ArtifactVersion(Base):
     __tablename__ = "artifact_versions"
     __table_args__ = (
-        UniqueConstraint(
-            "assignment_id", "artifact_type", "version_number", name="uq_artifact_version"
-        ),
+        UniqueConstraint("assignment_id", "artifact_type", "version_number", name="uq_artifact_version"),
         CheckConstraint("version_number >= 1", name="ck_artifact_version_number"),
         CheckConstraint("length(content_sha256) = 64", name="ck_artifact_sha256_length"),
         Index("ix_artifacts_assignment_type", "assignment_id", "artifact_type"),
     )
-
     id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
-    assignment_id: Mapped[UUID] = mapped_column(
-        Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False
-    )
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
     artifact_type: Mapped[str] = mapped_column(String(80), nullable=False)
     version_number: Mapped[int] = mapped_column(Integer, nullable=False)
     content_uri: Mapped[str | None] = mapped_column(String(2048), nullable=True)
     content_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
     created_by: Mapped[str] = mapped_column(String(160), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+
+class SourceRecord(Base):
+    __tablename__ = "source_records"
+    __table_args__ = (
+        UniqueConstraint("id", "assignment_id", name="uq_source_id_assignment"),
+        CheckConstraint("source_type IN ('PRIMARY','SECONDARY','REFERENCE','SOCIAL','UNKNOWN')", name="ck_source_type"),
+        CheckConstraint("access_status IN ('AVAILABLE','UNAVAILABLE','RESTRICTED','REMOVED','NOT_CHECKED')", name="ck_source_access_status"),
+        CheckConstraint("content_sha256 IS NULL OR length(content_sha256) = 64", name="ck_source_sha256"),
+        Index("ix_sources_assignment_retrieved", "assignment_id", "retrieved_at"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
+    canonical_url: Mapped[str] = mapped_column(String(2048), nullable=False)
+    title: Mapped[str] = mapped_column(String(500), nullable=False)
+    publisher: Mapped[str | None] = mapped_column(String(240))
+    author: Mapped[str | None] = mapped_column(String(240))
+    source_type: Mapped[str] = mapped_column(String(24), nullable=False, default="UNKNOWN")
+    published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    updated_at_source: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    retrieved_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    language: Mapped[str | None] = mapped_column(String(24))
+    content_sha256: Mapped[str | None] = mapped_column(String(64))
+    storage_uri: Mapped[str | None] = mapped_column(String(2048))
+    access_status: Mapped[str] = mapped_column(String(24), nullable=False, default="NOT_CHECKED")
+    independence_group: Mapped[str | None] = mapped_column(String(240))
+    metadata_json: Mapped[dict] = mapped_column("metadata", JSON, nullable=False, default=dict)
+
+
+class Claim(Base):
+    __tablename__ = "claims"
+    __table_args__ = (
+        UniqueConstraint("id", "assignment_id", name="uq_claim_id_assignment"),
+        CheckConstraint("claim_type IN ('FACTUAL','QUANTITATIVE','QUOTE','DATE','CAUSAL','PREDICTIVE','OPINION','MIXED')", name="ck_claim_type"),
+        CheckConstraint("materiality IN ('LOW','MEDIUM','HIGH','CRITICAL')", name="ck_claim_materiality"),
+        ForeignKeyConstraint(["supersedes_claim_id", "assignment_id"], ["claims.id", "claims.assignment_id"], ondelete="RESTRICT", name="fk_claim_supersedes_same_assignment"),
+        Index("ix_claims_assignment_materiality", "assignment_id", "materiality"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
+    claim_text: Mapped[str] = mapped_column(Text, nullable=False)
+    claim_type: Mapped[str] = mapped_column(String(24), nullable=False, default="FACTUAL")
+    materiality: Mapped[str] = mapped_column(String(16), nullable=False, default="MEDIUM")
+    attribution: Mapped[str | None] = mapped_column(Text)
+    context_note: Mapped[str | None] = mapped_column(Text)
+    created_by: Mapped[str] = mapped_column(String(160), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    supersedes_claim_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True))
+
+
+class EvidenceRecord(Base):
+    __tablename__ = "evidence_records"
+    __table_args__ = (
+        UniqueConstraint("id", "assignment_id", name="uq_evidence_id_assignment"),
+        ForeignKeyConstraint(["source_id", "assignment_id"], ["source_records.id", "source_records.assignment_id"], ondelete="RESTRICT", name="fk_evidence_source_same_assignment"),
+        CheckConstraint("evidence_type IN ('DOCUMENT','DATASET','QUOTE','IMAGE','AUDIO','VIDEO','OBSERVATION','OTHER')", name="ck_evidence_type"),
+        CheckConstraint("polarity IN ('SUPPORTS','CONTRADICTS','CONTEXTUALIZES','NEUTRAL')", name="ck_evidence_polarity"),
+        CheckConstraint("content_sha256 IS NULL OR length(content_sha256) = 64", name="ck_evidence_sha256"),
+        Index("ix_evidence_assignment_collected", "assignment_id", "collected_at"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
+    source_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    locator: Mapped[str] = mapped_column(String(2048), nullable=False)
+    excerpt: Mapped[str | None] = mapped_column(Text)
+    observation: Mapped[str] = mapped_column(Text, nullable=False)
+    evidence_type: Mapped[str] = mapped_column(String(24), nullable=False, default="OTHER")
+    polarity: Mapped[str] = mapped_column(String(24), nullable=False, default="NEUTRAL")
+    collected_by: Mapped[str] = mapped_column(String(160), nullable=False)
+    collected_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    content_sha256: Mapped[str | None] = mapped_column(String(64))
+    limitations: Mapped[str | None] = mapped_column(Text)
+
+
+class ClaimEvidenceLink(Base):
+    __tablename__ = "claim_evidence_links"
+    __table_args__ = (
+        UniqueConstraint("claim_id", "evidence_id", name="uq_claim_evidence_pair"),
+        ForeignKeyConstraint(["claim_id", "assignment_id"], ["claims.id", "claims.assignment_id"], ondelete="RESTRICT", name="fk_link_claim_same_assignment"),
+        ForeignKeyConstraint(["evidence_id", "assignment_id"], ["evidence_records.id", "evidence_records.assignment_id"], ondelete="RESTRICT", name="fk_link_evidence_same_assignment"),
+        CheckConstraint("relationship IN ('SUPPORTS','CONTRADICTS','CONTEXTUALIZES','DOES_NOT_ADDRESS')", name="ck_claim_evidence_relationship"),
+        Index("ix_claim_evidence_assignment", "assignment_id"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    claim_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    evidence_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    relationship: Mapped[str] = mapped_column(String(24), nullable=False)
+    rationale: Mapped[str] = mapped_column(Text, nullable=False)
+    assessed_by: Mapped[str] = mapped_column(String(160), nullable=False)
+    assessed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    assessment_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+
+
+class FactCheckAssessment(Base):
+    __tablename__ = "fact_check_assessments"
+    __table_args__ = (
+        UniqueConstraint("id", "assignment_id", name="uq_assessment_id_assignment"),
+        ForeignKeyConstraint(["claim_id", "assignment_id"], ["claims.id", "claims.assignment_id"], ondelete="RESTRICT", name="fk_assessment_claim_same_assignment"),
+        ForeignKeyConstraint(["supersedes_assessment_id", "assignment_id"], ["fact_check_assessments.id", "fact_check_assessments.assignment_id"], ondelete="RESTRICT", name="fk_assessment_supersedes_same_assignment"),
+        CheckConstraint("verdict IN ('CONFIRMADA','MAIORITARIAMENTE_CONFIRMADA','PARCIALMENTE_CONFIRMADA','ENGANOSA','DESCONTEXTUALIZADA','CONTRADITA','NAO_COMPROVADA','INCONCLUSIVA','DESATUALIZADA','NAO_FACTUAL')", name="ck_fact_check_verdict"),
+        CheckConstraint("reviewer_type IN ('HUMAN','AI')", name="ck_assessment_reviewer_type"),
+        CheckConstraint("assessment_version >= 1", name="ck_assessment_version"),
+        Index("ix_assessments_assignment_claim", "assignment_id", "claim_id", "assessment_version"),
+    )
+    id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
+    assignment_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), ForeignKey("assignments.id", ondelete="RESTRICT"), nullable=False)
+    claim_id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), nullable=False)
+    verdict: Mapped[str] = mapped_column(String(32), nullable=False)
+    reasoning_summary: Mapped[str] = mapped_column(Text, nullable=False)
+    limitations: Mapped[str | None] = mapped_column(Text)
+    reviewer_type: Mapped[str] = mapped_column(String(8), nullable=False)
+    reviewer_id: Mapped[str] = mapped_column(String(160), nullable=False)
+    assessed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    assessment_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    supersedes_assessment_id: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True))
