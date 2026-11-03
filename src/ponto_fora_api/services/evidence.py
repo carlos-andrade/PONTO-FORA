@@ -15,7 +15,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ponto_fora_api.domain import DomainError
-from ponto_fora_api.models import Assignment, AuditEvent, Claim, ClaimEvidenceLink, EvidenceRecord, FactCheckAssessment, SourceRecord, utc_now
+from ponto_fora_api.models import Assignment, AuditEvent, Claim, ClaimEvidenceLink, EvidenceRecord, FactCheckAssessment, SourceRecord
 from ponto_fora_api.schemas.evidence import ClaimCreate, ClaimEvidenceCreate, EvidenceCreate, FactCheckAssessmentCreate, SourceCreate
 
 
