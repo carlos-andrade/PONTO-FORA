@@ -5,8 +5,9 @@
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
-# Âmbito: Persistência idempotente e auditável dos envelopes dos agentes sem avanço implícito de estado.
-# SHA-256 (conteúdo normalizado): 39fb90c409fe934fa44793f5c22b00cce0588c42e7c71f58b8e862f854185829
+# Âmbito: Persistência idempotente e auditável dos envelopes dos agentes.
+# Não permite avanço implícito do estado editorial.
+# SHA-256 (conteúdo normalizado): 3d2dee9e5f1fde9d33e9ac5e2cef5b9abbfbd0f1dc6f0279798978e03ef05ab6
 # Commit de referência (base documental): 025804dfc3f79256d48e3c04aab9a15495893c5a
 
 import hashlib
