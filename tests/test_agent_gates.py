@@ -297,7 +297,7 @@ def test_social_gate_remains_blocked_without_persisted_human_approval(db):
 
 
 def test_editor_gate_accepts_empty_findings_with_consistent_decision(db):
-    create_assignment(db)
+    assignment = create_assignment(db)
     item = execution(
         assignment.id,
         AgentId.EDITOR,
@@ -314,7 +314,7 @@ def test_editor_gate_accepts_empty_findings_with_consistent_decision(db):
 
 
 def test_editor_gate_accepts_resolved_moderate_finding_for_current_version(db):
-    create_assignment(db)
+    assignment = create_assignment(db)
     item = execution(
         assignment.id,
         AgentId.EDITOR,
@@ -342,7 +342,7 @@ def test_editor_gate_accepts_resolved_moderate_finding_for_current_version(db):
 
 
 def test_editor_gate_rejects_unresolved_finding(db):
-    create_assignment(db)
+    assignment = create_assignment(db)
     item = execution(
         assignment.id,
         AgentId.EDITOR,
@@ -371,7 +371,7 @@ def test_editor_gate_rejects_unresolved_finding(db):
 
 
 def test_editor_gate_rejects_resolution_for_another_artifact_version(db):
-    create_assignment(db)
+    assignment = create_assignment(db)
     item = execution(
         assignment.id,
         AgentId.EDITOR,
@@ -400,7 +400,7 @@ def test_editor_gate_rejects_resolution_for_another_artifact_version(db):
 
 
 def test_editor_gate_rejects_critical_finding_even_when_claimed_resolved(db):
-    create_assignment(db)
+    assignment = create_assignment(db)
     item = execution(
         assignment.id,
         AgentId.EDITOR,
@@ -429,7 +429,7 @@ def test_editor_gate_rejects_critical_finding_even_when_claimed_resolved(db):
 
 
 def test_editor_gate_rejects_aggregate_severity_mismatch(db):
-    create_assignment(db)
+    assignment = create_assignment(db)
     item = execution(
         assignment.id,
         AgentId.EDITOR,
