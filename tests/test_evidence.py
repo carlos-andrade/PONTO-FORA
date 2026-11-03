@@ -85,7 +85,7 @@ def test_source_claim_evidence_and_link_are_persisted(db, two_assignments):
     assert db.scalar(select(func.count()).select_from(Claim)) == 1
     assert db.scalar(select(func.count()).select_from(EvidenceRecord)) == 1
     assert link.assignment_id == assignment.id
-    assert db.scalar(select(func.count()).select_from(AuditEvent)) == 5
+    assert db.scalar(select(func.count()).select_from(AuditEvent).where(AuditEvent.assignment_id == assignment.id)) == 5
 
 
 def test_evidence_cannot_use_source_from_another_assignment(db, two_assignments):
