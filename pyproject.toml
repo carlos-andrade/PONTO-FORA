@@ -1,13 +1,13 @@
 # PONTO-FORA — configuração do projeto Python
 # Identificador: PF-COD-CONFIG-001
-# Versão: 1.1
+# Versão: 1.2
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Dependências, ferramentas e configuração do backend.
-# SHA-256 (conteúdo normalizado): 1f5e61d9a402b1e0b779e5b5b807181c1f7f21f110ecb5326d30ac403f4be88c
-# Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
+# SHA-256 (conteúdo normalizado): 1b716b76ed8d485eae08ce72768fea5a36e3f59366e41d6ad99179d2ed8e14ac
+# Commit de referência (base documental): eaf2197a52de48c498f284a60d1aaf805b49e5b1
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]
@@ -24,6 +24,7 @@ dependencies = [
   "SQLAlchemy>=2.0,<3.0",
   "alembic>=1.13,<2.0",
   "psycopg[binary]>=3.2,<4.0",
+  "PyJWT[crypto]>=2.9,<3.0",
 ]
 
 [project.optional-dependencies]
