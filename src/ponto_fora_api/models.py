@@ -23,9 +23,9 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
-    text as sql_text,
     UniqueConstraint,
     Uuid,
+    text as sql_text,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -299,8 +299,12 @@ class User(Base):
     display_name: Mapped[str | None] = mapped_column(String(240))
     email: Mapped[str | None] = mapped_column(String(320))
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="ACTIVE")
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
-    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
 
 
 class ExternalIdentity(Base):
@@ -364,8 +368,12 @@ class UserRole(Base):
             "user_id",
             "role_id",
             unique=True,
-            sqlite_where=sql_text("status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"),
-            postgresql_where=sql_text("status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"),
+            sqlite_where=sql_text(
+                "status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"
+            ),
+            postgresql_where=sql_text(
+                "status = 'ACTIVE' AND scope_type IS NULL AND scope_id IS NULL"
+            ),
         ),
     )
     id: Mapped[UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid4)
@@ -378,10 +386,14 @@ class UserRole(Base):
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="ACTIVE")
     scope_type: Mapped[str | None] = mapped_column(String(64))
     scope_id: Mapped[str | None] = mapped_column(String(160))
-    valid_from: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    valid_from: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
     valid_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     granted_by: Mapped[str] = mapped_column(String(160), nullable=False)
-    granted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    granted_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
     revoked_by: Mapped[str | None] = mapped_column(String(160))
     revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
@@ -401,4 +413,6 @@ class AuthorizationEvent(Base):
     role_key: Mapped[str] = mapped_column(String(64), nullable=False)
     reason: Mapped[str] = mapped_column(Text, nullable=False)
     payload: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
-    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utc_now)
+    occurred_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=utc_now
+    )
