@@ -1,14 +1,14 @@
 # PONTO-FORA — persistência transacional de execuções dos agentes
 # Identificador: PF-COD-SVC-AGENT-EXECUTION-001
-# Versão: 1.1
+# Versão: 1.2
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software e Governança Editorial
-# Âmbito: Persistência idempotente, auditoria e transições explícitas dos envelopes dos agentes.
+# Âmbito: Persistência, gates de evidência e transições editoriais transacionais.
 # Não permite avanço implícito do estado editorial.
-# SHA-256 (conteúdo normalizado): 42b1c421c01d9af90dc3343267d86e2136588dd9b2281d58a19deb2b30a03e17
-# Commit de referência (base documental): 5d064a9430f0c8066ec0bbce4ab06d35b5232c8f
+# SHA-256 (conteúdo normalizado): 58ad4e35c03e24fe33c590cb88d7f0f0442730bf4d5e481ae8bd4c262f4ee36a
+# Commit de referência (base documental): 3439b36f8468ce420cd46cb1135d98dc9170c6c8
 
 import hashlib
 import json
@@ -34,6 +34,7 @@ from ponto_fora_api.models import (
     utc_now,
 )
 from ponto_fora_api.schemas.agent_contract import AgentEnvelope, ExecutionStatus
+from ponto_fora_api.services.agent_gates import validate_agent_gate
 from ponto_fora_api.services.orchestration import resolve_agent_envelope
 
 
@@ -243,6 +244,7 @@ def apply_agent_execution_transition(
     current = AssignmentStatus(assignment.status)
     target = AssignmentStatus(execution.mapped_target_status)
     validate_transition(current, target, actor, reason)
+    validate_agent_gate(db, execution)
 
     assignment.status = target.value
     assignment.row_version += 1

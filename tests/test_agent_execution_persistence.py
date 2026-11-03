@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Testes de atomicidade, idempotência, auditoria e gates editoriais.
-# SHA-256 (conteúdo normalizado): 12d909419e6e2629b33b06f903960295bcedd568b38a3dc0dcdaf5b9d2234fb6
+# SHA-256 (conteúdo normalizado): 11c4cd252171323ae6893e046e50fdc601e17f393565d8ed85485fed41770696
 # Commit de referência (base documental): 5d064a9430f0c8066ec0bbce4ab06d35b5232c8f
 
 from datetime import UTC, datetime
@@ -233,6 +233,10 @@ def test_authorized_transition_is_atomic_and_idempotent(db, orchestrator, monkey
         AssignmentStatus.AGUARDANDO_FACT_CHECK,
     )
     monkeypatch.setitem(TRANSITION_POLICY, transition, ActorRole.ORCHESTRATOR)
+    monkeypatch.setattr(
+        "ponto_fora_api.services.agent_executions.validate_agent_gate",
+        lambda _db, _execution: None,
+    )
     command_id = uuid4()
 
     changed, created = apply_agent_execution_transition(
