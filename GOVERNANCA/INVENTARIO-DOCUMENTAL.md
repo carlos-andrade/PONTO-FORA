@@ -15,7 +15,7 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `README.md` | Não confirmada — documento preexistente | 03/11/2026 | Atualizado com metadados documentais. |
 | `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | Não confirmada — documento preexistente | 03/11/2026 | Atualizado com metadados e referência à norma. |
 | `AGENTES/AGENTE-INVESTIGADOR.md` | Não confirmada — documento preexistente | 03/11/2026 | Atualizado com metadados e referência à norma. |
-| `LICENSE` | Não confirmada — ficheiro preexistente | 03/11/2026 — controlo documental | Texto legal padrão preservado; não foi alterado para evitar modificar o texto canónico da licença. Esta data é de revisão/controlo, não uma declaração de alteração do ficheiro. |
+| `LICENSE` | Não confirmada — ficheiro preexistente | 03/11/2026 — controlo documental | A licença MIT foi mantida intacta para preservar o texto jurídico canónico. A data de criação não confirmada e a data de controlo documental são registadas aqui, associadas inequivocamente ao ficheiro. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 | 03/11/2026 | Criado para estabelecer a regra obrigatória. |
 
 ## Regra de manutenção
@@ -27,3 +27,4 @@ Sempre que um ficheiro documental for criado ou alterado, atualizar os metadados
 | Data | Versão | Alteração |
 |---|---|---|
 | 03/11/2026 | 1.0 | Inventário inicial dos ficheiros existentes e respetivo estado documental. |
+| 03/11/2026 | 1.1 | Auditoria integral da branch main; confirmação da indicação de criação não confirmada nos documentos preexistentes; registo específico da LICENSE preservada sem alteração. |
