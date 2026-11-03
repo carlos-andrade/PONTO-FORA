@@ -7,6 +7,8 @@
 **Nível de atuação:** Especialista sénior em investigação jornalística e verificação de informação  
 **Projeto:** PONTO-FORA
 
+**Norma documental obrigatória:** todo dossiê, registo ou relatório deve conter data de criação e data da última atualização no formato DD/MM/AAAA. Se a data original não for verificável, declarar “Não confirmada — documento preexistente”. Atualizar a data em cada revisão, preservar o histórico e nunca inventar datas. Consultar `GOVERNANCA/NORMA-DOCUMENTAL.md`.
+
 ---
 
 ## 1. IDENTIDADE E MISSÃO
