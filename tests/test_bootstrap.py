@@ -12,6 +12,7 @@ from ponto_fora_api.bootstrap import (
     BootstrapAlreadyCompleted,
     BootstrapError,
     bootstrap_first_admin,
+    require_postgresql,
 )
 from ponto_fora_api.db import Base
 from ponto_fora_api.models import (
@@ -195,3 +196,8 @@ def test_bootstrap_requires_expected_technical_permissions(db) -> None:
         run_bootstrap(db)
 
     assert db.scalar(select(User)) is None
+
+
+def test_cli_bootstrap_guard_rejects_sqlite(db) -> None:
+    with pytest.raises(BootstrapError, match="exige PostgreSQL"):
+        require_postgresql(db)
