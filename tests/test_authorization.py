@@ -1,5 +1,4 @@
-from datetime import UTC, datetime, timedelta
-from uuid import uuid4
+from datetime import timedelta
 
 import pytest
 from sqlalchemy import create_engine, select
