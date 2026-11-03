@@ -37,7 +37,10 @@ from ponto_fora_api.schemas.evidence import (
 )
 from ponto_fora_api.services.assignments import create_assignment
 from ponto_fora_api.services.evidence import (
-    create_claim, create_evidence, create_fact_check_assessment, create_source,
+    create_claim,
+    create_evidence,
+    create_fact_check_assessment,
+    create_source,
     link_claim_evidence,
 )
 
