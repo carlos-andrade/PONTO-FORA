@@ -115,10 +115,10 @@ def create_fact_check_assessment(db: Session, assignment_id: UUID,
                 FactCheckAssessment.assignment_id == assignment_id,
                     FactCheckAssessment.claim_id == data.claim_id))
         if previous is None or data.assessment_version != previous.assessment_version + 1:
-            raise DomainError((
+            raise DomainError(
                 "O parecer substituído deve pertencer à mesma"
                 " afirmação e a versão deve ser consecutiva."
-            ))
+            )
     item = FactCheckAssessment(assignment_id=assignment_id, **data.model_dump())
     db.add(item)
     _audit(db, assignment_id, "FACT_CHECK_ASSESSED", data.reviewer_id,
