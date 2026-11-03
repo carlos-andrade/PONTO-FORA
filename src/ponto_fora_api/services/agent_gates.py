@@ -217,7 +217,7 @@ def validate_agent_gate(db: Session, execution) -> None:
                 "A decisão editorial do payload diverge do parecer do envelope."
             )
         severity_rank = {"LOW": 1, "MODERATE": 2, "HIGH": 3, "CRITICAL": 4}
-        if aggregate_severity not in severity_rank:
+        if not isinstance(aggregate_severity, str) or aggregate_severity not in severity_rank:
             raise GateValidationError("severity deve ser LOW, MODERATE, HIGH ou CRITICAL.")
 
         seen_ids: set[str] = set()
@@ -250,7 +250,7 @@ def validate_agent_gate(db: Session, execution) -> None:
             seen_ids.add(finding_id)
 
             finding_severity = finding["severity"]
-            if finding_severity not in severity_rank:
+            if not isinstance(finding_severity, str) or finding_severity not in severity_rank:
                 raise GateValidationError(
                     f"Severidade inválida no finding {finding_id}."
                 )
