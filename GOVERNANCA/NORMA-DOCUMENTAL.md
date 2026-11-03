@@ -1,13 +1,13 @@
 # NORMA DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-DOC-001  
-**Versão:** 1.4  
+**Versão:** 1.5  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Obrigatória  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Todos os documentos e ficheiros documentais do projeto PONTO-FORA  
-**SHA-256 (conteúdo normalizado):** d7ce746c3275258dd0e03df750fe13ab795a4f3103d22d47420da53de87631c3
+**SHA-256 (conteúdo normalizado):** f731f940fef6e542d103aa0f83765c6e7749be62a510112032b4433d835e4e44
 **Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
 ## 1. PRINCÍPIO FUNDAMENTAL
@@ -38,7 +38,9 @@ Todo ficheiro documental em Markdown (`.md`) criado, alterado ou salvo no reposi
 **Data da última atualização:** DD/MM/AAAA  
 **Estado:** Rascunho | Em revisão | Aprovado | Obsoleto  
 **Responsável:** [papel, agente ou equipa responsável]  
-**Âmbito:** [finalidade e abrangência do documento]
+**Âmbito:** [finalidade e abrangência do documento]  
+**SHA-256 (conteúdo normalizado):** [64 caracteres hexadecimais]  
+**Commit de referência (base documental):** [hash completo do commit-base]
 ```
 
 ### 3.1 Regras de preenchimento
@@ -171,5 +173,6 @@ O cálculo deve ser reproduzível. Não utilizar o SHA-1 do objeto blob Git como
 | 03/11/2026 | 1.0 | Criação e entrada em vigor da norma documental obrigatória. |
 | 03/11/2026 | 1.1 | Registo da data de criação com base no primeiro commit do GitHub e reforço da rastreabilidade documental. |
 | 03/11/2026 | 1.2 | Inclusão do cabeçalho Markdown padrão obrigatório e definição de metadados equivalentes para ficheiros em outros formatos. |
-| 03/11/2026 | 1.4 | Inclusão de regra de integridade criptográfica SHA-256, referência de commit Git, normalização de conteúdo, rastreabilidade e auditoria. |
 | 03/11/2026 | 1.3 | Aplicação do cabeçalho padrão aos documentos Markdown existentes e atualização do inventário de conformidade. |
+| 03/11/2026 | 1.4 | Inclusão de regra de integridade criptográfica SHA-256, referência de commit Git, normalização de conteúdo, rastreabilidade e auditoria. |
+| 03/11/2026 | 1.5 | Inclusão dos campos de integridade no modelo obrigatório de cabeçalho e correção da sequência do histórico. |
