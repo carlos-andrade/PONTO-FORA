@@ -6,7 +6,7 @@
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
 # Âmbito: Validar payloads de fontes, afirmações, evidências, relações e avaliações factuais.
-# SHA-256 (conteúdo normalizado): PENDENTE
+# SHA-256 (conteúdo normalizado): 622bdb45ce7c7d46a076e89f2727788a5deb30e5a0ab578a098909a6e1a077bb
 # Commit de referência (base documental): c5d4cf29b6d2ab23b99439852235868c3b422195
 
 from datetime import datetime
