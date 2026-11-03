@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 3.2  
+**Versão:** 3.3  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** 5ccc36106e717fa245917514b81a5698fcb1b44771fca79514b0a2d027542b93
-**Commit de referência (base documental):** 633eb45366f105b939d31149ee776979602d9bbe
+**SHA-256 (conteúdo normalizado):** d3191b5a25066643dbd7f4dea777d1b8ac3b98268e03fd000ae1c93530378e8d
+**Commit de referência (base documental):** 016ca632fbb23e4f284fc67fba2cd46f733f883c
 
 ## Finalidade
 
@@ -20,13 +20,14 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 |---|---|---|---|---|
 | `README.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão documental 1.3. |
 | `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.3. |
-| `AGENTES/AGENTE-INVESTIGADOR.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.3. |
-| `AGENTES/AGENTE-FACT-CHECKER.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
-| `AGENTES/AGENTE-REDATOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
-| `AGENTES/AGENTE-EDITOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
-| `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.0; em desenvolvimento controlado. |
-| `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
+| `AGENTES/AGENTE-INVESTIGADOR.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.4. |
+| `AGENTES/AGENTE-FACT-CHECKER.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
+| `AGENTES/AGENTE-REDATOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
+| `AGENTES/AGENTE-EDITOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; revisão social incluída; versão 1.1. |
+| `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato comum + mapeamentos + SHA-256 | Harmonizado; versão 1.1. |
+| `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Auditoria documental concluída; 12 pontos de harmonização; versão 1.0. |
+| `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.5. |
 | `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 3.2. |
 | `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados externos no preâmbulo; texto MIT preservado | Conforme; não inserir cabeçalho Markdown no texto jurídico. |
@@ -52,6 +53,13 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `AGENTES/AGENTE-REDATOR.md` | `43d3501f3cccd8c82b99bea67bc2ea2c17f6382876dc545b7921728135b2f156` | `3a14818c90d12583fda7af61db970ee2e23dff2a` |
 | `AGENTES/AGENTE-EDITOR.md` | `b31dd35444049bef8052edf19090b12644091869bd73c93ba6ec691c1d3ee95d` | `6bcc5ded7555abfdf0b14aabea51fb4b7f1731f7` |
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | `f561edc8678723e0589f8b7417b67e844780c54271d8474cd8b6a303d73c500e` | `5f655ad23fee2e204591102e466c5bc6e134f563` |
+| `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | `246cc737f6c6fe49fe53fe63355cd9749e4aa7db9d862b2a5664457ee607c510` | `5ba38d82ebad536b14cee3c94b1bffc049cbcf43` |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `c447fd647c5d9668ea5cc7a0770adba7e8a11307add7d7bca8b339089ff0c542` | `774da1847e0448f0b4591f7a53c16dffa5eadfc6` |
+| `AGENTES/AGENTE-INVESTIGADOR.md` | `e606cf790d8d267e4d507833dc320538ec84a731bb4e82a8ff7b7ecf165163c9` | `f33ccb9ce24162be972f35be2ccd8e2b3625f84b` |
+| `AGENTES/AGENTE-FACT-CHECKER.md` | `ae9651527c6d6b5176f60ae8db32e2e53ee194af8c5dbd1b26b48b73aaa5dc90` | `83d6220286194dbd48168389059d77cbf8b4a187` |
+| `AGENTES/AGENTE-REDATOR.md` | `6bccff646d528c404ce9ac4f29613b925dd8627270b916bf838cb4aa15347d89` | `03c25a840bc8658dd9c360e66fa260a1720c365c` |
+| `AGENTES/AGENTE-EDITOR.md` | `6493739f680af14512e392bc4a5950d7ee7f2b219cab4c023da203885cb1b3a2` | `daeced58bfdc421d60a9095fe5da4c57b7b59210` |
+| `AGENTES/AGENTE-SOCIAL-MEDIA.md` | `48eed4d565ff415ed1cb6a20fb1b05813b56875815a6ed00fb08827ba4f3400e` | `016ca632fbb23e4f284fc67fba2cd46f733f883c` |
 | `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `f5029ff10730e6b533e4dd1034512bc4cba8becc626f52a8ecb24c80066ec37b` | `ed8d469648a9d59497fedb38a4d8c626cda9f0df` |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | `1ae725ea77e73a4039f14b8adcf181d11b2771b7b6f114dc689ed1354c44eb17` | `8355e0162f2ee53abfba253cb9041b88d419ed1b` |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | `f731f940fef6e542d103aa0f83765c6e7749be62a510112032b4433d835e4e44` | `243a1bea864253e9b870931e6a5b1841c05816f1` |
@@ -152,4 +160,5 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 2.9 | Confirmação da integração da Fase B na main e inventário inicial dos artefactos da Fase C na branch de implementação. |
 | 03/11/2026 | 3.0 | Atualização do commit efetivo de publicação do serviço factual e revisão do inventário da Fase C. |
 | 03/11/2026 | 3.1 | Atualização dos hashes e commits dos ficheiros de modelos, serviços, testes, configuração e CI após correções de lint.
-| 03/11/2026 | 3.2 | Registo da CI aprovada para a Fase C: migração PostgreSQL 16 aplicada e 18 testes aprovados. | |
+| 03/11/2026 | 3.2 | Registo da CI aprovada para a Fase C: migração PostgreSQL 16 aplicada e 18 testes aprovados. |
+| 03/11/2026 | 3.3 | Registo da auditoria de coerência, Orquestrador Editorial V1.1 e harmonização dos cinco contratos de agentes, com hashes e commits confirmados. | |
