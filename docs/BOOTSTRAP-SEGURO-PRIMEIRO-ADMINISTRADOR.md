@@ -7,7 +7,7 @@
 **Estado:** Em revisão  
 **Responsável:** Engenharia de Software  
 **Âmbito:** Procedimento local e transacional para criar a primeira identidade interna com o papel técnico PLATFORM_ADMIN.  
-**SHA-256 (conteúdo normalizado):** PENDENTE  
+**SHA-256 (conteúdo normalizado):** 21c5f2d085481f75f34c7a3fc89804bb00193cd2e8a16c3cc9a90311b4e0da69  
 **Commit de referência (base documental):** 6ed842788df04670d724559c10103975f60ae9b4
 
 ## Objetivo e fronteira de confiança
