@@ -1,14 +1,14 @@
 # ORQUESTRADOR EDITORIAL — PONTO-FORA
 
 **Identificador:** PF-SYS-ORQ-001  
-**Versão:** 1.1  
+**Versão:** 1.2  
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção Editorial e Governança do PONTO-FORA  
 **Âmbito:** Coordenação do fluxo editorial, controlo de estados, encaminhamento entre agentes, gestão de dependências, bloqueios, versões, auditoria e preparação para integração tecnológica.  
-**SHA-256 (conteúdo normalizado):** c447fd647c5d9668ea5cc7a0770adba7e8a11307add7d7bca8b339089ff0c542
-**Commit de referência (base documental):** 5ba38d82ebad536b14cee3c94b1bffc049cbcf43
+**SHA-256 (conteúdo normalizado):** 9af521a4562dd6267e2cedd4fe8671c781fc21e96ece18a13aff521de594bd61
+**Commit de referência (base documental):** 5d064a9430f0c8066ec0bbce4ab06d35b5232c8f
 
 **Função:** Orquestração do processo editorial e aplicação das regras de transição  
 **Posição no fluxo editorial:** Camada central de coordenação de todo o processo  
@@ -456,6 +456,24 @@ Não acoplar a decisão editorial a um fornecedor específico de IA ou de automa
 - Aplicar limites de custo e de execução.
 - Exigir aprovação humana antes de operações externas de publicação.
 
+### 11.3 Persistência de execuções dos agentes — implementação integrada
+
+A primeira camada de persistência dos contratos de agentes está implementada no backend, através da entidade `AgentExecution`, da migração Alembic `0005_agent_execution_records` e do serviço `record_agent_execution`.
+
+Regras técnicas implementadas:
+
+- Cada execução é identificada por `execution_id` único e guarda o envelope completo, as versões do agente, prompt e artefacto, o parecer original, o estado técnico, o estado-alvo mapeado, o hash SHA-256 do pedido e o `correlation_id`.
+- A gravação da execução e do evento `AGENT_EXECUTION_RECORDED` ocorre na mesma transação da base de dados.
+- A repetição do mesmo `execution_id` com o mesmo envelope é idempotente; a reutilização com conteúdo diferente é rejeitada.
+- O registo exige o ator técnico `SYSTEM/ORCHESTRATOR` e confirma que o `pauta_id` existe.
+- Em PostgreSQL, os registos de execução são protegidos por trigger append-only.
+- Execuções `FAILED` e `RETRYABLE` são preservadas sem estado-alvo editorial.
+- Execuções `SUCCESS` guardam o estado-alvo resultante do mapeamento explícito de pareceres.
+
+**Limite deliberado:** registar um parecer não executa a transição da pauta. O serviço de persistência não altera `Assignment.status` nem `row_version`. A aplicação de uma transição exige comando separado, gate ativo na `TRANSITION_POLICY`, validação de versão concorrente e autorização do ator exigido. Não interpretar `mapped_target_status` como autorização ou mudança efetiva de estado.
+
+A CI do PR #17 confirmou Ruff, migração PostgreSQL 16 até `0005_agent_execution_records` e 87 testes aprovados. Isto valida a persistência e os seus limites; não equivale à aprovação do fluxo editorial ponta a ponta.
+
 ## 12. INDICADORES OPERACIONAIS
 
 Indicadores possíveis:
@@ -549,6 +567,7 @@ O Orquestrador garante que o trabalho certo chega ao agente certo, na versão ce
 |---|---|---|
 | 03/11/2026 | 1.0 | Criação do Orquestrador Editorial, com máquina de estados, portas de controlo, contratos de dados, auditoria, regras de recuperação, autoridade humana e plano de integração técnica. |
 | 03/11/2026 | 1.1 | Harmonização dos pareceres e estados, contrato comum de agentes, separação entre execução técnica e parecer editorial, revisão social pelo Editor, autorização granular e regras de reabertura. |
+| 03/11/2026 | 1.2 | Registo da persistência idempotente e append-only das execuções dos agentes; separação explícita entre estado-alvo registado e transição efetivamente autorizada. |
 
 ---
 
