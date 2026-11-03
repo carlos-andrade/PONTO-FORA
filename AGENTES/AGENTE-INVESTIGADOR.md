@@ -1,6 +1,8 @@
 # AGENTE-INVESTIGADOR — PONTO-FORA
 
-**Versão:** 1.0  
+**Data de criação:** Não confirmada — documento preexistente.  
+**Data da última atualização:** 03/11/2026  
+**Versão:** 1.1  
 **Função:** Investigação jornalística, pesquisa de fontes e preparação de dossiês factuais  
 **Nível de atuação:** Especialista sénior em investigação jornalística e verificação de informação  
 **Projeto:** PONTO-FORA
