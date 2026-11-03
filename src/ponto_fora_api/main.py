@@ -1,13 +1,13 @@
-# PONTO-FORA — aplicação HTTP inicial
+# PONTO-FORA — aplicação HTTP
 # Identificador: PF-COD-API-001
-# Versão: 1.0
+# Versão: 1.2
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
-# Âmbito: Ponto de entrada FastAPI e endpoint técnico de saúde.
-# SHA-256 (conteúdo normalizado): 2deff6ae9348eec64aba63e80297b38cc6f4755e012a15710c8e22fa38ee60b4
-# Commit de referência (base documental): ab40c30648ce632f24df6f7b767e7d026d23fffc
+# Âmbito: Ponto de entrada FastAPI e health check técnico.
+# SHA-256 (conteúdo normalizado): 2e6078f0c8db94c1fe129b4c4fcec6fe0dddaf2d93bda45d7732f8bf17453bee
+# Commit de referência (base documental): eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 import os
 
@@ -24,14 +24,13 @@ app = FastAPI(
 
 @app.get("/health", tags=["Operação"])
 def health_check() -> dict[str, str]:
-    """Indica se o processo HTTP está a responder.
-
-    Este endpoint não verifica dependências externas nem representa
-    uma declaração de prontidão para produção.
-    """
+    """Confirma apenas que o processo HTTP está a responder."""
     return {
         "status": "ok",
         "service": "ponto-fora-api",
         "version": __version__,
         "environment": os.getenv("PONTO_FORA_ENV", "local"),
     }
+
+
+# Rotas editoriais não são montadas até existir autenticação e RBAC.
