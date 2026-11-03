@@ -6,7 +6,9 @@
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
-**Âmbito:** Verificação independente de afirmações factuais, avaliação de evidências, identificação de erros e emissão de pareceres de conformidade factual antes da redação e publicação.  
+**Âmbito:** Verificação independente de afirmações factuais, avaliação de evidências, identificação de erros e emissão de pareceres de conformidade factual antes da redação e publicação.    
+**SHA-256 (conteúdo normalizado):** 6b5049d8d3f0c7a0d07050fd04e80b9997055b2313ce1b8a39fe29d596a80710  
+**Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 **SHA-256 (conteúdo normalizado):** 5575dfa7a22d02277b6eae15f491dd6149745529c5cce10dce7ac0f4a5510054  
 **Commit de referência (base documental):** c34d0fcdd03e8235bafc540911a175ea128e994c
 
