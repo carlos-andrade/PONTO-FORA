@@ -37,6 +37,10 @@ class Assignment(Base):
     __tablename__ = "assignments"
     __table_args__ = (
         CheckConstraint("row_version >= 1", name="ck_assignments_row_version"),
+        CheckConstraint(
+            "priority IN ('low', 'normal', 'high', 'urgent')",
+            name="ck_assignments_priority",
+        ),
         Index("ix_assignments_status_updated", "status", "updated_at"),
     )
 
@@ -115,6 +119,7 @@ class ArtifactVersion(Base):
             "assignment_id", "artifact_type", "version_number", name="uq_artifact_version"
         ),
         CheckConstraint("version_number >= 1", name="ck_artifact_version_number"),
+        CheckConstraint("length(content_sha256) = 64", name="ck_artifact_sha256_length"),
         Index("ix_artifacts_assignment_type", "assignment_id", "artifact_type"),
     )
 
