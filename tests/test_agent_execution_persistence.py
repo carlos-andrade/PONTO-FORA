@@ -1,13 +1,13 @@
 # PONTO-FORA — testes de persistência das execuções dos agentes
 # Identificador: PF-TEST-AGENT-EXECUTION-001
-# Versão: 1.0
+# Versão: 1.1
 # Data de criação: 03/11/2026
 # Data da última atualização: 03/11/2026
 # Estado: Em desenvolvimento controlado
 # Responsável: Engenharia de Software
-# Âmbito: Atomicidade, idempotência, integridade referencial e ausência de avanço implícito.
-# SHA-256 (conteúdo normalizado): 58eabcdf51eb701a6f6408374f8e0baa181d077e0034c189acb49ec7477a684f
-# Commit de referência (base documental): 025804dfc3f79256d48e3c04aab9a15495893c5a
+# Âmbito: Atomicidade, idempotência, integridade referencial, auditoria e gates de transição editorial.
+# SHA-256 (conteúdo normalizado): 804c99056db963e8d2025f98bb45185bf3189009767b47865889f50873c4eefd
+# Commit de referência (base documental): 5d064a9430f0c8066ec0bbce4ab06d35b5232c8f
 
 from datetime import UTC, datetime
 from uuid import uuid4
@@ -18,11 +18,22 @@ from sqlalchemy.orm import Session
 from sqlalchemy.pool import StaticPool
 
 from ponto_fora_api.db import Base
-from ponto_fora_api.domain import Actor, ActorRole, ActorType, AssignmentStatus, DomainError
+from ponto_fora_api.domain import (
+    TRANSITION_POLICY,
+    Actor,
+    ActorRole,
+    ActorType,
+    AssignmentStatus,
+    DomainError,
+    InvalidTransition,
+    PermissionDenied,
+    VersionConflict,
+)
 from ponto_fora_api.models import AgentExecution, AuditEvent
 from ponto_fora_api.schemas.agent_contract import AgentEnvelope, AgentId, ExecutionStatus
 from ponto_fora_api.services.agent_executions import (
     AgentExecutionConflict,
+    apply_agent_execution_transition,
     record_agent_execution,
 )
 from ponto_fora_api.services.assignments import create_assignment
@@ -186,3 +197,132 @@ def test_human_actor_cannot_impersonate_agent_orchestrator(db):
         record_agent_execution(db, envelope, actor=human)
 
     assert db.scalar(select(func.count()).select_from(AgentExecution)) == 0
+
+
+
+def test_mapped_target_cannot_bypass_inactive_transition_policy(db, orchestrator):
+    assignment = create_test_assignment(db, orchestrator)
+    envelope = build_envelope(assignment.id)
+    record_agent_execution(db, envelope, actor=orchestrator)
+
+    with pytest.raises(InvalidTransition):
+        apply_agent_execution_transition(
+            db,
+            envelope.execution_id,
+            actor=orchestrator,
+            expected_row_version=1,
+            command_id=uuid4(),
+        )
+
+    db.refresh(assignment)
+    assert assignment.status == AssignmentStatus.RECEBIDA.value
+    assert assignment.row_version == 1
+    assert db.scalar(
+        select(func.count()).select_from(AuditEvent).where(
+            AuditEvent.event_type == "AGENT_EXECUTION_STATE_TRANSITIONED"
+        )
+    ) == 0
+
+
+def test_authorized_transition_is_atomic_and_idempotent(db, orchestrator, monkeypatch):
+    assignment = create_test_assignment(db, orchestrator)
+    envelope = build_envelope(assignment.id)
+    record_agent_execution(db, envelope, actor=orchestrator)
+    transition = (
+        AssignmentStatus.RECEBIDA,
+        AssignmentStatus.AGUARDANDO_FACT_CHECK,
+    )
+    monkeypatch.setitem(TRANSITION_POLICY, transition, ActorRole.ORCHESTRATOR)
+    command_id = uuid4()
+
+    changed, created = apply_agent_execution_transition(
+        db,
+        envelope.execution_id,
+        actor=orchestrator,
+        expected_row_version=1,
+        command_id=command_id,
+    )
+    replayed, replay_created = apply_agent_execution_transition(
+        db,
+        envelope.execution_id,
+        actor=orchestrator,
+        expected_row_version=1,
+        command_id=command_id,
+    )
+
+    assert created is True
+    assert replay_created is False
+    assert changed.id == replayed.id == assignment.id
+    assert replayed.status == AssignmentStatus.AGUARDANDO_FACT_CHECK.value
+    assert replayed.row_version == 2
+    assert db.scalar(
+        select(func.count()).select_from(AuditEvent).where(
+            AuditEvent.event_type == "AGENT_EXECUTION_STATE_TRANSITIONED"
+        )
+    ) == 1
+
+
+def test_transition_rejects_stale_assignment_version(db, orchestrator, monkeypatch):
+    assignment = create_test_assignment(db, orchestrator)
+    envelope = build_envelope(assignment.id)
+    record_agent_execution(db, envelope, actor=orchestrator)
+    monkeypatch.setitem(
+        TRANSITION_POLICY,
+        (AssignmentStatus.RECEBIDA, AssignmentStatus.AGUARDANDO_FACT_CHECK),
+        ActorRole.ORCHESTRATOR,
+    )
+
+    with pytest.raises(VersionConflict):
+        apply_agent_execution_transition(
+            db,
+            envelope.execution_id,
+            actor=orchestrator,
+            expected_row_version=2,
+            command_id=uuid4(),
+        )
+
+    db.refresh(assignment)
+    assert assignment.status == AssignmentStatus.RECEBIDA.value
+    assert assignment.row_version == 1
+
+
+def test_transition_requires_policy_actor_role(db, orchestrator, monkeypatch):
+    assignment = create_test_assignment(db, orchestrator)
+    envelope = build_envelope(assignment.id)
+    record_agent_execution(db, envelope, actor=orchestrator)
+    monkeypatch.setitem(
+        TRANSITION_POLICY,
+        (AssignmentStatus.RECEBIDA, AssignmentStatus.AGUARDANDO_FACT_CHECK),
+        ActorRole.EDITORIAL_DIRECTOR,
+    )
+
+    with pytest.raises(PermissionDenied):
+        apply_agent_execution_transition(
+            db,
+            envelope.execution_id,
+            actor=orchestrator,
+            expected_row_version=1,
+            command_id=uuid4(),
+        )
+
+    db.refresh(assignment)
+    assert assignment.status == AssignmentStatus.RECEBIDA.value
+
+
+def test_failed_execution_cannot_apply_editorial_transition(db, orchestrator):
+    assignment = create_test_assignment(db, orchestrator)
+    envelope = build_envelope(
+        assignment.id,
+        execution_status=ExecutionStatus.FAILED.value,
+        editorial_opinion="EXECUÇÃO FALHOU",
+    )
+    record_agent_execution(db, envelope, actor=orchestrator)
+
+    with pytest.raises(DomainError):
+        apply_agent_execution_transition(
+            db,
+            envelope.execution_id,
+            actor=orchestrator,
+            expected_row_version=1,
+            command_id=uuid4(),
+        )
