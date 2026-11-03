@@ -1,14 +1,14 @@
 # ORQUESTRADOR EDITORIAL — PONTO-FORA
 
 **Identificador:** PF-SYS-ORQ-001  
-**Versão:** 1.2  
+**Versão:** 1.3  
 **Data de criação:** 03/11/2026  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção Editorial e Governança do PONTO-FORA  
 **Âmbito:** Coordenação do fluxo editorial, controlo de estados, encaminhamento entre agentes, gestão de dependências, bloqueios, versões, auditoria e preparação para integração tecnológica.  
-**SHA-256 (conteúdo normalizado):** 9af521a4562dd6267e2cedd4fe8671c781fc21e96ece18a13aff521de594bd61
-**Commit de referência (base documental):** 5d064a9430f0c8066ec0bbce4ab06d35b5232c8f
+**SHA-256 (conteúdo normalizado):** 782ae70053018170cb084afd6d6fcf7a5a30a96ecc473c1335f44fe4fe66db7d
+**Commit de referência (base documental):** 3439b36f8468ce420cd46cb1135d98dc9170c6c8
 
 **Função:** Orquestração do processo editorial e aplicação das regras de transição  
 **Posição no fluxo editorial:** Camada central de coordenação de todo o processo  
@@ -474,6 +474,25 @@ Regras técnicas implementadas:
 
 A CI do PR #17 confirmou Ruff, migração PostgreSQL 16 até `0005_agent_execution_records` e 87 testes aprovados. Isto valida a persistência e os seus limites; não equivale à aprovação do fluxo editorial ponta a ponta.
 
+### 11.4 Aplicação transacional de transições autorizadas — implementação integrada
+
+A camada de execução agora dispõe de um comando separado para aplicar o estado-alvo de uma execução persistida: `apply_agent_execution_transition`.
+
+O comando executa, na mesma transação:
+
+1. Localização da execução e confirmação de que o resultado é `SUCCESS` e possui estado-alvo.
+2. Bloqueio da pauta com `SELECT FOR UPDATE`.
+3. Verificação de `expected_row_version`; versões desatualizadas são rejeitadas.
+4. Validação do par estado atual/estado-alvo pela `TRANSITION_POLICY` ativa e do papel do ator por `validate_transition`.
+5. Atualização de `Assignment.status`, incremento de `row_version`, evento `AGENT_EXECUTION_STATE_TRANSITIONED` e registo idempotente do comando.
+6. Confirmação atómica de todos os registos.
+
+Repetir o mesmo comando com o mesmo conteúdo devolve o resultado idempotente. Reutilizar o identificador com conteúdo diferente é rejeitado. Uma transição não presente na política ativa falha sem modificar a pauta.
+
+**Política de produção preservada:** o PR #18 não acrescentou novas transições ao domínio. Os testes ativam uma transição temporariamente por monkeypatch para validar o caminho autorizado, sem alterar a política real. As etapas de investigação, fact-checking, redação, edição e social media só poderão avançar quando os seus gates e papéis forem formalmente ativados.
+
+A CI do PR #18 confirmou Ruff, migrações PostgreSQL 16 até `0005_agent_execution_records` e **92 testes aprovados**. A validação comprova o mecanismo transacional e os bloqueios; não declara o fluxo editorial completo operacional.
+
 ## 12. INDICADORES OPERACIONAIS
 
 Indicadores possíveis:
@@ -568,6 +587,7 @@ O Orquestrador garante que o trabalho certo chega ao agente certo, na versão ce
 | 03/11/2026 | 1.0 | Criação do Orquestrador Editorial, com máquina de estados, portas de controlo, contratos de dados, auditoria, regras de recuperação, autoridade humana e plano de integração técnica. |
 | 03/11/2026 | 1.1 | Harmonização dos pareceres e estados, contrato comum de agentes, separação entre execução técnica e parecer editorial, revisão social pelo Editor, autorização granular e regras de reabertura. |
 | 03/11/2026 | 1.2 | Registo da persistência idempotente e append-only das execuções dos agentes; separação explícita entre estado-alvo registado e transição efetivamente autorizada. |
+| 03/11/2026 | 1.3 | Implementação do comando transacional de transição com lock da pauta, controlo de versão, autorização, auditoria e idempotência; política de produção preservada. |
 
 ---
 
