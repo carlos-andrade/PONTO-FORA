@@ -258,7 +258,7 @@ def test_writer_gate_rejects_missing_claim_traceability(db):
         validate_agent_gate(db, item)
 
 
-def test_editor_gate_remains_blocked_until_findings_are_structured(db):
+def test_editor_gate_accepts_structured_empty_findings(db):
     assignment = create_assignment(db)
     item = execution(
         assignment.id,
@@ -268,11 +268,11 @@ def test_editor_gate_remains_blocked_until_findings_are_structured(db):
             "editorial_findings": [],
             "severity": "LOW",
             "editorial_decision": "APROVADO PARA DECISÃO EDITORIAL",
+            "output_version": "1.0",
         },
     )
 
-    with pytest.raises(GateNotImplemented):
-        validate_agent_gate(db, item)
+    validate_agent_gate(db, item)
 
 
 def test_social_gate_remains_blocked_without_persisted_human_approval(db):
