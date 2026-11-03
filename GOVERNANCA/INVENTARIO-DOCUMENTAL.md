@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 4.0  
+**Versão:** 4.1  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** 10ed276bebee65b89223aaf4c49233339ec8a7900a4bcf7e00bad0b485b52dfa
-**Commit de referência (base documental):** 2c7147271760b46c34025a965b147a665b09fbba
+**SHA-256 (conteúdo normalizado):** afb9880291f411c6b816d9312323c114411d304fc251dd39fbb45aba6a96476d
+**Commit de referência (base documental):** 4925e84618efcf3d859dc3b603ffcefa548e2a1d
 
 ## Finalidade
 
@@ -25,7 +25,7 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `AGENTES/AGENTE-REDATOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
 | `AGENTES/AGENTE-EDITOR.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; revisão social incluída; versão 1.1. |
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contrato de integração + SHA-256 | Harmonizado; versão 1.1. |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contratos + mapeamentos + SHA-256 | Gates G1–G3 implementados; G4/G6 bloqueados; versão 1.4. |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho + contratos + mapeamentos + SHA-256 | Gates G1–G4 implementados; G5 e G6/G7 continuam separados; versão 1.5. |
 | `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Auditoria documental concluída; 12 pontos de harmonização; versão 1.0. |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.5. |
@@ -43,8 +43,8 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `migrations/versions/0005_agent_execution_records.py` | 03/11/2026 | 03/11/2026 | Metadados de migração + SHA-256 + commit-base | Migração 0005; tabela de execuções e proteção append-only em PostgreSQL; PR #17. |
 | `src/ponto_fora_api/services/agent_executions.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Persistência, transições transacionais e chamada dos gates; PR #19. |
 | `tests/test_agent_execution_persistence.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Testes transacionais e isolamento de validação da política; PR #19. |
-| `src/ponto_fora_api/services/agent_gates.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Gates G1–G3 verificam evidências, veredictos e rastreabilidade; G4/G6 bloqueados; PR #19. |
-| `tests/test_agent_gates.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Testes dos gates G1–G3 e dos bloqueios G4/G6; PR #19. |
+| `src/ponto_fora_api/services/agent_gates.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Gates G1–G4 verificam evidências, rastreabilidade e findings editoriais; PR #20. |
+| `tests/test_agent_gates.py` | 03/11/2026 | 03/11/2026 | Metadados de código + SHA-256 + commit-base | Testes dos gates G1–G4 e do bloqueio G6; PR #20. |
 | `.github/workflows/ci.yml` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; lint e testes da Fase A na main. |
 | `docs/GUIA-DE-DESENVOLVIMENTO.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown + SHA-256 + commit-base | Conforme; guia de desenvolvimento, versão 1.0. |
 
@@ -58,7 +58,7 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `README.md` | `57c066a7b515de4558224466154cd2cf887aec016c4c776d93f2e6687626e7eb` | `e4f4913d5e33c6fc20cdd422f0c2447e5e185f64` |
 | `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | `77d6bd94dd7e9280144a6247b2a68b798d767eb9473f6bba9afaaab4da3f8ea7` | `8f5dd7d53644e65d62cb17ed59944e88a21a20d0` |
 | `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | `246cc737f6c6fe49fe53fe63355cd9749e4aa7db9d862b2a5664457ee607c510` | `5ba38d82ebad536b14cee3c94b1bffc049cbcf43` |
-| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `96b88899b8b60f264774f5cd9ca34c3b170f282fe2ee5ac84f2953ae2733edce` | `2c7147271760b46c34025a965b147a665b09fbba` |
+| `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `531b66d84dd176f8e664ff9ee3dbf552f1ca1ec6027314a63a619fa3e4ff2556` | `5141bf7836fe87cf7dbeb883cb0ab216e440768b` |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | `1ae725ea77e73a4039f14b8adcf181d11b2771b7b6f114dc689ed1354c44eb17` | `8355e0162f2ee53abfba253cb9041b88d419ed1b` |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | `f731f940fef6e542d103aa0f83765c6e7749be62a510112032b4433d835e4e44` | `243a1bea864253e9b870931e6a5b1841c05816f1` |
 | `LICENSE` | `a3b6bf7bfaa2b3b9cb6f8edafb531eb9ca07b84f7b595200198116538acfceaa` | `fc7ac004e8335ee20641c75b1263aadc8f2e5e40` |
@@ -75,8 +75,8 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 | `migrations/versions/0005_agent_execution_records.py` | `ec13eaeef26586bd211a87b2b11cb6991131b714bfe82c2ee2ff79e374b934f6` | `5d064a9430f0c8066ec0bbce4ab06d35b5232c8f` |
 | `src/ponto_fora_api/services/agent_executions.py` | `58ad4e35c03e24fe33c590cb88d7f0f0442730bf4d5e481ae8bd4c262f4ee36a` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` |
 | `tests/test_agent_execution_persistence.py` | `11c4cd252171323ae6893e046e50fdc601e17f393565d8ed85485fed41770696` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` |
-| `src/ponto_fora_api/services/agent_gates.py` | `545d88181a971e3f65413366a2fad2d2c969a8f709e67f2a95e15891898e2801` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` |
-| `tests/test_agent_gates.py` | `d4ff36853f61cbe78bfe82ed324e0c729e27bbf46d3175d9a681002ef318434a` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` |
+| `src/ponto_fora_api/services/agent_gates.py` | `a537b9fa639f907d08fb54fece0042f175f72eb95d926ff7b6292cc50ce7030a` | `ed7f2a939d267f9c33a6909c42400c4519a346a0` |
+| `tests/test_agent_gates.py` | `5d5ca4102f3abd4656a7cd9fcdc2b311f2babfafd5289db30a4f1ae15e38d50d` | `4925e84618efcf3d859dc3b603ffcefa548e2a1d` |
 
 O SHA-256 do próprio Inventário consta no seu cabeçalho. O commit efetivo que publica o próprio Inventário não pode ser inscrito dentro do mesmo ficheiro sem autorreferência circular; consulte o histórico Git do repositório. O campo de commit no cabeçalho identifica o commit-base documental.
 
@@ -181,7 +181,16 @@ O PR #19 integrou a primeira camada de validação objetiva de gates editoriais.
 | `tests/test_agent_gates.py` | PF-TEST-EDITORIAL-GATES-001 | `d4ff36853f61cbe78bfe82ed324e0c729e27bbf46d3175d9a681002ef318434a` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` | Testes de investigação, fact-checking, redação e bloqueios. |
 | `tests/test_agent_execution_persistence.py` | PF-TEST-AGENT-EXECUTION-001 | `11c4cd252171323ae6893e046e50fdc601e17f393565d8ed85485fed41770696` | `3d371b987707f7ba3a5b52c34144ec1b6d96460e` | Testes transacionais e de autorização. |
 
-G4 (Editor), G5 (decisão humana) e G6/G7 (produção/revisão/autorização social) permanecem bloqueados ou incompletos. Não ativar essas transições até existir estrutura persistida e validação verificável para cada gate.
+G4 (Editor) foi integrado pelo PR #20. G5 (decisão editorial humana) e G6/G7 (produção, revisão e autorização social) permanecem bloqueados ou incompletos. Não ativar essas transições até existir estrutura persistida e validação verificável para cada gate.
+
+## Artefactos de implementação — Gate editorial G4 (PR #20, integrado na main)
+
+O PR #20 implementou o gate G4 para validar findings editoriais estruturados, estado de resolução, justificação, versão exata do artefacto e revalidação pelo Editor. Findings HIGH e CRITICAL não podem ser encerrados apenas por declaração do Editor. A política de transições de produção não foi ampliada. A CI confirmou Ruff, migrações PostgreSQL 16, revisão Alembic e **107 testes aprovados**. Merge commit: `d38c872e44e1e0ab946f55e2f28261e995c99a39`.
+
+| Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
+|---|---|---|---|---|
+| `src/ponto_fora_api/services/agent_gates.py` | PF-COD-SVC-EDITORIAL-GATES-001 | `a537b9fa639f907d08fb54fece0042f175f72eb95d926ff7b6292cc50ce7030a` | `ed7f2a939d267f9c33a6909c42400c4519a346a0` | G1–G4 implementados; G5/G6 permanecem fora do escopo. |
+| `tests/test_agent_gates.py` | PF-TEST-EDITORIAL-GATES-001 | `5d5ca4102f3abd4656a7cd9fcdc2b311f2babfafd5289db30a4f1ae15e38d50d` | `4925e84618efcf3d859dc3b603ffcefa548e2a1d` | Cobertura de validações positivas e negativas de G4; 107 testes na suíte. |
 
 ## Regra de manutenção
 
@@ -228,3 +237,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 3.8 | Atualização do Orquestrador Editorial para V1.2, com a separação entre persistência do parecer e transição efetiva; reconciliação da integridade e remoção de linha duplicada. |
 | 03/11/2026 | 3.9 | Registo do comando transacional de transições dos agentes após merge do PR #18; CI com 92 testes aprovados; Orquestrador V1.3. |
 | 03/11/2026 | 4.0 | Integração dos gates G1–G3, bloqueio explícito de G4/G6 e atualização do Orquestrador para V1.4; CI com 101 testes aprovados. |
+| 03/11/2026 | 4.1 | Integração do gate G4 no PR #20; atualização do Orquestrador para V1.5, reconciliação dos hashes e registo de 107 testes aprovados. |
