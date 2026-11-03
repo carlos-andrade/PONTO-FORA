@@ -1,14 +1,14 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 2.5  
+**Versão:** 2.6  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
-**Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos da implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** 4a5cefdf8130ecb0f943705ea4a72049a4597fcefbc5d053c94224ee2c9f4993
-**Commit de referência (base documental):** 3d6e12a9f086c2cf5108b19e77d15a66aa507423
+**Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
+**SHA-256 (conteúdo normalizado):** c72d98bd929f14a607e87a187a6dc7c2c7026c69fcd8a9ef1ed66a338d813f1b
+**Commit de referência (base documental):** 41851dee6932347e2e55c6598ceb8658c9a7cac0
 
 ## Finalidade
 
@@ -28,8 +28,15 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.0; em desenvolvimento controlado. |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | 03/11/2026 | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Nova especificação técnica; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 1.5. |
-| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 2.0. |
+| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho padrão + SHA-256 + commit-base | Conforme; versão 2.6. |
 | `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados externos no preâmbulo; texto MIT preservado | Conforme; não inserir cabeçalho Markdown no texto jurídico. |
+| `.gitignore` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; exclusões locais Python. |
+| `pyproject.toml` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; configuração de backend e ferramentas, versão 1.0 na main. |
+| `src/ponto_fora_api/__init__.py` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; pacote Python, versão 0.1.0 na main. |
+| `src/ponto_fora_api/main.py` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; API inicial e health check, versão 1.0 na main. |
+| `tests/test_health.py` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; testes do health check e OpenAPI. |
+| `.github/workflows/ci.yml` | 03/11/2026 | 03/11/2026 | Comentários de metadados + SHA-256 + commit-base | Conforme; lint e testes da Fase A na main. |
+| `docs/GUIA-DE-DESENVOLVIMENTO.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown + SHA-256 + commit-base | Conforme; guia de desenvolvimento, versão 1.0. |
 
 
 ## Integridade criptográfica e commits de publicação
@@ -54,9 +61,9 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 O SHA-256 do próprio Inventário consta no seu cabeçalho. O commit efetivo que publica o próprio Inventário não pode ser inscrito dentro do mesmo ficheiro sem autorreferência circular; consulte o histórico Git do repositório. O campo de commit no cabeçalho identifica o commit-base documental.
 
 
-## Artefactos de implementação — branch `phase-a/fundacao`
+## Artefactos de implementação — Fase A (integrados na branch `main`)
 
-Os ficheiros abaixo foram criados na branch de trabalho da Fase A. Ainda não fazem parte da branch `main`. Os commits indicados são os commits efetivos de publicação devolvidos pelo GitHub.
+A Fase A foi integrada na branch `main` através do Pull Request #1, com merge commit `eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4`. Os commits indicados são os commits efetivos de criação dos ficheiros na branch de trabalho integrada.
 
 | Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
 |---|---|---|---|---|
@@ -67,6 +74,31 @@ Os ficheiros abaixo foram criados na branch de trabalho da Fase A. Ainda não fa
 | `tests/test_health.py` | PF-COD-TEST-001 | `dfa825008d3e5aabfee18e91892f5d356a5ac5d19644c74d3d81708c72ce6b21` | `81bf9fceb887e779d5a5032ff9603ecc448933d1` | Criado |
 | `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `bee61d07d376d8d41b70d0e9a283665093e0c7762e0fd6956e0ef3b935389f86` | `29425bc3166b08f27a1248f18ce72ec40b129d0d` | Criado; CI validada |
 | `docs/GUIA-DE-DESENVOLVIMENTO.md` | PF-DOC-DEV-001 | `482414b762d642d50266c2a24c99cb0e99eedbff58d541dc1b7f450850c05f2a` | `3d6e12a9f086c2cf5108b19e77d15a66aa507423` | Criado |
+
+## Artefactos de implementação — Fase B (branch `phase-b/nucleo-editorial`)
+
+Os artefactos abaixo foram publicados na branch de trabalho da Fase B. O commit de publicação da versão com hashes documentais é `41851dee6932347e2e55c6598ceb8658c9a7cac0`. Ainda não fazem parte da branch `main`.
+
+| Ficheiro | Identificador | SHA-256 (conteúdo normalizado) | Commit efetivo de publicação | Estado |
+|---|---|---|---|---|
+| `pyproject.toml` | PF-COD-CONFIG-001 | `5ff8c7c6038509672a4490222b63c94e89f46fe3d2ec7ec4801073046b0078f0` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Atualizado para 0.2.0; dependências SQLAlchemy, Alembic e Psycopg. |
+| `.env.example` | PF-CFG-ENV-001 | `be55eddeee8db66eb9c7d32d461e6f694b8bc82f2e74e950b9f2839960b02fd8` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; sem credenciais reais. |
+| `alembic.ini` | PF-CFG-ALEMBIC-001 | `f4da5c02c8aa04c5c98a6068e36edca071a8259824b6a62ff7bb299801601d98` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; configuração de migrações. |
+| `migrations/env.py` | PF-COD-MIG-ENV-001 | `2725612c07b42febb50e885f2d348c985f87fdb89cd8e14e783d2b6981beb0c9` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
+| `migrations/script.py.mako` | PF-CFG-MIG-TEMPLATE-001 | `d3aeb93c4508fbea0bd6e6c7f4d3f4852ccc09f7b8b826dfbed4eda8c70bb9b7` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
+| `migrations/versions/0001_initial.py` | PF-MIG-0001 | `d8d0d97fd1396ab2304391747229f2cf422c512dae74f10a5ccf22461b2aaa32` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; migração inicial. |
+| `src/ponto_fora_api/__init__.py` | PF-COD-PKG-001 | `1b07b2af43caf591eceb3f62bbdb551fdcf4573fe47d89e700940cf1f2be2307` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Atualizado para versão 0.2.0. |
+| `src/ponto_fora_api/main.py` | PF-COD-API-001 | `2e6078f0c8db94c1fe129b4c4fcec6fe0dddaf2d93bda45d7732f8bf17453bee` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Health check; rotas editoriais não montadas sem autenticação. |
+| `src/ponto_fora_api/db.py` | PF-COD-DB-001 | `315e73a3c2bb467f069d734b7ef83529bdf8b3f5a44de01b0dbbb5df103a73e9` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; engine e sessões SQLAlchemy. |
+| `src/ponto_fora_api/models.py` | PF-COD-MODELS-001 | `7c1961c338ac29d535e56d0cb206b04bf68d6a71b38f1f32b3193aefbb252d63` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; cinco tabelas do núcleo. |
+| `src/ponto_fora_api/domain.py` | PF-COD-DOMAIN-001 | `c69af0cc1225f48935ade424acb458d866bbd30abcf595f2e20ad960d46e984c` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; estados e política limitada de transições. |
+| `src/ponto_fora_api/services/__init__.py` | PF-COD-SVC-PKG-001 | `880334064a64455de4fac5352b5f596be904c685cd876d6b849c12a444dca9ed` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
+| `src/ponto_fora_api/services/assignments.py` | PF-COD-ASSIGNMENTS-001 | `4d16d85952bd3e8e6e2491b0de85490fc0b281f7b85980f584bc5be6c9d936fc` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; criação idempotente e transições auditadas. |
+| `src/ponto_fora_api/api/__init__.py` | PF-COD-API-PKG-001 | `a073dc24fed665553c563c86b4d7e44dff0e2fbc439f60420bbd2abc4a1a65e0` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado. |
+| `src/ponto_fora_api/api/assignments.py` | PF-COD-API-ASSIGN-001 | `243a9ba3614bf58afae502031719353eeb7d22327fff3bf146fb5553abb40344` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Rotas de consulta preparadas, ainda não montadas. |
+| `tests/test_assignments.py` | PF-TEST-ASSIGNMENTS-001 | `a3e8e480aacb7feda000b30ee7268ab420599044e4a837d0efe923f93b621547` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; testes de domínio e persistência. |
+| `docs/FASE-B-NUCLEO-EDITORIAL.md` | PF-DOC-FASE-B-001 | `961dfc52323543d25b096270fc4b5ada87dfaabf8859077f1f109f68d1129463` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Criado; escopo e limites da fase. |
+| `.github/workflows/ci.yml` | PF-CI-PYTHON-001 | `9d8e402fd0751a90c30fd7e1e2bce4d9d6044fcdb3fc56557ca87cb782349a4e` | `41851dee6932347e2e55c6598ceb8658c9a7cac0` | Atualizado; PostgreSQL 16, Alembic, Ruff e Pytest. |
 
 ## Regra de manutenção
 
@@ -98,3 +130,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 2.3 | Inclusão do próprio Inventário no registo de integridade, com tratamento explícito da autorreferência Git/SHA-256. |
 | 03/11/2026 | 2.4 | Registo da arquitetura de software, correção dos metadados do Fact-checker e atualização da integridade documental. |
 | 03/11/2026 | 2.5 | Registo dos sete artefactos técnicos e documentais da Fase A na branch de trabalho, com hashes e commits confirmados. |
+| 03/11/2026 | 2.6 | Atualização do estado da Fase A após integração na main e registo dos 18 artefactos da Fase B com hashes SHA-256 e commit de publicação. |
