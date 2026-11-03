@@ -7,7 +7,7 @@
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** b37d442bd075e95ec0733a745fbf1f57a2119e68ed693536fc3f73bda77b5166
+**SHA-256 (conteúdo normalizado):** 536fa17d2357dc2a93b269bfb26cd8dcba1995aab209c508ab99a26ad437d2fe
 **Commit de referência (base documental):** 441d86142067836d268d9855a575063377dcec56
 
 ## Finalidade
