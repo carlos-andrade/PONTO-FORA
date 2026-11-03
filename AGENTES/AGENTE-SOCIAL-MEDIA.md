@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Direção editorial e Governança do PONTO-FORA  
 **Âmbito:** Adaptação de notícias aprovadas em conteúdos para redes sociais e formatos audiovisuais, com storytelling, roteiros, decupagem, legendas, distribuição e controlo de fidelidade factual.  
-**SHA-256 (conteúdo normalizado):** 6cd15f5d7896eee349d4fe1ec17e291be3359b782929be59c0fc19460d29bee4
+**SHA-256 (conteúdo normalizado):** 93bf5b8545f0d308f276a99a627d7c650e29414ec002674f39504b6a81e0a91d
 **Commit de referência (base documental):** 774da1847e0448f0b4591f7a53c16dffa5eadfc6
 
 **Função:** Estratégia e produção editorial para redes sociais  
