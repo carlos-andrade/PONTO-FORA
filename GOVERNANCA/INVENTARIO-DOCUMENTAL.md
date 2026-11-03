@@ -1,13 +1,13 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 3.4  
+**Versão:** 3.5  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
 **Âmbito:** Inventário dos ficheiros rastreados na branch main e dos artefactos de implementação em branches de trabalho, com respetiva conformidade documental.  
-**SHA-256 (conteúdo normalizado):** cceac08af985d54d2131df92f68a9670f3ca4a8b5caf5b1569e42140768ee0ba
+**SHA-256 (conteúdo normalizado):** c3f03d021204ae968b30511b306f37ab6493304d91c055e1917e260ee9ad295d
 **Commit de referência (base documental):** dc96862997aae3fc95383f6e290b095f3f393e76
 
 ## Finalidade
@@ -48,23 +48,18 @@ Os hashes SHA-256 abaixo foram calculados segundo a [Norma Documental](NORMA-DOC
 |---|---|---|
 | `README.md` | `57c066a7b515de4558224466154cd2cf887aec016c4c776d93f2e6687626e7eb` | `e4f4913d5e33c6fc20cdd422f0c2447e5e185f64` |
 | `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | `77d6bd94dd7e9280144a6247b2a68b798d767eb9473f6bba9afaaab4da3f8ea7` | `8f5dd7d53644e65d62cb17ed59944e88a21a20d0` |
-| `AGENTES/AGENTE-INVESTIGADOR.md` | `f1f8ec0de597cf2ef3348707b5bbe4d97a40a9fd113140614181b6ae664d7993` | `40f45381f7492b2ec0f7e86055b3574fae5ac8a7` |
-| `AGENTES/AGENTE-FACT-CHECKER.md` | `5575dfa7a22d02277b6eae15f491dd6149745529c5cce10dce7ac0f4a5510054` | `1589c2299db96354e5ca1e2e7454743a4edc12a0` |
-| `AGENTES/AGENTE-REDATOR.md` | `43d3501f3cccd8c82b99bea67bc2ea2c17f6382876dc545b7921728135b2f156` | `3a14818c90d12583fda7af61db970ee2e23dff2a` |
-| `AGENTES/AGENTE-EDITOR.md` | `b31dd35444049bef8052edf19090b12644091869bd73c93ba6ec691c1d3ee95d` | `6bcc5ded7555abfdf0b14aabea51fb4b7f1731f7` |
-| `AGENTES/AGENTE-SOCIAL-MEDIA.md` | `f561edc8678723e0589f8b7417b67e844780c54271d8474cd8b6a303d73c500e` | `5f655ad23fee2e204591102e466c5bc6e134f563` |
 | `SISTEMA/AUDITORIA-COERENCIA-AGENTES-01.md` | `246cc737f6c6fe49fe53fe63355cd9749e4aa7db9d862b2a5664457ee607c510` | `5ba38d82ebad536b14cee3c94b1bffc049cbcf43` |
 | `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `c447fd647c5d9668ea5cc7a0770adba7e8a11307add7d7bca8b339089ff0c542` | `774da1847e0448f0b4591f7a53c16dffa5eadfc6` |
-| `AGENTES/AGENTE-INVESTIGADOR.md` | `cf924073e0768b88e6c6dd46e1d5f2ce205c4b07f43d4590f45f8756c7f4100c` | `4667be001b7c6196afede1f6fd4029766fa72229` |
-| `AGENTES/AGENTE-FACT-CHECKER.md` | `e1eb902b435e068cfe2a8d64038d06a7ca5e94ac0883912629d2f8c92544f25e` | `506791b2f343683190f4e27c06e870425944fefc` |
-| `AGENTES/AGENTE-REDATOR.md` | `ebebd1d05b3a6da12e093a6cf470af255e8102bdcce1f2ba7999c3f79f271588` | `d0d4e13708cd4adf5cbd6964009efef19591dbb7` |
-| `AGENTES/AGENTE-EDITOR.md` | `6493739f680af14512e392bc4a5950d7ee7f2b219cab4c023da203885cb1b3a2` | `daeced58bfdc421d60a9095fe5da4c57b7b59210` |
-| `AGENTES/AGENTE-SOCIAL-MEDIA.md` | `48eed4d565ff415ed1cb6a20fb1b05813b56875815a6ed00fb08827ba4f3400e` | `016ca632fbb23e4f284fc67fba2cd46f733f883c` |
 | `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | `f5029ff10730e6b533e4dd1034512bc4cba8becc626f52a8ecb24c80066ec37b` | `ed8d469648a9d59497fedb38a4d8c626cda9f0df` |
 | `SISTEMA/ARQUITETURA-DE-SOFTWARE.md` | `1ae725ea77e73a4039f14b8adcf181d11b2771b7b6f114dc689ed1354c44eb17` | `8355e0162f2ee53abfba253cb9041b88d419ed1b` |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | `f731f940fef6e542d103aa0f83765c6e7749be62a510112032b4433d835e4e44` | `243a1bea864253e9b870931e6a5b1841c05816f1` |
 | `LICENSE` | `a3b6bf7bfaa2b3b9cb6f8edafb531eb9ca07b84f7b595200198116538acfceaa` | `fc7ac004e8335ee20641c75b1263aadc8f2e5e40` |
 | `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | Ver cabeçalho (não duplicar o próprio hash) | Autorreferência: consultar o histórico Git; commit atual confirmado no relatório de execução. |
+| `AGENTES/AGENTE-INVESTIGADOR.md` | `cf924073e0768b88e6c6dd46e1d5f2ce205c4b07f43d4590f45f8756c7f4100c` | `4667be001b7c6196afede1f6fd4029766fa72229` |
+| `AGENTES/AGENTE-FACT-CHECKER.md` | `e1eb902b435e068cfe2a8d64038d06a7ca5e94ac0883912629d2f8c92544f25e` | `506791b2f343683190f4e27c06e870425944fefc` |
+| `AGENTES/AGENTE-REDATOR.md` | `ebebd1d05b3a6da12e093a6cf470af255e8102bdcce1f2ba7999c3f79f271588` | `d0d4e13708cd4adf5cbd6964009efef19591dbb7` |
+| `AGENTES/AGENTE-EDITOR.md` | `96311be2c3365d336597761c14cd1a71c361444308c9d5d51dfd8d14b9d32124` | `85ba9ca4e2d3d9e9e48c2916918c996499dc6f7e` |
+| `AGENTES/AGENTE-SOCIAL-MEDIA.md` | `93bf5b8545f0d308f276a99a627d7c650e29414ec002674f39504b6a81e0a91d` | `dc96862997aae3fc95383f6e290b095f3f393e76` |
 
 O SHA-256 do próprio Inventário consta no seu cabeçalho. O commit efetivo que publica o próprio Inventário não pode ser inscrito dentro do mesmo ficheiro sem autorreferência circular; consulte o histórico Git do repositório. O campo de commit no cabeçalho identifica o commit-base documental.
 
@@ -162,4 +157,5 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 3.1 | Atualização dos hashes e commits dos ficheiros de modelos, serviços, testes, configuração e CI após correções de lint.
 | 03/11/2026 | 3.2 | Registo da CI aprovada para a Fase C: migração PostgreSQL 16 aplicada e 18 testes aprovados. |
 | 03/11/2026 | 3.3 | Registo da auditoria de coerência, Orquestrador Editorial V1.1 e harmonização inicial dos cinco contratos. |
-| 03/11/2026 | 3.4 | Correção estrutural dos títulos de secção, inclusão do histórico do Investigador e recálculo dos hashes SHA-256 e commits efetivos dos cinco agentes. | |
+| 03/11/2026 | 3.4 | Correção estrutural dos títulos de secção, inclusão do histórico do Investigador e recálculo dos hashes SHA-256 e commits efetivos dos cinco agentes. |
+| 03/11/2026 | 3.5 | Reconciliação do quadro de integridade para manter uma única linha atual por agente, com SHA-256 e commit efetivo verificados. | |
