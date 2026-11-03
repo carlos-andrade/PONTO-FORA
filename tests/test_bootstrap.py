@@ -59,6 +59,7 @@ def seed_platform_admin_role(db: Session) -> Role:
 def run_bootstrap(db: Session, **overrides):
     values = {
         "issuer": "https://identity.example.test/",
+        "expected_issuer": "https://identity.example.test/",
         "subject": "oidc-subject-001",
         "display_name": "Administrador inicial",
         "email": "admin@example.test",
@@ -129,6 +130,7 @@ def test_bootstrap_requires_exact_confirmation(db) -> None:
         ("issuer", "https://user:pass@identity.example.test/"),
         ("issuer", "https://identity.example.test/?next=unsafe"),
         ("issuer", "https://identity.example.test/#fragment"),
+        ("expected_issuer", "https://other.example.test/"),
         ("subject", ""),
         ("subject", "x" * 513),
         ("display_name", ""),
