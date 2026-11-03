@@ -25,7 +25,7 @@ Registar o estado de conformidade documental dos ficheiros existentes no reposit
 | `AGENTES/AGENTE-SOCIAL-MEDIA.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo agente criado; versão 1.0; em desenvolvimento controlado. |
 | `SISTEMA/ORQUESTRADOR-EDITORIAL.md` | 03/11/2026 | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Novo componente de sistema criado; versão 1.0; em desenvolvimento controlado. |
 | `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.3. |
-| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.9. |
+| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 2.0. |
 | `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados externos no preâmbulo; texto MIT preservado | Conforme; não inserir cabeçalho Markdown no texto jurídico. |
 
 ## Regra de manutenção
