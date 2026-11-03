@@ -1,27 +1,27 @@
 # INVENTÁRIO DOCUMENTAL — PONTO-FORA
 
 **Identificador:** PF-GOV-INV-001  
-**Versão:** 1.4  
+**Versão:** 1.5  
 **Data de criação:** 03/11/2026 (primeiro registo no GitHub)  
 **Data da última atualização:** 03/11/2026  
 **Estado:** Em manutenção  
 **Responsável:** Governança do projeto PONTO-FORA  
-**Âmbito:** Inventário de ficheiros documentais e respetiva conformidade.
+**Âmbito:** Inventário de todos os ficheiros rastreados na branch main e respetiva conformidade documental.
 
 ## Finalidade
 
 Registar o estado de conformidade documental dos ficheiros existentes no repositório. Este inventário complementa a [NORMA-DOCUMENTAL.md](NORMA-DOCUMENTAL.md), que estabelece o cabeçalho Markdown padrão obrigatório e metadados equivalentes para formatos que não suportam Markdown.
 
-## Inventário
+## Inventário da branch main
 
-| Ficheiro | Data de criação | Data da última atualização / controlo | Cabeçalho/metadados | Estado e observação |
+| Ficheiro | Data de criação | Data da última atualização / controlo | Metadados | Estado e observação |
 |---|---|---|---|---|
-| `README.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Adequação ao novo padrão pendente | Documento preexistente; verificar e aplicar o cabeçalho na próxima revisão controlada. |
-| `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Adequação ao novo padrão pendente | Documento preexistente; verificar e aplicar o cabeçalho na próxima revisão controlada. |
-| `AGENTES/AGENTE-INVESTIGADOR.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Adequação ao novo padrão pendente | Documento preexistente; verificar e aplicar o cabeçalho na próxima revisão controlada. |
-| `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados associados; texto jurídico MIT preservado | Não inserir cabeçalho Markdown no texto da licença. |
-| `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Norma atualizada para versão 1.2. |
-| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Inventário atualizado para versão 1.4. |
+| `README.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão documental 1.3. |
+| `PROMPT/PROMPT-MESTRE-PONTO-FORA.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.3. |
+| `AGENTES/AGENTE-INVESTIGADOR.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.3. |
+| `GOVERNANCA/NORMA-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.3. |
+| `GOVERNANCA/INVENTARIO-DOCUMENTAL.md` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Cabeçalho Markdown padrão aplicado | Conforme; versão 1.5. |
+| `LICENSE` | 03/11/2026 (primeiro registo no GitHub) | 03/11/2026 | Metadados externos no preâmbulo; texto MIT preservado | Conforme; não inserir cabeçalho Markdown no texto jurídico. |
 
 ## Regra de manutenção
 
@@ -31,6 +31,7 @@ Sempre que um ficheiro documental for criado ou alterado:
 3. Atualizar a data da última atualização e a versão, quando aplicável.
 4. Atualizar este inventário quando o estado, a versão, a data ou a conformidade do ficheiro mudar.
 5. Registar a criação com base em evidência; o primeiro commit prova a presença no GitHub, não necessariamente a primeira redação fora do repositório.
+6. Executar uma auditoria à árvore completa da branch, incluindo ficheiros não documentais, para identificar novos formatos que exijam metadados compatíveis.
 
 ## Histórico de alterações
 
@@ -41,3 +42,4 @@ Sempre que um ficheiro documental for criado ou alterado:
 | 03/11/2026 | 1.2 | Datas de criação atualizadas com base no primeiro commit de cada ficheiro; atualização dos metadados e histórico. |
 | 03/11/2026 | 1.3 | Inclusão do próprio inventário na listagem de documentos auditados. |
 | 03/11/2026 | 1.4 | Inclusão do cabeçalho Markdown padrão obrigatório no inventário de conformidade. |
+| 03/11/2026 | 1.5 | Auditoria dos seis ficheiros da branch main e aplicação dos cabeçalhos e metadados documentais correspondentes. |
