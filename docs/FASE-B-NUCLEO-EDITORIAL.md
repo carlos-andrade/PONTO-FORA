@@ -7,7 +7,7 @@
 **Estado:** Em desenvolvimento controlado  
 **Responsável:** Engenharia de Software e Governança Editorial  
 **Âmbito:** Registar o escopo implementado da Fase B, as regras de domínio, persistência, auditoria e limites operacionais.  
-**SHA-256 (conteúdo normalizado):** PENDING  
+**SHA-256 (conteúdo normalizado):** 961dfc52323543d25b096270fc4b5ada87dfaabf8859077f1f109f68d1129463  
 **Commit de referência (base documental):** eba38c76bd8fe4fbddf6fbef8a9419ebdd9319d4
 
 ## 1. Objetivo
